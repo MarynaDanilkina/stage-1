@@ -1,4 +1,4 @@
-$font-georgia: 'Noto Sans Georgian', sans-serif;
+$font-georgia: 'Georgia', sans-serif;
 /*Обнуление*/
 *,
 *::before,
@@ -41,7 +41,7 @@ body{
     height: 100%;
     line-height: 1;
     font-size: 15px;
-    color: #fff;
+    color: #000;
 	 font-family: Arial;
 	 font-weight: 400;
 	 scroll-behavior: smooth; /**плавная прокрутка по якорям*/
@@ -77,7 +77,7 @@ body._lock{
     padding: 0px 40px;
     box-sizing: content-box;
 }
-.header__logo{
+
     .logo__title{
         color: #F1CDB3;
     padding-top: 60px;
@@ -88,14 +88,15 @@ body._lock{
     letter-spacing: 0.04em;
 }
 .logo__subtitile{
+    color: #fff;
     margin-left: 2px;
     line-height: 15px;
     font-size: 13px;
     letter-spacing: 0.1em;
 }
-}
 
-    .menu__list {
+
+.menu__list {
     display: flex;
     padding-top: 56px;
 }
@@ -121,7 +122,7 @@ body._lock{
     justify-content: space-between;
 }
 .main__hero-body__info{
-    padding: 343px 0px 332px 0px;
+    padding: 343px 0px 0px 0px;
     position: relative;
     z-index: 2;
     max-width: 500px;
@@ -131,11 +132,13 @@ body._lock{
     font-family: $font-georgia;
     font-size: 44px;
     line-height: 130%;
+    color: #fff;
 }
 .header__hero-text {
     margin-top: 42px;
     line-height: 160%;
     width: 460px;
+    color: #fff;
 }
 .header__hero-button {
     border-radius: 100px;
@@ -155,16 +158,125 @@ body._lock{
     z-index: 10;
 }
 .main-block__image {
-    background-position: center center;
+    background-position: center top;
     background-size: auto;
     background-repeat: no-repeat;
     background-image: url(../../assets/images/bg.jpg);
     position: absolute;
     width: 100%;
-    height: 159%;
+    height: 908px;
     top: 0;
     left: 0;
 }
 ._ibg {
 }
+.main__about{
+    display: flex;
+    justify-content: center;
+    gap: 120px;
+}
+.main__about__pets-img img{
+    margin-top: 80px;
+    margin-bottom: 100px;
+}
+.main__about__pets__title{
+    margin-top: 94px;
+    font-family: $font-georgia;
+    font-size: 35px;
+    width: 370px;
+    line-height: 130%;
+    letter-spacing: 0.06em;
+}
+.main__about__pets__text{
+    margin-top: 25px;
+    width: 430px;
+    line-height: 160%;
+}
 
+@media (max-width: 1000px){
+    .main__hero-body__img {
+		padding-top: 182px;
+	}
+	.main__hero-body__img img{
+		width: 450px;
+        height: 450px * 728px / 698px;
+	}
+    .main__hero-body__info{
+        padding-top: 200px;
+    }
+    .main-block__image {
+        height: 650px;
+    }
+    .header__hero-text {
+        width: 358px;
+    }
+    .main__about{
+        gap: 40px;
+    }
+    .main__about__pets__text {
+        width: 367px;
+    }
+    .main__about__pets-img img {
+        margin-top: 118px;
+    }
+}
+@media (max-width: 768px){
+    ._container {
+        padding: 0px 30px;
+    }
+    .logo__title{       
+    padding-top: 30px;
+    }
+    .main-block__image {
+        height: 1165px;
+    }
+    .menu__list {
+        padding-top: 29px;
+    }
+    .main__hero-body {
+        flex-direction: column;
+    }
+    .main__hero-body__info {
+        padding-top: 150px;
+        padding-left: 124px;
+    }
+    .header__hero-text {
+        width: 459px;
+    }
+    .header__hero-button {
+        margin-left: 125px;
+    }
+    .main__hero-body__img img{
+		width: 569px;
+        height: 569px * 728px / 698px;
+	}
+    .main__hero-body__img {
+        margin-top: 100px;
+        padding-top: 0px;
+        margin-left: 139px;
+    }
+    .main-block__image {
+        background-image: url(../../assets/images/bg768.jpg);
+    }
+    .main__about{
+        gap: 0px;
+        flex-direction: column-reverse;
+    }
+    .main__about__pets-img{
+        display: flex;
+        justify-content: center;
+    }
+    .main__about__pets-text{
+        display: flex;
+        justify-content: center;
+    }
+    .main__about__pets__title{
+        margin-top: 80px;
+    }
+    .main__about__pets__text {
+        width: 430px;
+    }
+    .main__about__pets-img img{
+        margin-top: 80px;
+    }
+}
