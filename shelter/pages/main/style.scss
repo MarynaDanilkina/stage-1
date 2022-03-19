@@ -209,7 +209,6 @@ body._lock{
     color: #545454;
     letter-spacing: 0.06em;
     width: 400px;
-
 }
 .our__friends__title-block{
     display: flex;
@@ -297,6 +296,78 @@ body._lock{
 }
 .help{
     background-color: #FFFFFF;
+}
+.help__title{
+    text-align: center;
+    padding-top: 80px;
+    font-family: $font-georgia;
+    font-size: 35px;
+    line-height: 130%;
+    color: #545454;
+    letter-spacing: 0.06em;
+    width: 310px;
+}
+.help__block-all{
+    margin: 58px 20px 100px 20px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 3.5em;
+}
+.help__block-icon{
+    display: flex;
+    justify-content: center;
+}
+.help__block-text{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    font-family: $font-georgia;
+   font-size: 20px;
+   line-height: 115%;
+   letter-spacing: 0.06em;
+   color: #545454;
+}
+.help__block{
+    display: flex;
+    flex-direction: column;
+}
+.food{ 
+    width: 47.86px;
+    height: 60px;
+    
+}
+.Transportation{
+    height: 60px;
+   width: 59.95px;
+}
+.Toys{
+    width: 60px;
+    height: 60px;
+}
+.Bowls{
+    width: 56.82px;
+    height: 60px;
+}
+.Shampoos{
+    width: 31.3px;
+    height: 60px;
+}
+.Vitamins{
+    width: 54.16px;
+    height: 60px; 
+}
+.Medicines{
+    width: 60px;
+    height: 60px; 
+}
+.Collars{
+    width: 52.43px;
+    height: 60px; 
+}
+.Sleeping{
+    width: 56.29px;
+    height: 60px; 
 }
 @media (max-width: 1000px){
     .main__hero-body__img {
