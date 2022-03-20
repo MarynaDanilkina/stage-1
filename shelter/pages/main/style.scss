@@ -309,10 +309,11 @@ body._lock{
 }
 .help__block-all{
     margin: 58px 20px 100px 20px;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-column-gap: 10px;
-    grid-row-gap: 3.5em;
+   display: flex;
+   row-gap: 55px;
+    column-gap: 120px;
+   flex-wrap: wrap;
+   justify-content: center;
 }
 .help__block-icon{
     display: flex;

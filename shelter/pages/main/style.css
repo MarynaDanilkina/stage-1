@@ -408,12 +408,17 @@ body._lock {
 
 .help__block-all {
   margin: 58px 20px 100px 20px;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: (1fr)[5];
-      grid-template-columns: repeat(5, 1fr);
-  grid-column-gap: 10px;
-  grid-row-gap: 3.5em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  row-gap: 55px;
+  -webkit-column-gap: 120px;
+          column-gap: 120px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .help__block-icon {
