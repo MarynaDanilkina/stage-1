@@ -30,6 +30,7 @@ const img = document.querySelector('.about-animals__block-img')
 const nameAnim = document.querySelector('.name__animal')
 const modal = document.querySelector('.our__friends__popup')
 const modalClose = document.querySelector('.modalClose')
+const card = document.querySelectorAll('.about-animals__block')
 let jsonAnim = "./data.json";
 const url = "./data.json"
 
@@ -68,7 +69,7 @@ async function getData(url) {
 getData(url)
 
 function addDiv(data) {
-    for (let i = 0; i < 8; i++) {
+    for (let i = card.length; i < card.length + data.length; i++) {
         let parent = document.querySelector('.our__friends-slider__line');
         let div = document.createElement('div');
         div.classList.add('about-animals__block');
@@ -120,14 +121,14 @@ function buttonAbout(parentButton) {
     parentButton.append(butAbout);
 }
 function showImg(data) {
-    for (let i = 0; i < 8; i++) {
+    for (let i = card.length; i < card.length + data.length; i++) {
         let imgAnim = document.querySelectorAll('.about-animals__block-img');
         imgAnim[i].src = `${data[i].img}`
         imgAnim[i].alt = `${data[i].name}`
     }
 }
 function showTitle(data) {
-    for (let i = 0; i < 8; i++) {
+    for (let i = card.length; i < card.length + data.length; i++) {
         let titleAnim = document.querySelectorAll('.about-animals__block-name');
         titleAnim[i].innerHTML = `${data[i].name}`
     }
@@ -156,7 +157,7 @@ function addModalName(id, data) {
     document.querySelector('.nameAnimals').innerHTML = `${data[id - 1].name}`;
 }
 function addModalBreed(id, data) {
-    document.querySelector('.breed').innerHTML = `${data[id - 1].type}-${data[id - 1].breed}`;
+    document.querySelector('.breed').innerHTML = `${data[id - 1].type} - ${data[id - 1].breed}`;
 }
 function addModalDescription(id, data) {
     document.querySelector('.description').innerHTML = `${data[id - 1].description}`;
