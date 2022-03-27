@@ -13,12 +13,10 @@
 a:hover {
   -webkit-transition: .3s;
   transition: .3s;
-  color: #ff0000;
   text-decoration: none;
 }
 
 a {
-  color: #fff;
   text-decoration: none;
 }
 
@@ -137,6 +135,12 @@ body._lock {
   color: #CDCDCD;
   line-height: calc(50 / 20 * 100%);
   font-weight: 400;
+}
+
+.active {
+  color: #FAFAFA;
+  padding-bottom: 4px;
+  border-bottom: 3px solid #F1CDB3;
 }
 
 .main {
@@ -1462,5 +1466,26 @@ body._lock {
   .header__menu {
     padding: 0px 20px 0px 0px;
   }
+}
+
+.about-animals__block:hover {
+  background-color: #FFF;
+  cursor: pointer;
+}
+
+.menu__link:hover {
+  color: #FAFAFA;
+}
+
+.header__hero-button:hover {
+  background: #FDDCC4;
+}
+
+.about-animals-button:hover {
+  background: #FDDCC4;
+}
+
+.our__friends-button-get:hover {
+  background: #FDDCC4;
 }
 /*# sourceMappingURL=style.css.map */
