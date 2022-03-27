@@ -140,6 +140,12 @@ body._lock {
   font-weight: 400;
 }
 
+.active {
+  color: #545454;
+  padding-bottom: 4px;
+  border-bottom: 3px solid #F1CDB3;
+}
+
 .main {
   -webkit-box-flex: 1;
       -ms-flex: 1 1 auto;
@@ -294,9 +300,9 @@ body._lock {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .our__friends__about-animals {
@@ -309,6 +315,9 @@ body._lock {
   -webkit-column-gap: 40px;
           column-gap: 40px;
   margin-bottom: 45px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .about-animals__block {
@@ -384,70 +393,6 @@ body._lock {
   margin-top: 60px;
   background-color: #F1CDB3;
   color: #292929;
-}
-
-.help {
-  background-color: #FFFFFF;
-}
-
-.help__title {
-  text-align: center;
-  padding-top: 80px;
-  font-family: "Georgia", sans-serif;
-  font-size: 35px;
-  line-height: 130%;
-  color: #545454;
-  letter-spacing: 0.06em;
-  width: 310px;
-}
-
-.help__block-all {
-  margin: 58px 20px 100px 20px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  row-gap: 55px;
-  -webkit-column-gap: 120px;
-          column-gap: 120px;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-.help__block-icon {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-.help__block-text {
-  margin-top: 30px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  font-family: "Georgia", sans-serif;
-  font-size: 20px;
-  line-height: 115%;
-  letter-spacing: 0.06em;
-  color: #545454;
-}
-
-.help__block {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
 }
 
 .addition__block {
@@ -738,6 +683,9 @@ body._lock {
 }
 
 @media (max-width: 768px) {
+  .our__friends__about {
+    margin-top: 29px;
+  }
   .header__menu {
     margin-left: 0px;
   }
@@ -754,7 +702,7 @@ body._lock {
     height: 1165px;
   }
   .menu__list {
-    padding-top: 29px;
+    padding-top: 0px;
   }
   .main__hero-body {
     -webkit-box-orient: vertical;
@@ -1306,5 +1254,18 @@ body._lock {
   .header__menu {
     padding: 0px 20px 0px 0px;
   }
+}
+
+.menu__link:hover {
+  color: #292929;
+}
+
+.about-animals__block:hover {
+  background-color: #FFF;
+  cursor: pointer;
+}
+
+.about-animals-button:hover {
+  background: #FDDCC4;
 }
 /*# sourceMappingURL=style.css.map */
