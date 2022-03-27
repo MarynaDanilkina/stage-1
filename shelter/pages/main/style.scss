@@ -85,7 +85,7 @@ body._lock{
     font-family: $font-georgia;
     font-size: 32px;
     line-height: 110%;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.06em;
 }
 .logo__subtitile{
     color: #fff;
@@ -156,13 +156,14 @@ body._lock{
 .main__hero-body__img{
     padding-top: 180px;
     z-index: 10;
+    padding-left: 42px;
 }
 .main-block__image {
     background-position: center top;
     background: radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%) , #211F20;
     position: absolute;
     width: 100%;
-    height: 908px;
+    height: 907px;
     top: 0;
     left: 0;
 }
@@ -226,6 +227,16 @@ body._lock{
     background-color: #FAFAFA;
     border-radius: 9px;
     display: flex;
+}
+.modalClose{
+    width: 52px;
+    height: 52px;
+}
+.modalClose__img{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -50px;
+    margin-right: -63px;
 }
 .our__friends__popup__block-info{
     margin-left: 29px;
@@ -570,9 +581,15 @@ body._lock{
 .tel{
     color: #F1CDB3;
 }
+.main__hero-body-all{
+    display: flex;
+}
 @media (max-width: 1220px){
+    .our__friends__about-animals {
+        width: 680px;
+    }
     .our__friends-slider__line {
-        gap: 20px;
+        gap: 140px;
     }
 }
 @media (max-width: 1150px){
@@ -581,6 +598,20 @@ body._lock{
     }
     .footer__info {
         gap: 200px;
+    }
+    .our__friends__popup__block {
+        width: 700px;
+        height: 700px * 500px / 900px;
+    }
+    .img__modal{
+
+    }
+    .our__friends__popup__block-info {
+        margin-left: 0px; 
+    }
+    .modalClose__img {
+        margin-top: -50px;
+        margin-right: -89px;
     }
 }
 @media (max-width: 1000px){
@@ -613,8 +644,15 @@ body._lock{
         flex-direction: column-reverse;
        gap: 60px;
     }
+    
 }
 @media (max-width: 926px){
+    .our__friends__about-animals {
+        width: 270px + 270px + 40px;
+    }
+    .our__friends-slider__line {
+        gap: 40px;
+    }
     .help__block-all{
         column-gap: 60px;
     }
@@ -627,13 +665,19 @@ body._lock{
     .footer__img {
         padding-top: 10px;
     }
-}
-@media (max-width: 768px){
-    ._container {
-        padding: 0px 30px;
-    }
     .logo__title{       
     padding-top: 30px;
+    }
+}
+@media (max-width: 768px){
+    .header__menu{
+        margin-left: 0px;
+    }
+    .main__hero-body-all{
+        flex-direction: column;
+    }
+    ._container {
+        padding: 0px 30px;
     }
     .main-block__image {
         height: 1165px;
@@ -661,7 +705,7 @@ body._lock{
     .main__hero-body__img {
         margin-top: 100px;
         padding-top: 0px;
-        margin-left: 139px;
+        margin-left: 97px;
     }
     .main-block__image {
         background-image: url(../../assets/images/bg768.jpg);
@@ -699,11 +743,8 @@ body._lock{
     .main-block__image {
         background: radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%) , #211F20;
     }
-    .header__menu{
-        margin-left: 46px;
-    }
 }
-@media (max-width: 767px){
+@media (max-width: 767.5px){
     // бургер 
     .header__menu-icon{
 		z-index: 20;
@@ -789,10 +830,86 @@ body._lock{
         z-index: 5;
     }
 }
+@media (max-width: 760px){
+    .our__friends__about-animals {
+        width: 270px + 270px + 10px;
+    }
+    .our__friends-slider__line {
+        gap: 10px;
+    }
+}
+@media (max-width: 740px){
+    .our__friends__about-animals {
+        width: 270px;
+    }
+    .our__friends-slider__line {
+        gap: 0px;
+    }
+}
 @media (max-width: 720px){
+    .header__hero-title{
+        text-align: center;
+    }
+    .header__hero-text{
+        text-align: center;
+    }
+    .main__hero-body{
+        justify-content: center;
+    }
+    .main__hero-body__info{
+        padding-left: 0px;
+    }
+    .main__hero-body__img{
+        margin-left: 0;
+        display: flex;
+        justify-content: center;
+    }
+    .main__hero-body__img img{
+		width: 400px;
+        height: 400px * 728px / 698px;
+    }
+    .main-block__image{
+        height: 989px;
+    }
+    .main__about__pets-text{
+        text-align: center;
+    }
+    .addition__info{
+        display: flex;
+        flex-direction: column;
+    }
+    .addition__info-title{
+        text-align: center;
+    }
+    .addition__info-title__bank-text{
+        text-align: center;
+    }
     .footer__info {
         flex-direction: column;
         gap: 10px;
+    }
+    .footer__info-left{
+        display: flex;
+        flex-direction: column;
+    }
+    .footer__info-title{
+        text-align: center;
+    }
+    .footer__info-contacts-all{
+        display: flex;
+        flex-direction: column;
+    }
+    .main__about__pets-text-all{
+        display: flex;
+        flex-direction: column;
+    }
+    .pets-text{
+        display: flex;
+        justify-content: center;
+    }
+    .centers{
+        display: flex;
+        justify-content: center;
     }
 }
 @media (max-width: 654px){
@@ -812,7 +929,111 @@ body._lock{
         width: 220px;
     }
 }
+@media (max-width: 540px){
+    .main__hero-body__img {
+        margin-top: 105px;
+    }
+    .main__hero-body__img img {
+        width: 260px;
+        height: 260px * 728px / 698px;
+        margin-left: 40px;
+    }
+    .main-block__image {
+        height: 873px;
+    }
+    .main__about__pets__title {
+        font-size: 25px;
+    }
+    .addition__img-dog{
+        width: 260px;
+        height: 260px * 261px / 505px;
+    }
+    .header__menu-icon{
+        margin-right: 43px;
+        width: 30px;
+        height: 22px;
+    }
+    .addition__block {
+        margin-bottom: 42px;
+    }
+    .header__hero-text {
+        width: 300px;
+    }
+    .header__hero-button {
+        margin-left: 46px;
+    }
+    
+}
+@media (max-width: 470px){
+    .our__friends__about {
+      flex-direction: column;
+      margin-top: -16px;
+    }
+    .our__friends__about-arrow.right{
+        position: relative;
+        top: 20px;
+        left: 66px;
+    }
+    .our__friends__about-arrow.left{
+        position: relative;
+        top: 510px;
+        left: -66px;
+    }
+    .our__friends-button {
+        margin-bottom: 41px;
+    }
+}
 @media (max-width: 420px){
+    .main__hero-body__img {
+        margin-right: 43px;
+    }
+    .main-block__image {
+        height: 823px;
+    }
+    .main__about__pets__title {
+        margin-top: 42px;
+    }
+    .header__menu-icon {
+      margin-top: 30px;
+    }
+    .logo__subtitile {
+        margin-left: 4px;
+    }
+    ._container {
+        padding: 0px 10px;
+    }
+    .header__hero-title {
+        font-size: 25px;
+        width: 220px;
+        letter-spacing: 0.06em;
+    }
+    .addition__info-title {
+        font-size: 25px;
+        width: 210px;
+    }
+    .help__title {
+        padding-top: 42px;
+        font-size: 25px;
+        width: 300px;
+    }
+    .main__about__pets-img img {
+        margin-top: 42px;
+        width: 260px;
+        height: 260px * 408px / 300px;
+        margin-bottom: 42px;
+    }
+    .our__friends__title {
+        font-size: 25px;
+        width: 300px;
+        padding-top: 42px;
+    }
+    .main__about__pets__text {
+        width: 270px;
+        text-align: justify;
+    }
+    .pets__text2{
+        margin-top: 22px;
+    }
     .footer__img img{
         width: 260px;
         height: 269px;
@@ -826,6 +1047,101 @@ body._lock{
     }
     .footer__info-contacts-all {
         text-align: center;
+    }
+    .help__block-all {
+        margin-top: 42px;
+        row-gap: 30px;
+        column-gap: 30px;
+        margin-bottom: 42px;
+    }
+    .help__block-text {
+        margin-top: 20px;
+    }
+    .help__block{
+        width: 135px;
+    }
+    .help__block-text {
+        margin-top: 20px;
+        width: 139px;
+        letter-spacing: 0.06em;
+    }
+    .food {
+        width: 50px;
+        height: 50px;
+    }
+    .Transportation{
+        width: 50px;
+        height: 50px;
+    }
+    .Toys{
+        width: 50px;
+        height: 50px;
+    }
+    .Bowls{
+        width: 50px;
+        height: 50px;
+    }
+    .Shampoos{
+        width: 50px;
+        height: 50px;
+    }
+    .Vitamins{
+        width: 50px;
+        height: 50px; 
+    }
+    .Medicines{
+        width: 50px;
+        height: 50px;
+    }
+    .Collars{
+        width: 50px;
+        height: 50px;
+    }
+    .Sleeping{
+        width: 50px;
+        height: 50px; 
+    }
+    .addition__block {
+        padding-top: 42px;
+        margin-bottom: 42px;
+    }
+    .addition__info-title__bank {
+        margin-top: 20px;
+        width: 273px;
+        letter-spacing: 0em;
+        line-height: 160%;
+    }
+    .addition__info-title__bank-code {
+        height: 43px;
+        width: 281px;
+    }
+    .bank-code {
+        width: 206px;
+        font-size: 15px;
+        line-height: 110%;
+    }
+    .addition__info-title__bank-text {
+        width: 280px;
+        text-align: justify;
+    }
+    .addition__block {
+        gap: 43px;
+    }
+    .footer__info {
+        gap: 0px;
+    }
+    .footer__info-contacts-all {
+        margin-bottom: 10px;
+    }
+    .footer__info-title {
+        padding-top: 30px;
+    }
+    .footer__info-pin {
+        margin-top: 40px;
+        text-align: left;
+    }
+    .footer__img {
+        padding-top: 27px;
     }
 }
 @media (min-width: 1300px){
