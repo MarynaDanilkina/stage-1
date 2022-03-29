@@ -29,7 +29,7 @@ function closeMenu() {
 //const img = document.querySelector('.about-animals__block-img')
 //const nameAnim = document.querySelector('.name__animal')
 const modal = document.querySelector('.our__friends__popup')
-const modalClose = document.querySelector('.modalClose')
+const modalClose = document.querySelector('.modalClose__block')
 const card = document.querySelectorAll('.about-animals__block')
 let jsonAnim = "./data.json";
 const url = "./data.json"
@@ -117,6 +117,7 @@ function buttonAbout(parentButton) {
 
     let butAbout = document.createElement('button');
     butAbout.classList.add('about-animals-button');
+    butAbout.classList.add('effect')
     butAbout.innerHTML = "Learn more";
     parentButton.append(butAbout);
 }

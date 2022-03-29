@@ -229,10 +229,10 @@
                             <a href="../pets/index.html" class="menu__link ">Our pets</a>
                         </li>
                         <li class="menu__item">
-                            <a href="#" class="menu__link ">Help the shelter</a>
+                            <a href="#help" class="menu__link ">Help the shelter</a>
                         </li>
                         <li class="menu__item">
-                            <a href="#" class="menu__link ">Contacts</a>
+                            <a href="#footer" class="menu__link ">Contacts</a>
                         </li>
                     </ul>
                 </nav>
@@ -256,7 +256,8 @@
                                         heart.
                                         He or she will love you more than anybody else in the world, you will see!
                                     </div>
-                                    <button class="header__hero-button" data-i18='hire'>
+                                    <button type="button" onclick="location.href='../pets/index.html' "
+                                        class="header__hero-button effect" data-i18='hire'>
                                         Make a friend
                                     </button>
                                 </div>
@@ -285,15 +286,12 @@
                         <div class="pets-text">
                             <h2 class="main__about__pets__title">About the shelter <br> “Cozy House”</h2>
                         </div>
-
-
                         <div class="pets-text">
                             <p class="main__about__pets__text">Currently we have 121 dogs and 342 cats on our hands and
                                 statistics show that only 20% of them will find a family. The others will continue to
                                 live
                                 with
                                 us and will be waiting for a lucky chance to become dearly loved.</p>
-
                         </div>
                         <div class="pets-text">
                             <p class="main__about__pets__text pets__text2">We feed our wards with the best food and make
@@ -309,27 +307,33 @@
                                 hardly
                                 ever leave them alone.</p>
                         </div>
-
                     </div>
                 </div>
             </section>
             <section class="our__friends__container">
                 <div class="modal">
                     <div class="our__friends__popup close">
+                        <div class="popup__block-close ">
+                            <div class="modalClose__block effect">
+                                <p class="modalClose ">&#10006;</p>
+                            </div>
+                        </div>
                         <div class="our__friends__popup__block">
                             <div class="our__friends__popup__block-img">
                                 <img class="img__modal" src="" alt="pets" width="500px" height="500px">
                             </div>
                             <div class="popup__block-right">
-                                <div class="modalClose__img">
-                                    <img class="modalClose" src="../../assets/icons/modal_close_button.svg" alt="">
-                                </div>
-
                                 <div class="our__friends__popup__block-info">
+                                    <div class="block__popup">
+                                        <h3 class="nameAnimals"></h3>
+                                    </div>
+                                    <div class="block__popup">
+                                        <h4 class="breed"></h4>
+                                    </div>
+                                    <div class="block__popup">
+                                        <h5 class="description"></h5>
+                                    </div>
 
-                                    <h3 class="nameAnimals"></h3>
-                                    <h4 class="breed"></h4>
-                                    <h5 class="description"></h5>
                                     <div class="popup__block-info">
                                         <ul>
                                             <li>Age:<span class="age"></span></li>
@@ -337,26 +341,21 @@
                                             <li>Diseases:<span class="diseases"></span></li>
                                             <li>Parasites:<span class="parasites"></span></li>
                                         </ul>
-
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
                 </div>
-
                 <div class="our__friends _container">
                     <div class="our__friends-all">
                         <div class="our__friends__title-block">
                             <h3 class="our__friends__title">Our friends who <br>are looking for a house</h3>
                         </div>
                         <div class="our__friends__about">
-                            <div class="our__friends__about-arrow left">
-                                <svg class="arrow0">
-                                    <use xlink:href="#arrow0"></use>
-                                </svg>
+
+                            <div class="our__friends__about-arrow effect left">
+                                <p class="arrow0">&larr;</p>
                             </div>
                             <div class="our__friends__about-animals">
                                 <div class="our__friends-slider__line">
@@ -458,16 +457,15 @@
                                     </div>-->
                                 </div>
                             </div>
-                            <div class="our__friends__about-arrow right">
-                                <svg class="arrow">
-                                    <use xlink:href="#arrow"></use>
-                                </svg>
+                            <div class="our__friends__about-arrow effect right">
+                                <p class="arrow">&rarr;</p>
                             </div>
                         </div>
 
                     </div>
                     <div class="our__friends-button">
-                        <button class="our__friends-button-get">
+                        <button type="button" onclick="location.href='../pets/index.html' "
+                            class="our__friends-button-get effect">
                             Get to know the rest
                         </button>
                     </div>
@@ -477,7 +475,7 @@
         <section class="help _container">
             <div class="our__friends-all">
                 <div class="our__friends__title-block">
-                    <h3 class="help__title">How you can help <br> our shelter</h3>
+                    <h3 id="help" class="help__title">How you can help <br> our shelter</h3>
                 </div>
                 <div class="help__block-all">
                     <div class="help__block">
@@ -592,7 +590,7 @@
                             </div>
                         </div>
                         <div class="centers">
-                            <div class="addition__info-title__bank-code">
+                            <div class="addition__info-title__bank-code effect">
                                 <p class="bank-code__img">
                                     <svg class="credit">
                                         <use xlink:href="#credit"></use>
@@ -615,7 +613,7 @@
             </div>
         </section>
     </div>
-    <footer class="footer">
+    <footer class="footer" id="footer">
         <div class="footer__block _container">
             <div class="footer__info ">
                 <div class="footer__info-left">
@@ -671,7 +669,10 @@
                                     </svg>
                                 </div>
                                 <div class="footer__info-pin-info">
-                                    <p>1 Central Street, Boston (entrance from the store)</p>
+                                    <a target="_blank"
+                                        href="https://www.google.com/maps/place/1+Central+St,+Boston,+MA+02109,+%D0%A1%D0%A8%D0%90/@42.3585519,-71.056915,17z/data=!3m1!4b1!4m5!3m4!1s0x89e370868bc2ce7b:0x82fa7db94f5fea9e!8m2!3d42.3585519!4d-71.0547263!5m1!1e1?hl=ru-RU">
+                                        <p>1 Central Street, Boston (entrance from the store)</p>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -684,7 +685,10 @@
                                     </svg>
                                 </div>
                                 <div class="footer__info-pin-info">
-                                    <p>18 South Park, London </p>
+                                    <a target="_blank"
+                                        href="https://www.google.com/maps/place/Strach/@51.4892434,-0.2479036,11z/data=!4m9!1m2!2m1!1sLondon+shelter+18!3m5!1s0x4876037ab66aa51b:0x3c2f9e8000374a5!8m2!3d51.4754125!4d-0.0772963!15sChFMb25kb24gc2hlbHRlciAxOCID8AEBkgEOYW5pbWFsX3NoZWx0ZXI!5m1!1e1?hl=ru-RU">
+                                        <p>18 South Park, London</p>
+                                    </a>
                                 </div>
                             </div>
                         </div>
