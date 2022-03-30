@@ -137,9 +137,11 @@ function showTitle(data) {
 
 function openModal() {
     modal.classList.add('open');
+    document.body.classList.add('_lock');
 }
 modalClose.addEventListener("click", () => {
     modal.classList.remove('open');
+    document.body.classList.remove('_lock');
 })
 function getAnimalsData(id, data) {
     addModalImg(id, data);
@@ -179,5 +181,6 @@ function addModalParasites(id, data) {
 window.onclick = function (e) {
     if (e.target == modal) {
         modal.classList.remove('open');
+        document.body.classList.remove('_lock');
     }
 };

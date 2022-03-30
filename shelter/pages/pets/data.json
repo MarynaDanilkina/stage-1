@@ -92,7 +92,7 @@
         ]
     },
     {
-        "id": 7,
+        "id": 6,
         "name": "Charly",
         "img": "../../assets/images/charly.png",
         "type": "Dog",
@@ -113,7 +113,7 @@
         ]
     },
     {
-        "id": 8,
+        "id": 7,
         "name": "Scarlett",
         "img": "../../assets/images/scarlet.png",
         "type": "Dog",
@@ -131,7 +131,7 @@
         ]
     },
     {
-        "id": 9,
+        "id": 8,
         "name": "Freddie",
         "img": "../../assets/images/freddie.png",
         "type": "Cat",
