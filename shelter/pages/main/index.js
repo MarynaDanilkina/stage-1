@@ -9,6 +9,8 @@ if (iconMenu) {
     iconMenu.addEventListener("click", function (e) {
         iconMenu.classList.toggle('_active');
         menuHeader.classList.toggle('_active');
+        menuHeader.classList.toggle('slide-in');
+        menuHeader.classList.toggle('slide-out');
     });
 }
 

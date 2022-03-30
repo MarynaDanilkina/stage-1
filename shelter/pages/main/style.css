@@ -1752,4 +1752,50 @@ body._lock {
 body._lock {
   overflow: hidden;
 }
+
+.slide-in {
+  -webkit-animation: slide-in 2s forwards;
+          animation: slide-in 2s forwards;
+}
+
+@-webkit-keyframes slide-in {
+  from {
+    left: 100%;
+  }
+  to {
+    left: 0px;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    left: 100%;
+  }
+  to {
+    left: 0px;
+  }
+}
+
+.slide-out {
+  -webkit-animation: slide-out 2s forwards;
+          animation: slide-out 2s forwards;
+}
+
+@-webkit-keyframes slide-out {
+  from {
+    left: 50%;
+  }
+  to {
+    left: 100%;
+  }
+}
+
+@keyframes slide-out {
+  from {
+    left: 50%;
+  }
+  to {
+    left: 100%;
+  }
+}
 /*# sourceMappingURL=style.css.map */
