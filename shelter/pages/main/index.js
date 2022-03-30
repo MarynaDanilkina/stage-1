@@ -34,27 +34,33 @@ const card = document.querySelectorAll('.about-animals__block')
 let jsonAnim = "./data.json";
 const url = "./data.json"
 
-let offset = -10; //смещение от левого края
 
 
-next.addEventListener('click', arrowNext);
-prew.addEventListener('click', arrowPrew);
 
-function arrowNext() {
-    offset = offset + 360;
-    if (offset > 1790) {
-        offset = -10;
+next.addEventListener('click', function () {
+    randomPets();
+    getData(url);
+});
+prew.addEventListener('click', function () {
+    randomPets();
+    getData(url);
+});
+
+let arrPets = [0, 1, 2];
+
+const randomPets = () => {
+    const arr = arrPets;
+    arrPets = [];
+    while (arrPets.length < 3) {
+        let rand = Math.floor(Math.random() * (7 - 0 + 1)) + 0;
+        if (!arrPets.includes(rand) && !arr.includes(rand)) {
+            arrPets.push(rand);
+        }
     }
-    slider.style.left = -offset + 'px';
+    console.log(arrPets)
 }
 
-function arrowPrew() {
-    offset = offset - 360;
-    if (offset < -10) {
-        offset = 1790;
-    }
-    slider.style.left = -offset + 'px';
-}
+
 
 //popup
 
@@ -69,14 +75,14 @@ async function getData(url) {
 getData(url)
 
 function addDiv(data) {
-    for (let i = card.length; i < card.length + data.length; i++) {
+    for (let i = 0; i < 3; i++) {
         let parent = document.querySelector('.our__friends-slider__line');
         let div = document.createElement('div');
         div.classList.add('about-animals__block');
-        let id = data[i].id;
+        let id = data[arrPets[i]].id;
         div.id = id;
         div.onclick = function bu() {
-            const id = div.id;
+            const id = arrPets[i] + 1;
             getAnimalsData(id, data)
             openModal()
         }
@@ -122,16 +128,16 @@ function buttonAbout(parentButton) {
     parentButton.append(butAbout);
 }
 function showImg(data) {
-    for (let i = card.length; i < card.length + data.length; i++) {
+    for (let i = 0; i < 3; i++) {
         let imgAnim = document.querySelectorAll('.about-animals__block-img');
-        imgAnim[i].src = `${data[i].img}`
-        imgAnim[i].alt = `${data[i].name}`
+        imgAnim[i].src = `${data[arrPets[i]].img}`
+        imgAnim[i].alt = `${data[arrPets[i]].name}`
     }
 }
 function showTitle(data) {
-    for (let i = card.length; i < card.length + data.length; i++) {
+    for (let i = 0; i < 3; i++) {
         let titleAnim = document.querySelectorAll('.about-animals__block-name');
-        titleAnim[i].innerHTML = `${data[i].name}`
+        titleAnim[i].innerHTML = `${data[arrPets[i]].name}`
     }
 }
 
