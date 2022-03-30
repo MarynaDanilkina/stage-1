@@ -24,8 +24,8 @@ function closeMenu() {
 
 //slider
 const slider = document.querySelector('.our__friends-slider__line');
-const prew = document.querySelector('.arrow0');
-const next = document.querySelector('.arrow');
+const prew = document.querySelector('.left');
+const next = document.querySelector('.right');
 const img = document.querySelector('.about-animals__block-img')
 const nameAnim = document.querySelector('.name__animal')
 const modal = document.querySelector('.our__friends__popup')
@@ -137,9 +137,11 @@ function showTitle(data) {
 
 function openModal() {
     modal.classList.add('open');
+    document.body.classList.add('_lock');
 }
 modalClose.addEventListener("click", () => {
     modal.classList.remove('open');
+    document.body.classList.remove('_lock');
 })
 function getAnimalsData(id, data) {
     addModalImg(id, data);
@@ -179,6 +181,7 @@ function addModalParasites(id, data) {
 window.onclick = function (e) {
     if (e.target == modal) {
         modal.classList.remove('open');
+        document.body.classList.remove('_lock');
     }
 };
 
