@@ -1471,6 +1471,7 @@ body._lock {
 }
 
 .about-animals-button:hover {
+  border: none;
   background: #FDDCC4;
 }
 
@@ -1483,6 +1484,7 @@ body._lock {
 }
 
 .modalClose__block:hover {
+  border: none;
   background: #FDDCC4;
 }
 
@@ -1514,11 +1516,13 @@ body._lock {
 }
 
 .forward:hover {
+  border: none;
   background: #FDDCC4;
   cursor: pointer;
 }
 
 .full-forward:hover {
+  border: none;
   background: #FDDCC4;
   cursor: pointer;
 }

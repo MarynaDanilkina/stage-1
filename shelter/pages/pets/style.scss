@@ -1160,6 +1160,7 @@ body._lock{
     cursor: pointer;
 }
 .about-animals-button:hover {
+    border: none;
     background: #FDDCC4;
 }
 .our__friends__popup:hover {
@@ -1169,6 +1170,7 @@ body._lock{
     cursor: default;
 }
 .modalClose__block:hover {
+    border: none;
     background: #FDDCC4;
 }
 //интерактивность
@@ -1187,11 +1189,13 @@ body._lock{
     overflow: hidden;
 }
 .forward:hover{
+    border: none;
     background: #FDDCC4;
     cursor: pointer;
 
 }
 .full-forward:hover{
+    border: none;
     background: #FDDCC4;
     cursor: pointer;
 
