@@ -1698,18 +1698,22 @@ body._lock {
 }
 
 .header__hero-button:hover {
+  border: none;
   background: #FDDCC4;
 }
 
 .about-animals-button:hover {
+  border: none;
   background: #FDDCC4;
 }
 
 .our__friends-button-get:hover {
+  border: none;
   background: #FDDCC4;
 }
 
 .our__friends__about-arrow:hover {
+  border: none;
   background: #FDDCC4;
   cursor: pointer;
 }
@@ -1723,6 +1727,7 @@ body._lock {
 }
 
 .modalClose__block:hover {
+  border: none;
   background: #FDDCC4;
 }
 
