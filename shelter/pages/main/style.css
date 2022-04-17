@@ -42,8 +42,8 @@ h6 {
 
 html,
 body {
+  line-height: 160%;
   height: 100%;
-  line-height: 1;
   font-size: 15px;
   color: #000;
   font-family: Arial;
@@ -180,8 +180,7 @@ body._lock {
 .header__hero-text {
   color: #CDCDCD;
   margin-top: 42px;
-  line-height: 160%;
-  width: 460px;
+  width: 465px;
 }
 
 .header__hero-button {
@@ -243,7 +242,6 @@ body._lock {
   color: #4C4C4C;
   margin-top: 25px;
   width: 430px;
-  line-height: 160%;
 }
 
 .our__friends__container {
@@ -828,45 +826,30 @@ body._lock {
           justify-content: center;
 }
 
-@media (max-width: 1220px) {
-  .our__friends__about-animals {
-    width: 680px;
-  }
-  .our__friends-slider__line {
-    gap: 140px;
+@media (max-width: 1279px) and (min-width: 768px) {
+  .header {
+    padding-top: 86px;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    width: 768px;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
   }
 }
 
-@media (max-width: 1150px) {
-  .our__friends__popup__block-img img {
-    width: 380px;
-    height: 380px;
+@media (max-width: 1279px) {
+  .main__hero-body__img {
+    padding-left: 44px;
   }
-  .popup__block-close {
-    margin-left: 682px;
-  }
-  .our__friends__popup__block-info {
-    margin-top: 17px;
-  }
-  .our__friends__popup__block-info h5 {
-    margin-top: 24px;
-    width: 281px;
-  }
-  .footer__block {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-  }
-  .footer__info {
-    gap: 200px;
-  }
-  .our__friends__popup__block {
-    width: 700px;
-    height: 388.88889px;
-  }
-  .our__friends__popup__block-info {
-    margin-left: 0px;
+  .main__hero {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
   }
   .modalClose__block {
     margin-top: -50px;
@@ -887,33 +870,11 @@ body._lock {
         -ms-flex-pack: center;
             justify-content: center;
   }
-}
-
-@media (max-width: 1000px) {
-  .main__hero-body__img {
-    padding-top: 182px;
-  }
-  .main__hero-body__img img {
-    width: 450px;
-    height: 469.34097px;
-  }
-  .main__hero-body__info {
-    padding-top: 200px;
-  }
-  .main-block__image {
-    height: 650px;
-  }
-  .header__hero-text {
-    width: 358px;
-  }
-  .main__about {
-    gap: 40px;
-  }
-  .main__about__pets__text {
-    width: 367px;
-  }
-  .main__about__pets-img img {
-    margin-top: 118px;
+  .footer__block {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
   }
   .addition__block {
     -webkit-box-orient: vertical;
@@ -921,19 +882,6 @@ body._lock {
         -ms-flex-direction: column-reverse;
             flex-direction: column-reverse;
     gap: 60px;
-  }
-}
-
-@media (max-width: 926px) {
-  .our__friends__about-animals {
-    width: 580px;
-  }
-  .our__friends-slider__line {
-    gap: 40px;
-  }
-  .help__block-all {
-    -webkit-column-gap: 60px;
-            column-gap: 60px;
   }
   .footer__info {
     gap: 61px;
@@ -947,25 +895,6 @@ body._lock {
   .logo__title {
     padding-top: 30px;
   }
-}
-
-@media (max-width: 850px) {
-  .our__friends__popup__block {
-    margin: 0px 69px;
-    width: 630px;
-    height: 350px;
-  }
-  .our__friends__popup__block-img img {
-    width: 350px;
-    height: 350px;
-  }
-  .popup__block-close {
-    margin-left: 611px;
-  }
-  .our__friends__popup__block-info {
-    margin-top: 10px;
-    margin-left: 11px;
-  }
   .our__friends__popup__block-info h5 {
     margin-top: 21px;
     width: 270px;
@@ -975,9 +904,28 @@ body._lock {
   .popup__block-info {
     margin-top: 16px;
   }
-}
-
-@media (max-width: 768px) {
+  .our__friends__popup__block {
+    margin: 0px 69px;
+    width: 630px;
+    height: 350px;
+  }
+  .our__friends__popup__block-info {
+    margin-top: 10px;
+    margin-left: 11px;
+  }
+  .popup__block-close {
+    margin-left: 611px;
+  }
+  .our__friends__popup__block-img img {
+    width: 350px;
+    height: 350px;
+  }
+  .our__friends-slider__line {
+    gap: 40px;
+  }
+  .our__friends__about-animals {
+    width: 580px;
+  }
   .header__menu {
     margin-left: 0px;
   }
@@ -997,6 +945,10 @@ body._lock {
     padding-top: 29px;
   }
   .main__hero-body {
+    width: 768px;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
@@ -1004,7 +956,7 @@ body._lock {
   }
   .main__hero-body__info {
     padding-top: 150px;
-    padding-left: 124px;
+    padding-left: 125px;
   }
   .header__hero-text {
     width: 459px;
@@ -1053,13 +1005,11 @@ body._lock {
   .main__about__pets__text {
     width: 430px;
   }
-  .main__about__pets-img img {
-    margin-top: 80px;
-  }
   .help__block-all {
+    width: 660px;
     row-gap: 55px;
-    -webkit-column-gap: 20px;
-            column-gap: 20px;
+    -webkit-column-gap: 35px;
+            column-gap: 35px;
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
     -ms-flex-pack: distribute;
@@ -1170,18 +1120,7 @@ body._lock {
   .header__logo {
     z-index: 5;
   }
-}
-
-@media (max-width: 760px) {
-  .our__friends__about-animals {
-    width: 550px;
-  }
-  .our__friends-slider__line {
-    gap: 10px;
-  }
-}
-
-@media (max-width: 740px) {
+  /**/
   .our__friends__about-animals {
     width: 270px;
   }
@@ -1189,7 +1128,8 @@ body._lock {
     gap: 0px;
   }
   .our__friends__popup__block {
-    width: 468px;
+    width: 240px;
+    height: 341px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -1201,11 +1141,9 @@ body._lock {
     display: none;
   }
   .popup__block-close {
-    margin-left: 454px;
+    margin-left: 195px;
   }
   .our__friends__popup__block-info {
-    margin-top: 20px;
-    margin-left: 0px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -1213,12 +1151,16 @@ body._lock {
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
+    margin: 10px;
   }
   .our__friends__popup__block-info h5 {
+    letter-spacing: 0.06em;
+    margin-top: 22px;
+    width: 220px;
     text-align: justify;
   }
   .popup__block-info {
-    margin-top: 16px;
+    margin-top: 34px;
   }
   .popup__block-right {
     display: -webkit-box;
@@ -1238,21 +1180,23 @@ body._lock {
             justify-content: center;
   }
   .our__friends__popup__block-info h4 {
-    width: 218px;
+    width: 149px;
   }
-}
-
-@media (max-width: 720px) {
   .header__hero-title {
     text-align: center;
+    font-size: 25px;
+    width: 220px;
+    letter-spacing: 0.06em;
   }
   .header__hero-text {
     text-align: center;
+    width: 300px;
   }
   .main__hero-body {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
+    padding: 0px 20px;
   }
   .main__hero-body__info {
     padding-left: 0px;
@@ -1265,13 +1209,16 @@ body._lock {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
+    margin-top: 105px;
+    margin-right: 43px;
   }
   .main__hero-body__img img {
-    width: 400px;
-    height: 417.19198px;
+    width: 260px;
+    height: 271.17479px;
+    margin-left: 40px;
   }
   .main-block__image {
-    height: 989px;
+    height: 823px;
   }
   .main__about__pets-text {
     text-align: center;
@@ -1287,18 +1234,33 @@ body._lock {
   }
   .addition__info-title {
     text-align: center;
+    font-size: 25px;
+    width: 210px;
   }
   .addition__info-title__bank-text {
     text-align: center;
+    width: 280px;
+    text-align: justify;
   }
   .footer__info {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
-    gap: 10px;
+    gap: 0px;
   }
   .footer__info-left {
+    padding-top: 30px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .footer__info-rigth {
+    padding-top: 23px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -1309,6 +1271,8 @@ body._lock {
   }
   .footer__info-title {
     text-align: center;
+    font-size: 25px;
+    padding-top: 0px;
   }
   .footer__info-contacts-all {
     display: -webkit-box;
@@ -1318,6 +1282,8 @@ body._lock {
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
+    text-align: center;
+    margin-bottom: 10px;
   }
   .main__about__pets-text-all {
     display: -webkit-box;
@@ -1344,104 +1310,32 @@ body._lock {
         -ms-flex-pack: center;
             justify-content: center;
   }
-}
-
-@media (max-width: 654px) {
   .help__block-text {
-    width: 130px;
     font-size: 15px;
     line-height: 110%;
+    margin-top: 20px;
+    width: 139px;
+    letter-spacing: 0.06em;
   }
   .help__block-all {
     -webkit-box-pack: justify;
         -ms-flex-pack: justify;
             justify-content: space-between;
-    row-gap: 55px;
-    -webkit-column-gap: 0px;
-            column-gap: 0px;
-    margin: 58px 0px 100px 0px;
+    margin: 58px 0px 42px 0px;
+    margin-top: 42px;
+    row-gap: 30px;
+    -webkit-column-gap: 31px;
+            column-gap: 31px;
+    width: 301px;
   }
   .help__title {
+    padding-top: 42px;
     font-size: 25px;
-    width: 220px;
-  }
-}
-
-@media (max-width: 600px) {
-  .our__friends__popup__block {
-    width: 468px;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-  }
-  .our__friends__popup__block-img img {
-    display: none;
-  }
-  .popup__block-close {
-    margin-left: 454px;
-  }
-  .our__friends__popup__block-info {
-    margin-top: 20px;
-    margin-left: 0px;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-  }
-  .our__friends__popup__block-info h5 {
-    text-align: justify;
-  }
-  .popup__block-info {
-    margin-top: 16px;
-  }
-  .popup__block-right {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-  }
-  .block__popup {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-  }
-  .our__friends__popup__block-info h4 {
-    width: 218px;
-  }
-  .our__friends__popup__block {
-    width: 320px;
-  }
-  .popup__block-close {
-    margin-left: 300px;
-  }
-}
-
-@media (max-width: 540px) {
-  .main__hero-body__img {
-    margin-top: 105px;
-  }
-  .main__hero-body__img img {
-    width: 260px;
-    height: 271.17479px;
-    margin-left: 40px;
-  }
-  .main-block__image {
-    height: 873px;
+    width: 300px;
   }
   .main__about__pets__title {
     font-size: 25px;
+    margin-top: 42px;
   }
   .addition__img-dog {
     width: 260px;
@@ -1451,19 +1345,16 @@ body._lock {
     margin-right: 43px;
     width: 30px;
     height: 22px;
+    margin-top: 30px;
   }
   .addition__block {
-    margin-bottom: 42px;
-  }
-  .header__hero-text {
-    width: 300px;
+    padding-top: 47px;
+    margin-bottom: 39px;
+    gap: 43px;
   }
   .header__hero-button {
     margin-left: 46px;
   }
-}
-
-@media (max-width: 470px) {
   .our__friends__about {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -1484,67 +1375,17 @@ body._lock {
   .our__friends-button {
     margin-bottom: 41px;
   }
-  .popup__block-close {
-    margin-left: 195px;
-  }
-  .our__friends__popup__block {
-    width: 240px;
-    height: 341px;
-  }
-  .our__friends__popup__block-info {
-    margin: 10px;
-  }
   .our__friends__popup__block-info h3 {
     letter-spacing: 0.07em;
   }
-  .our__friends__popup__block-info h4 {
-    width: 149px;
-  }
-  .our__friends__popup__block-info h5 {
-    letter-spacing: 0.06em;
-    margin-top: 22px;
-    width: 220px;
-  }
-  .popup__block-info {
-    margin-top: 34px;
-  }
   .popup__block-info ul li {
     margin-bottom: 8px;
-  }
-}
-
-@media (max-width: 420px) {
-  .main__hero-body__img {
-    margin-right: 43px;
-  }
-  .main-block__image {
-    height: 823px;
-  }
-  .main__about__pets__title {
-    margin-top: 42px;
-  }
-  .header__menu-icon {
-    margin-top: 30px;
   }
   .logo__subtitile {
     margin-left: 4px;
   }
   ._container {
     padding: 0px 10px;
-  }
-  .header__hero-title {
-    font-size: 25px;
-    width: 220px;
-    letter-spacing: 0.06em;
-  }
-  .addition__info-title {
-    font-size: 25px;
-    width: 210px;
-  }
-  .help__title {
-    padding-top: 42px;
-    font-size: 25px;
-    width: 300px;
   }
   .main__about__pets-img img {
     margin-top: 42px;
@@ -1568,33 +1409,8 @@ body._lock {
     width: 260px;
     height: 269px;
   }
-  .footer__info-title {
-    text-align: center;
-    font-size: 25px;
-  }
-  ._container {
-    padding: 0px 10px;
-  }
-  .footer__info-contacts-all {
-    text-align: center;
-  }
-  .help__block-all {
-    margin-top: 42px;
-    row-gap: 30px;
-    -webkit-column-gap: 30px;
-            column-gap: 30px;
-    margin-bottom: 42px;
-  }
-  .help__block-text {
-    margin-top: 20px;
-  }
   .help__block {
     width: 135px;
-  }
-  .help__block-text {
-    margin-top: 20px;
-    width: 139px;
-    letter-spacing: 0.06em;
   }
   .food {
     width: 50px;
@@ -1632,10 +1448,6 @@ body._lock {
     width: 50px;
     height: 50px;
   }
-  .addition__block {
-    padding-top: 42px;
-    margin-bottom: 42px;
-  }
   .addition__info-title__bank {
     margin-top: 20px;
     width: 273px;
@@ -1651,35 +1463,19 @@ body._lock {
     font-size: 15px;
     line-height: 110%;
   }
-  .addition__info-title__bank-text {
-    width: 280px;
-    text-align: justify;
-  }
-  .addition__block {
-    gap: 43px;
-  }
-  .footer__info {
-    gap: 0px;
-  }
-  .footer__info-contacts-all {
-    margin-bottom: 10px;
-  }
-  .footer__info-title {
-    padding-top: 30px;
-  }
   .footer__info-pin {
     margin-top: 40px;
     text-align: left;
   }
   .footer__img {
-    padding-top: 27px;
+    padding-top: 22px;
+  }
+  .our__friends-button-get {
+    margin-top: 64px;
   }
 }
 
 @media (min-width: 1300px) {
-  .main__hero-body {
-    padding: 0px 20px;
-  }
   .header__logo {
     padding: 0px 0px 0px 20px;
   }
@@ -1798,6 +1594,29 @@ body._lock {
 @keyframes slide-out {
   from {
     left: 50%;
+  }
+  to {
+    left: 100%;
+  }
+}
+
+.slide-add {
+  -webkit-animation: slide-add 2s forwards;
+          animation: slide-add 2s forwards;
+}
+
+@-webkit-keyframes slide-add {
+  from {
+    left: 100%;
+  }
+  to {
+    left: 100%;
+  }
+}
+
+@keyframes slide-add {
+  from {
+    left: 100%;
   }
   to {
     left: 100%;

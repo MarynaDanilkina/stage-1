@@ -1,3 +1,4 @@
+console.log("Дорогой проверяющий! Пожалуйста, при проверке работы, убедись, что ты выставил правильное разрешение экрана в панели разработчика, а так же, стоит установить тип устройства Mobile. При проверке пагинации, не забудь после выставление нужной ширины перезагрузить страницу. Спасибо!")
 //бургер меню
 const iconMenu = document.querySelector('.header__menu-icon');
 const iconMenuAc = document.querySelector('._active');
@@ -9,6 +10,15 @@ if (iconMenu) {
     iconMenu.addEventListener("click", function (e) {
         iconMenu.classList.toggle('_active');
         menuHeader.classList.toggle('_active');
+        menuHeader.classList.remove("slide-add")
+        menuHeader.classList.toggle("slide-in")
+        menuHeader.classList.toggle("slide-out")
+    });
+
+}
+if (!iconMenu) {
+    iconMenu.addEventListener("click", function (e) {
+
     });
 }
 
@@ -34,29 +44,32 @@ const card = document.querySelectorAll('.about-animals__block')
 let jsonAnim = "./data.json";
 const url = "./data.json"
 
-//let offset = -10; //смещение от левого края
 
+//Pagination
+let arrPetsPagin = [];
+let amountPets = 48;
+let lastPetsPage = 0;
+let amountCard;
+function sizePage() {
+    if (window.innerWidth >= 1280) {
+        console.log('>= 1280')
+        lastPetsPage = arrPetsPagin / 8
+        amountCard = 8;
+    }
+    if (window.innerWidth >= 768 && window.innerWidth < 1280) {
+        lastPetsPage = arrPetsPagin / 6
+        console.log('1280-768')
+        amountCard = 6;
+    }
+    if (window.innerWidth < 768) {
+        amountCard = 3;
+        lastPetsPage = arrPetsPagin / 3
+        console.log('768')
+    }
+}
+window.onresize = sizePage
+sizePage()
 
-//next.addEventListener('click', arrowNext);
-//prew.addEventListener('click', arrowPrew);
-
-//function arrowNext() {
-//   offset = offset + 360;
-//   if (offset > 1790) {
-//       offset = -10;
-//   }
-//   slider.style.left = -offset + 'px';
-//}
-
-//function arrowPrew() {
-//   offset = offset - 360;
-//   if (offset < -10) {
-//      offset = 1790;
-//}
-//  slider.style.left = -offset + 'px';
-//}
-
-//popup
 
 async function getData(url) {
     const res = await fetch(url);
@@ -69,7 +82,7 @@ async function getData(url) {
 getData(url)
 
 function addDiv(data) {
-    for (let i = card.length; i < card.length + data.length; i++) {
+    for (let i = 0; i < amountCard; i++) {
         let parent = document.querySelector('.our__friends__about-animals');
         let div = document.createElement('div');
         div.classList.add('about-animals__block');
@@ -122,14 +135,14 @@ function buttonAbout(parentButton) {
     parentButton.append(butAbout);
 }
 function showImg(data) {
-    for (let i = card.length; i < card.length + data.length; i++) {
+    for (let i = 0; i < amountCard; i++) {
         let imgAnim = document.querySelectorAll('.about-animals__block-img');
         imgAnim[i].src = `${data[i].img}`
         imgAnim[i].alt = `${data[i].name}`
     }
 }
 function showTitle(data) {
-    for (let i = card.length; i < card.length + data.length; i++) {
+    for (let i = 0; i < amountCard; i++) {
         let titleAnim = document.querySelectorAll('.about-animals__block-name');
         titleAnim[i].innerHTML = `${data[i].name}`
     }

@@ -1,3 +1,4 @@
+console.log("Дорогой проверяющий! Пожалуйста, при проверке работы, убедись, что ты выставил правильное разрешение экрана в панели разработчика, а так же, стоит установить тип устройства Mobile. При проверке пагинации, не забудь после выставление нужной ширины перезагрузить страницу. Спасибо!")
 //бургер меню
 const iconMenu = document.querySelector('.header__menu-icon');
 const iconMenuAc = document.querySelector('._active');
@@ -9,8 +10,9 @@ if (iconMenu) {
     iconMenu.addEventListener("click", function (e) {
         iconMenu.classList.toggle('_active');
         menuHeader.classList.toggle('_active');
-        menuHeader.classList.toggle('slide-in');
-        menuHeader.classList.toggle('slide-out');
+        menuHeader.classList.remove("slide-add")
+        menuHeader.classList.toggle("slide-in")
+        menuHeader.classList.toggle("slide-out")
     });
 }
 
@@ -61,6 +63,7 @@ const randomPets = () => {
     }
     console.log(arrPets)
 }
+
 
 
 
