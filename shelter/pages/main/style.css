@@ -1503,6 +1503,11 @@ body._lock {
   background: #FDDCC4;
 }
 
+.our__friends__popup__block:hover + .popup__block-close {
+  border: none;
+  background: #FDDCC4;
+}
+
 .our__friends-button-get:hover {
   border: none;
   background: #FDDCC4;

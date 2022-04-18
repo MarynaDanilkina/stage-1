@@ -31,7 +31,14 @@ function closeMenu() {
 
 }
 
+let popup = document.querySelector(".our__friends__popup__block")
 
+popup.addEventListener("mouseleave", () => {
+    document.querySelector(".modalClose__block").style.backgroundColor = '#FDDCC4'
+})
+popup.addEventListener("mouseenter", () => {
+    document.querySelector(".modalClose__block").style.backgroundColor = null
+})
 //slider
 //const slider = document.querySelector('.our__friends-slider__line');
 //const prew = document.querySelector('.arrow0');
