@@ -15,7 +15,6 @@ if (iconMenu) {
         menuHeader.classList.toggle("slide-out")
     });
 }
-
 const navMenu = document.querySelectorAll('.menu__link');
 navMenu.forEach(n => n.addEventListener("click", closeMenu));
 function closeMenu() {
@@ -195,4 +194,13 @@ window.onclick = function (e) {
         document.body.classList.remove('_lock');
     }
 };
+
+let popup = document.querySelector(".our__friends__popup__block")
+
+popup.addEventListener("mouseleave", () => {
+    document.querySelector(".modalClose__block").style.backgroundColor = '#FDDCC4'
+})
+popup.addEventListener("mouseenter", () => {
+    document.querySelector(".modalClose__block").style.backgroundColor = null
+})
 
