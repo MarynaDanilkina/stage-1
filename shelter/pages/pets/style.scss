@@ -434,7 +434,6 @@ body._lock{
         padding-top: 86px;
         left:50%;
         transform:translate(-50%, -50%);
-        width: 768px;
         justify-content: space-between;
     }
 }
@@ -958,16 +957,18 @@ body._lock{
 
 
 }
+@media  (min-width: 1281px){
+    ._container {
+        max-width: 1200px;
+    }
+    .header__logo {
+        padding: 0px 0px 0px 0px;
+    }
 
+}
 @media (min-width: 1300px){
     .main__hero-body {
         padding: 0px 20px;
-    }
-    .header__logo{
-        padding: 0px 0px 0px 20px;
-    }
-    .header__menu{
-        padding: 0px 20px 0px 0px;
     }
 }
 //hover
