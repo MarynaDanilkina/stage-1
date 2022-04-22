@@ -58,6 +58,21 @@ body._lock{
     display: flex;
     flex-direction: column;
 }
+.window{
+    z-index: 1;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    
+}
+.window__open{
+    background-color: rgba(41, 41, 41, 0.6);
+    display: block;
+    z-index: 11;
+}
 .header {
     position: absolute;
     width: 100%;
@@ -214,6 +229,15 @@ body._lock{
     align-items: center;
 
 }
+.info::before{
+    margin: 0px 6px 0px 0px;
+    color: #F1CDB3; 
+    content: "•";
+}
+li span{
+    letter-spacing: 0.06em;
+    margin-left: 10px;
+}
 .close{
     opacity: 0;
     z-index: -1;
@@ -245,7 +269,7 @@ body._lock{
 }
 .our__friends__popup__block-info{
     margin-left: 29px;
-    margin-top: 50px;
+    margin-top: 55px;
 }
 .our__friends__popup__block-info {
     letter-spacing: 0.06em;
@@ -274,10 +298,10 @@ body._lock{
     }
 }
 .popup__block-info{
-    margin-top: 40px;
+    margin-top: 34px;
 }
 .popup__block-info ul li{
-    margin-bottom: 10px;
+    margin-bottom: 4px;
 
 }
 .popup__block-close{
@@ -318,6 +342,7 @@ body._lock{
     flex-direction: column
 }
 .our__friends-slider__line{
+    left: 0%;
     gap: 90px;
    justify-content: space-between;
     display: flex;
@@ -650,7 +675,7 @@ body._lock{
         line-height: 110%;
     }
     .popup__block-info {
-        margin-top: 16px;
+        margin-top: 10px;
     }
     .our__friends__popup__block {
         margin: 0px 69px;
@@ -747,6 +772,9 @@ body._lock{
     .main-block__image {
         background: url(../../assets/images/noise_transparent.png), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%) , #211F20;
     }
+    .popup__block-info ul li {
+        margin-bottom: 0px;
+    }
 }
 @media (max-width: 767.5px){
     // бургер 
@@ -797,19 +825,19 @@ body._lock{
 		transform: rotate(90deg) translate(0px, 22px);
 	}
     .header__menu {
+        width: 320px;
         position: fixed;
         top: 0;
-        left: 100%;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(41, 41, 41, 0.6);
-        transition: left 0.3s ease 0s;
-        margin-left: 0;
+        bottom: 0;
+        right: -320px;
     }
     .header__menu._active {
-        justify-content: flex-end;
-        display: flex;
-        left: 0;
+        width: 320px;
+        z-index: 15;
+        position: fixed;
+        background-color: #292929;
+        right: 0;
+
     }
     .menu__list {
         
@@ -831,9 +859,12 @@ body._lock{
         color: #FAFAFA;
     }
     .header__logo{
-        z-index: 5;
+        z-index: 100;
     }
     /**/
+    .popup__block-info ul li {
+        margin-bottom: -2px;
+    }
     .our__friends__about-animals {
         width: 270px;
     }
@@ -1025,9 +1056,7 @@ body._lock{
     .our__friends__popup__block-info h3 {
         letter-spacing: 0.07em;
     }
-    .popup__block-info ul li {
-        margin-bottom: 8px;
-    }
+    
     .logo__subtitile {
         margin-left: 4px;
     }
@@ -1107,7 +1136,7 @@ body._lock{
     }
     .bank-code {
         width: 206px;
-        font-size: 15px;
+        font-size: 14px;
         line-height: 110%;
     }
     .footer__info-pin {
@@ -1189,13 +1218,13 @@ body._lock{
 }
   
   
-  @keyframes slide-in {
+@keyframes slide-in {
     from {
-      left: 100%;
-    }
-    to {
-      left: 0px;
-    }
+        right: -320px;
+      }
+      to {
+        right: 0;
+      }
   }
 
 .slide-out{
@@ -1222,3 +1251,14 @@ animation: slide-out 2s forwards;
             left: 100%;
         }
       }
+.logo-add{
+    animation: logo-add 2s forwards;
+}
+@keyframes logo-add {
+    from {
+        margin-left: 0;
+    }
+    to {
+        margin-left: calc(100% - 290px);
+    }
+}

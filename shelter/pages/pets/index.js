@@ -1,10 +1,11 @@
-console.log("Дорогой проверяющий! Пожалуйста, при проверке работы, убедись, что ты выставил правильное разрешение экрана в панели разработчика, а так же, стоит установить тип устройства Mobile. При проверке пагинации, не забудь после выставление нужной ширины перезагрузить страницу. Спасибо!")
 //бургер меню
 const iconMenu = document.querySelector('.header__menu-icon');
 const iconMenuAc = document.querySelector('._active');
 //общий класс для навигации
 const menuHeader = document.querySelector('.header__menu ');
-
+const wind = document.querySelector('.window');
+const header = document.querySelector('.header');
+const logo = document.querySelector('.header__logo');
 if (iconMenu) {
     //при клике на бургер меню
     iconMenu.addEventListener("click", function (e) {
@@ -13,23 +14,27 @@ if (iconMenu) {
         menuHeader.classList.remove("slide-add")
         menuHeader.classList.toggle("slide-in")
         menuHeader.classList.toggle("slide-out")
+        document.body.classList.toggle('_lock');
+        wind.classList.toggle('window__open');
+        header.classList.toggle("header__active")
+        logo.classList.toggle("logo-add")
+
     });
 
 }
-if (!iconMenu) {
-    iconMenu.addEventListener("click", function (e) {
-
-    });
-}
-
 const navMenu = document.querySelectorAll('.menu__link');
 navMenu.forEach(n => n.addEventListener("click", closeMenu));
 function closeMenu() {
-
     iconMenu.classList.remove('_active');
     menuHeader.classList.remove('_active');
-
+    menuHeader.classList.toggle("slide-in")
+    menuHeader.classList.toggle("slide-out")
+    document.body.classList.toggle('_lock');
+    wind.classList.remove('window__open');
+    logo.classList.remove("logo-add")
+    header.classList.remove("header__active")
 }
+wind.addEventListener("click", closeMenu)
 
 let popup = document.querySelector(".our__friends__popup__block")
 
@@ -39,12 +44,8 @@ popup.addEventListener("mouseleave", () => {
 popup.addEventListener("mouseenter", () => {
     document.querySelector(".modalClose__block").style.backgroundColor = null
 })
-//slider
-//const slider = document.querySelector('.our__friends-slider__line');
-//const prew = document.querySelector('.arrow0');
-//const next = document.querySelector('.arrow');
-//const img = document.querySelector('.about-animals__block-img')
-//const nameAnim = document.querySelector('.name__animal')
+
+
 const modal = document.querySelector('.our__friends__popup')
 const modalClose = document.querySelector('.modalClose__block')
 const card = document.querySelectorAll('.about-animals__block')
@@ -53,40 +54,252 @@ const url = "./data.json"
 
 
 //Pagination
-let arrPetsPagin = [];
+let forward = document.querySelector(".forward")
+let forwardFull = document.querySelector(".full-forward")
+let back = document.querySelector(".back")
+let backFull = document.querySelector(".full-back")
+let numberPige = document.querySelector(".now p")
+let arrPets8 = []
+let arrPets6 = []
+let arrPets3 = []
 let amountPets = 48;
-let lastPetsPage = 0;
-let amountCard;
+let lastPetsPage = 0; // количестово страниц
+let amountCard; //количество на странице
+let number = 1; // номер страницы
+forward.addEventListener("click", nextNumber);
+back.addEventListener("click", prewNumber);
+backFull.addEventListener("click", prewFullNumber);
+forwardFull.addEventListener("click", forwardFullNumber);
+
+
+
+// разрешение экрана
 function sizePage() {
     if (window.innerWidth >= 1280) {
-        console.log('>= 1280')
-        lastPetsPage = arrPetsPagin / 8
+        lastPetsPage = 6;
         amountCard = 8;
     }
     if (window.innerWidth >= 768 && window.innerWidth < 1280) {
-        lastPetsPage = arrPetsPagin / 6
-        console.log('1280-768')
+        lastPetsPage = 8;
         amountCard = 6;
     }
     if (window.innerWidth < 768) {
         amountCard = 3;
-        lastPetsPage = arrPetsPagin / 3
-        console.log('768')
+        lastPetsPage = 16;
     }
 }
 window.onresize = sizePage
 sizePage()
 
+//массивы
+
+
+//8 карточек рандом
+function randomPets8() {
+    let first = [[1, 2, 3, 4, 5, 6, 7, 8]];
+    let result = []
+    while (first.length < 6) {
+        let arr3 = [];
+        while (arr3.length < 8) {
+            let rand = Math.floor(Math.random() * (8 - 1 + 1)) + 1;
+            if (!arr3.includes(rand)) {
+                arr3.push(rand);
+            }
+        }
+        first.push(arr3)
+        arr3 = [];
+    }
+    let arrStr = first.flat().join('').match(/\d{8}/g)
+    for (let i = 0; i < arrStr.length; i++) {
+        result.push(arrStr[i].split(",").map(Number))
+    }
+
+    return result
+}
+randomPets8()
+arrPets8 = randomPets8()
+//console.log('массив 48 элементов для 8 карт')
+//console.log(arrPets8)
+
+//6 карточек рандом
+function randomPets6() {
+    let first = [[1, 2, 3, 4, 5, 6]];
+    let result = []
+    while (first.length < 8) {
+        let arr3 = [];
+        while (arr3.length < 6) {
+            let rand = Math.floor(Math.random() * (8 - 1 + 1)) + 1;
+            if (!arr3.includes(rand)) {
+                arr3.push(rand);
+            }
+        }
+        first.push(arr3)
+        arr3 = [];
+    }
+    //console.log(first)
+    let arrStr = first.flat().join('').match(/\d{6}/g)
+
+    for (let i = 0; i < arrStr.length; i++) {
+        result.push(arrStr[i].split(",").map(Number))
+    }
+
+    return result
+}
+randomPets6()
+arrPets6 = randomPets6()
+//console.log('массив 48 элементов для 6 карт')
+//console.log(arrPets6)
+
+//3 карточек рандом
+function randomPets3() {
+    let first = [[1, 2, 3]];
+    let result = []
+    while (first.length < 16) {
+        let arr3 = [];
+        while (arr3.length < 3) {
+            let rand = Math.floor(Math.random() * (8 - 1 + 1)) + 1;
+            if (!arr3.includes(rand)) {
+                arr3.push(rand);
+            }
+        }
+        first.push(arr3)
+        arr3 = [];
+    }
+    //console.log(first)
+    let arrStr = first.flat().join('').match(/\d{3}/g)
+
+    for (let i = 0; i < arrStr.length; i++) {
+        result.push(arrStr[i].split(",").map(Number))
+    }
+
+    return result
+}
+randomPets3()
+arrPets3 = randomPets3()
+//console.log('массив 48 элементов для 3 карт')
+//console.log(arrPets3)
+
+//Номера страниц
+function nextNumber() {
+    number++;
+    numberPige.textContent = number;
+    if (number === 1) {
+        back.setAttribute("disabled", "disabled");
+        backFull.setAttribute("disabled", "disabled");
+    }
+    if (number > 1) {
+        back.removeAttribute("disabled", "disabled");
+        backFull.removeAttribute("disabled", "disabled");
+    }
+    if (number >= lastPetsPage) {
+        forward.setAttribute("disabled", "disabled");
+        forwardFull.setAttribute("disabled", "disabled");
+    }
+    if (window.innerWidth >= 1280) {
+        whoArr(number, arrPets8)
+    }
+    if (window.innerWidth >= 768 && window.innerWidth < 1280) {
+        whoArr(number, arrPets6)
+    }
+    if (window.innerWidth < 768) {
+        whoArr(number, arrPets3)
+    }
+
+    return number
+
+}
+function prewNumber() {
+    number--;
+    numberPige.textContent = number;
+    if (number === 1) {
+        back.setAttribute("disabled", "disabled");
+        backFull.setAttribute("disabled", "disabled");
+    }
+    if (number > 1) {
+        forward.removeAttribute("disabled", "disabled");
+        forwardFull.removeAttribute("disabled", "disabled");
+        back.removeAttribute("disabled", "disabled");
+        backFull.removeAttribute("disabled", "disabled");
+    }
+    if (number >= lastPetsPage) {
+        forward.setAttribute("disabled", "disabled");
+        forwardFull.setAttribute("disabled", "disabled");
+        back.removeAttribute("disabled", "disabled");
+        backFull.removeAttribute("disabled", "disabled");
+    }
+    if (window.innerWidth >= 1280) {
+        whoArr(number, arrPets8)
+    }
+    if (window.innerWidth >= 768 && window.innerWidth < 1280) {
+        whoArr(number, arrPets6)
+    }
+    if (window.innerWidth < 768) {
+        whoArr(number, arrPets3)
+    }
+    return number
+}
+function prewFullNumber() {
+    number = 1;
+    numberPige.textContent = number;
+    back.setAttribute("disabled", "disabled");
+    backFull.setAttribute("disabled", "disabled");
+    forward.removeAttribute("disabled", "disabled");
+    forwardFull.removeAttribute("disabled", "disabled");
+    if (window.innerWidth >= 1280) {
+        whoArr(number, arrPets8)
+    }
+    if (window.innerWidth >= 768 && window.innerWidth < 1280) {
+        whoArr(number, arrPets6)
+    }
+    if (window.innerWidth < 768) {
+        whoArr(number, arrPets3)
+    }
+    return number
+}
+function forwardFullNumber() {
+    number = lastPetsPage;
+    numberPige.textContent = number;
+    forward.setAttribute("disabled", "disabled");
+    forwardFull.setAttribute("disabled", "disabled");
+    back.removeAttribute("disabled", "disabled");
+    backFull.removeAttribute("disabled", "disabled");
+    if (window.innerWidth >= 1280) {
+        whoArr(number, arrPets8)
+    }
+    if (window.innerWidth >= 768 && window.innerWidth < 1280) {
+        whoArr(number, arrPets6)
+    }
+    if (window.innerWidth < 768) {
+        whoArr(number, arrPets3)
+    }
+    return number
+}
+
+//массив с номерами карточек при переключении
+
+//для 8 карт
+function whoArr(number, arrPets8) {
+    let arrResult = arrPets8[number - 1]
+    getDataNew(url, arrResult)
+    return arrResult
+}
+
 
 async function getData(url) {
     const res = await fetch(url);
     const data = await res.json();
-    console.log(data);
+    //console.log(data);
     addDiv(data);
     showImg(data);
     showTitle(data);
 }
 getData(url)
+
+async function getDataNew(url, arrResult) {
+    const res = await fetch(url);
+    const data = await res.json();
+    showImgNew(data, arrResult)
+}
 
 function addDiv(data) {
     for (let i = 0; i < amountCard; i++) {
@@ -140,6 +353,18 @@ function buttonAbout(parentButton) {
     butAbout.classList.add('effect')
     butAbout.innerHTML = "Learn more";
     parentButton.append(butAbout);
+}
+function showImgNew(data, arrResult) {
+    let posich = arrResult.join('').split('').map(Number)
+    //console.log(posich)
+    if (arrResult !== undefined && data !== undefined) {
+        for (let i = 0; i < posich.length; i++) {
+            let imgAnim = document.querySelectorAll('.about-animals__block-img');
+            imgAnim[i].src = `${data[posich[i] - 1].img}`
+            imgAnim[i].alt = `${data[posich[i] - 1].name}`
+        }
+    }
+
 }
 function showImg(data) {
     for (let i = 0; i < amountCard; i++) {
