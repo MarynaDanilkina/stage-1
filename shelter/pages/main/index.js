@@ -4,7 +4,10 @@ const iconMenu = document.querySelector('.header__menu-icon');
 const iconMenuAc = document.querySelector('._active');
 //общий класс для навигации
 const menuHeader = document.querySelector('.header__menu ');
-
+const listMenu = document.querySelectorAll('.menu__list');
+const wind = document.querySelector('.window');
+const header = document.querySelector('.header');
+const logo = document.querySelector('.header__logo');
 if (iconMenu) {
     //при клике на бургер меню
     iconMenu.addEventListener("click", function (e) {
@@ -13,16 +16,26 @@ if (iconMenu) {
         menuHeader.classList.remove("slide-add")
         menuHeader.classList.toggle("slide-in")
         menuHeader.classList.toggle("slide-out")
+        document.body.classList.toggle('_lock');
+        wind.classList.toggle('window__open');
+        logo.classList.toggle("logo-add")
     });
 }
+
 const navMenu = document.querySelectorAll('.menu__link');
 navMenu.forEach(n => n.addEventListener("click", closeMenu));
 function closeMenu() {
-
     iconMenu.classList.remove('_active');
     menuHeader.classList.remove('_active');
+    menuHeader.classList.toggle("slide-in")
+    menuHeader.classList.toggle("slide-out")
+    document.body.classList.remove('_lock');
+    wind.classList.remove('window__open');
+    logo.classList.remove("logo-add")
 
 }
+wind.addEventListener("click", closeMenu)
+
 
 
 //slider
