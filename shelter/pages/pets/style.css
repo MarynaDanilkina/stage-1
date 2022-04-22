@@ -157,6 +157,7 @@ body._lock {
 }
 
 .active {
+  cursor: default;
   color: #545454;
   padding-bottom: 4px;
   border-bottom: 3px solid #F1CDB3;
