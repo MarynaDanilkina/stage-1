@@ -54,6 +54,15 @@ const url = "./data.json"
 
 
 //Pagination
+let arrNew8 = []
+while (arrNew8.length < 8) {
+    let rand = Math.floor(Math.random() * (8 - 1 + 1)) + 1;
+    if (!arrNew8.includes(rand)) {
+        arrNew8.push(rand);
+    }
+}
+//console.log(arrNew8)
+
 let forward = document.querySelector(".forward")
 let forwardFull = document.querySelector(".full-forward")
 let back = document.querySelector(".back")
@@ -96,7 +105,7 @@ sizePage()
 
 //8 карточек рандом
 function randomPets8() {
-    let first = [[1, 2, 3, 4, 5, 6, 7, 8]];
+    let first = [arrNew8];
     let result = []
     while (first.length < 6) {
         let arr3 = [];
@@ -110,6 +119,7 @@ function randomPets8() {
         arr3 = [];
     }
     let arrStr = first.flat().join('').match(/\d{8}/g)
+    //console.log(arrStr)
     for (let i = 0; i < arrStr.length; i++) {
         result.push(arrStr[i].split(",").map(Number))
     }
@@ -123,7 +133,8 @@ arrPets8 = randomPets8()
 
 //6 карточек рандом
 function randomPets6() {
-    let first = [[1, 2, 3, 4, 5, 6]];
+    let first = [arrNew8.slice(0, 6)];
+    //console.log(first)
     let result = []
     while (first.length < 8) {
         let arr3 = [];
@@ -138,7 +149,7 @@ function randomPets6() {
     }
     //console.log(first)
     let arrStr = first.flat().join('').match(/\d{6}/g)
-
+    //console.log(arrStr)
     for (let i = 0; i < arrStr.length; i++) {
         result.push(arrStr[i].split(",").map(Number))
     }
@@ -152,7 +163,7 @@ arrPets6 = randomPets6()
 
 //3 карточек рандом
 function randomPets3() {
-    let first = [[1, 2, 3]];
+    let first = [arrNew8.slice(0, 3)];
     let result = []
     while (first.length < 16) {
         let arr3 = [];
@@ -280,9 +291,11 @@ function forwardFullNumber() {
 //для 8 карт
 function whoArr(number, arrPets8) {
     let arrResult = arrPets8[number - 1]
+    console.log(arrResult)
     getDataNew(url, arrResult)
     return arrResult
 }
+
 
 
 async function getData(url) {
@@ -293,23 +306,45 @@ async function getData(url) {
     showImg(data);
     showTitle(data);
 }
-getData(url)
-
 async function getDataNew(url, arrResult) {
     const res = await fetch(url);
     const data = await res.json();
+    addDivNew(data, arrResult);
     showImgNew(data, arrResult)
+    showTitleNew(data, arrResult);
 }
 
+
+
+
+function addDivNew(data, arrResult) {
+    let carts = document.querySelectorAll('.about-animals__block')
+    let posich = arrResult.join('').split('').map(Number)
+    for (let i = 0; i < amountCard; i++) {
+        let id2 = data[posich[i] - 1].id;
+        console.log(id2)
+
+
+        carts[i].addEventListener("click", () => {
+            console.log("?????")
+            console.log(id2)
+            getAnimalsDataNew(id2, data)
+            openModal()
+        })
+    }
+}
 function addDiv(data) {
     for (let i = 0; i < amountCard; i++) {
         let parent = document.querySelector('.our__friends__about-animals');
         let div = document.createElement('div');
         div.classList.add('about-animals__block');
-        let id = data[i].id;
-        div.id = id;
-        div.onclick = function bu() {
-            const id = div.id;
+        let id = data[arrNew8[i] - 1].id;
+        console.log(id)
+        div.addEventListener("click", foo)
+
+        function foo() {
+            console.log("-?-?-?-")
+            console.log(id)
             getAnimalsData(id, data)
             openModal()
         }
@@ -319,6 +354,7 @@ function addDiv(data) {
         addButton(div);
     }
 }
+
 
 function addImg(div) {
     let divChild = parent.firstChild;
@@ -369,14 +405,21 @@ function showImgNew(data, arrResult) {
 function showImg(data) {
     for (let i = 0; i < amountCard; i++) {
         let imgAnim = document.querySelectorAll('.about-animals__block-img');
-        imgAnim[i].src = `${data[i].img}`
-        imgAnim[i].alt = `${data[i].name}`
+        imgAnim[i].src = `${data[arrNew8[i] - 1].img}`
+        imgAnim[i].alt = `${data[arrNew8[i] - 1].name}`
+    }
+}
+function showTitleNew(data, arrResult) {
+    let posich = arrResult.join('').split('').map(Number)
+    for (let i = 0; i < amountCard; i++) {
+        let titleAnim = document.querySelectorAll('.about-animals__block-name');
+        titleAnim[i].innerHTML = `${data[posich[i] - 1].name}`
     }
 }
 function showTitle(data) {
     for (let i = 0; i < amountCard; i++) {
         let titleAnim = document.querySelectorAll('.about-animals__block-name');
-        titleAnim[i].innerHTML = `${data[i].name}`
+        titleAnim[i].innerHTML = `${data[arrNew8[i] - 1].name}`
     }
 }
 
@@ -388,7 +431,18 @@ modalClose.addEventListener("click", () => {
     modal.classList.remove('open');
     document.body.classList.remove('_lock');
 })
+function getAnimalsDataNew(id2, data) {
+    addModalImg2(id2, data);
+    addModalName2(id2, data);
+    addModalBreed2(id2, data);
+    //addModalDescription2(id2, data);
+    //addModalAge2(id2, data);
+    //addModalInoculations2(id2, data);
+    //addModalDiseases2(id2, data);
+    //addModalParasites2(id2, data);
+}
 function getAnimalsData(id, data) {
+    //console.log(id)
     addModalImg(id, data);
     addModalName(id, data);
     addModalBreed(id, data);
@@ -398,26 +452,60 @@ function getAnimalsData(id, data) {
     addModalDiseases(id, data);
     addModalParasites(id, data);
 }
+function addModalImg2(id2, data) {
+    console.log(id2)
+    document.querySelector('.img__modal').src = `${data[id2 - 1].img}`
+}
 function addModalImg(id, data) {
+    console.log(id)
     document.querySelector('.img__modal').src = `${data[id - 1].img}`;
+}
+function addModalName2(id2, data) {
+    document.querySelector('.nameAnimals').innerHTML = `${data[id2 - 1].name}`;
 }
 function addModalName(id, data) {
     document.querySelector('.nameAnimals').innerHTML = `${data[id - 1].name}`;
 }
+
+function addModalBreed2(id2, data) {
+    document.querySelector('.breed').innerHTML = `${data[id2 - 1].type} - ${data[id2 - 1].breed}`;
+}
 function addModalBreed(id, data) {
     document.querySelector('.breed').innerHTML = `${data[id - 1].type} - ${data[id - 1].breed}`;
+}
+
+function addModalDescription2(id2, data) {
+    document.querySelector('.description').innerHTML = `${data[id2 - 1].description}`;
 }
 function addModalDescription(id, data) {
     document.querySelector('.description').innerHTML = `${data[id - 1].description}`;
 }
+
+
+function addModalAge2(id2, data) {
+    document.querySelector('.age').innerHTML = `${data[id2 - 1].age}`;
+}
 function addModalAge(id, data) {
     document.querySelector('.age').innerHTML = `${data[id - 1].age}`;
+}
+
+function addModalInoculations2(id2, data) {
+    document.querySelector('.inoculations').innerHTML = `${data[id2 - 1].inoculations}`;
 }
 function addModalInoculations(id, data) {
     document.querySelector('.inoculations').innerHTML = `${data[id - 1].inoculations}`;
 }
+
+function addModalDiseases2(id2, data) {
+    document.querySelector('.diseases').innerHTML = `${data[id2 - 1].diseases}`;
+}
 function addModalDiseases(id, data) {
     document.querySelector('.diseases').innerHTML = `${data[id - 1].diseases}`;
+}
+
+
+function addModalParasites2(id2, data) {
+    document.querySelector('.parasites').innerHTML = `${data[id2 - 1].parasites}`;
 }
 function addModalParasites(id, data) {
     document.querySelector('.parasites').innerHTML = `${data[id - 1].parasites}`;
@@ -429,3 +517,4 @@ window.onclick = function (e) {
         document.body.classList.remove('_lock');
     }
 };
+getData(url)
