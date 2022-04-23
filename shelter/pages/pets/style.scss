@@ -980,6 +980,16 @@ li span{
 
 
 }
+@media  (max-width: 766px){
+    .our__friends__popup__block-info h3 {
+        font-size: 20px;
+        height: 28px;
+    }
+    .our__friends__popup__block-info h4 {
+        font-size: 15px;
+    }
+
+}
 @media  (min-width: 1281px){
     ._container {
         max-width: 1200px;
