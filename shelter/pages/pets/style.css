@@ -920,6 +920,9 @@ li span {
   /**/
   .popup__block-info ul li {
     margin-bottom: -2px;
+    letter-spacing: 0.00em;
+    font-size: 13px;
+    margin-top: 5px;
   }
   .our__friends-paginations {
     margin-top: -3px;
