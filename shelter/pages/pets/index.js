@@ -29,7 +29,7 @@ function closeMenu() {
     menuHeader.classList.remove('_active');
     menuHeader.classList.toggle("slide-in")
     menuHeader.classList.toggle("slide-out")
-    document.body.classList.toggle('_lock');
+    document.body.classList.remove('_lock');
     wind.classList.remove('window__open');
     logo.classList.remove("logo-add")
     header.classList.remove("header__active")
