@@ -1,5 +1,6 @@
 import './news.css';
-import {IArticles} from '../../components';
+import { IArticles } from '../../components';
+
 class News {
     draw(data: IArticles[]) {
         const news = data.length >= 10 ? data.filter((_item, idx) => idx < 10) : data;
@@ -15,7 +16,8 @@ class News {
             (newsClone.querySelector('.news__meta-photo') as HTMLElement).style.backgroundImage = `url(${
                 item.urlToImage || 'img/news_placeholder.jpg'
             })`;
-            (newsClone.querySelector('.news__meta-author') as HTMLElement).textContent = item.author || item.source.name;
+            (newsClone.querySelector('.news__meta-author') as HTMLElement).textContent =
+                item.author || item.source.name;
             (newsClone.querySelector('.news__meta-date') as HTMLElement).textContent = item.publishedAt
                 .slice(0, 10)
                 .split('-')
