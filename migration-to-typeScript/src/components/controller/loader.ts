@@ -1,4 +1,4 @@
-import {IOptions} from '../components';
+import {IOptions, ISourcesAll} from '../components';
 class Loader {
     baseLink: string;
     options: IOptions;
@@ -8,8 +8,8 @@ class Loader {
     }
 
     getResp(
-        { endpoint, options }: {endpoint: string, options: Record<string, string>},
-        callback = () => {
+        { endpoint, options }: {endpoint: string, options?: Record<string, string>},
+        callback: (data: ISourcesAll) => void = () => {
             console.error('No callback for GET response');
         }
     ) {
@@ -37,7 +37,7 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load(method: string, endpoint: string, callback, options = {}) {
+    load(method: string, endpoint: string, callback: (data: ISourcesAll) => void, options = {}) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
