@@ -1,5 +1,5 @@
 import './sources.css';
-import {ISources} from '../../components';
+import { ISources } from '../../components';
 class Sources {
     draw(data: ISources[]) {
         const fragment = document.createDocumentFragment();
