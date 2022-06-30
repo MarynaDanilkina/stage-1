@@ -1,7 +1,7 @@
 import { IOptions, ISourcesAll } from '../components';
 class Loader {
-    baseLink: string;
-    options: IOptions;
+    public baseLink: string;
+    public options: IOptions;
     constructor(baseLink: string, options: IOptions) {
         this.baseLink = baseLink;
         this.options = options;
