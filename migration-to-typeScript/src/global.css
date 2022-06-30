@@ -5,10 +5,14 @@ body {
 }
 
 header {
+    
     padding: 10px 30px;
+    justify-content: center;
+    display: flex;
 }
 
 header h1 {
+    border-bottom: 4px #70d6ff solid;
     font-size: 40px;
     font-weight: 800;
 }
@@ -17,7 +21,11 @@ footer {
     height: 100px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
+}
+.footer__git{
+    text-decoration: none;
+    color: #444;
 }
 footer .copyright {
     font-size: 14px;
