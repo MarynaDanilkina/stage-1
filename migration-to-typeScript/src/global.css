@@ -23,6 +23,14 @@ footer {
     align-items: center;
     justify-content: space-around;
 }
+.rss:hover {
+    fill: rgb(203, 202, 202);;
+}
+.rss {
+    width: 100px;
+    height: 70px;
+    fill: rgb(119, 119, 119);
+}
 .footer__git{
     text-decoration: none;
     color: #444;
