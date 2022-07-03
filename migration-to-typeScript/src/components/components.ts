@@ -1,21 +1,22 @@
-export type IOptions = {
-    [apiKey: string]: string;
-};
 export interface ISourcesAll {
     status: string;
-    sources?: Array<ISources>;
+    sources?: ISources[];
     totalResults?: number;
-    articles?: Array<IArticles>;
+    articles?: IArticles[];
 }
-export type IArticles = {
+export interface IArticles {
     author: string;
     content: string;
     description: string;
     publishedAt: string;
-    source: { id: string; name: string };
+    source: Source;
     title: string;
     url: string;
     urlToImage: string;
+}
+export type Source = {
+    id: string;
+    name: string;
 };
 export type ISources = {
     category: string;
