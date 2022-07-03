@@ -10,12 +10,12 @@ export class AppView {
     }
 
     drawNews(data: ISourcesAll): void {
-        const values = data?.articles ? data?.articles : [];
+        const values = data?.articles || [];
         this.news.draw(values);
     }
 
     drawSources(data: ISourcesAll): void {
-        const values = data?.sources ? data?.sources : [];
+        const values = data?.sources || [];
         this.sources.draw(values);
     }
 }

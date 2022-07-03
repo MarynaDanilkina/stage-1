@@ -1,8 +1,8 @@
-import { IOptions, ISourcesAll } from '../components';
+import { ISourcesAll } from '../components';
 class Loader {
     public baseLink: string;
-    public options: IOptions;
-    constructor(baseLink: string, options: IOptions) {
+    public options: Record<string, string>;
+    constructor(baseLink: string, options: Record<string, string>) {
         this.baseLink = baseLink;
         this.options = options;
     }
@@ -26,7 +26,7 @@ class Loader {
         return res;
     }
 
-    makeUrl(options: IOptions, endpoint: string): string {
+    makeUrl(options: Record<string, string>, endpoint: string): string {
         const urlOptions = { ...this.options, ...options };
         let url = `${this.baseLink}${endpoint}?`;
 
@@ -37,7 +37,12 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load(method: string, endpoint: string, callback: (data: ISourcesAll) => void, options = {}): void {
+    load(
+        method: string,
+        endpoint: string,
+        callback: (data: ISourcesAll) => void,
+        options: Record<string, string> = {}
+    ): void {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
