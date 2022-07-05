@@ -59,7 +59,7 @@ a{
 .sidebar-left{
   position: relative;
   z-index: 100;
-  width: 200px;
+  min-width: 200px;
 }
 .sidebar-left__title{
   border-bottom: 1px solid #EEE;
@@ -104,12 +104,21 @@ a{
 }
 .product-container{
   margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-top: 30px;
 }
 .product-container__box{
   background: rgb(255, 255, 255);
   width: 190px;
   max-width: 190px;
-  padding: 4px 0 0;
+  padding: 10px 50px;
+}
+.product-container__box-info{
+  width: 190px;
+  max-width: 190px;
+  margin: 0;
 }
 .product-container__box-img{
   position: relative;
