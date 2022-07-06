@@ -31,14 +31,17 @@ a{
   width: 100%;
   padding-top: 15px;
   background: #005aab;
+  height: 65px;
 }
 .header__container{
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .container{
-  padding: 10px 30px;
+  padding: 0px 40px;
   margin: 0px auto;
+  max-width: 1200px;
 }
 .favorite{
   display: flex;
@@ -52,10 +55,11 @@ a{
   color: #FFFFFF;
   font-size: 20px;
 }
-.main{
+.main__container{
   flex: 1 1 auto;
   display: flex;
 }
+
 .sidebar-left{
   position: relative;
   z-index: 100;
