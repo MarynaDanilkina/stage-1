@@ -107,6 +107,36 @@ class Storage {
         }
         return result6;
     };
+    getbasketData = (value: IData[]) => {
+        return value.reduce((acc, num) => acc + num.amount, 0);
+    };
+    getPlusData = (value: string, dataNew: IData[], max: number) => {
+        if (max < 20) {
+            dataNew.filter((user) => {
+                if (user.plus == value) {
+                    if (user.quantity > 0) {
+                        user.amount++;
+                        user.quantity--;
+                    }
+                }
+            });
+        } else {
+            alert('Извините, все слоты заполнены');
+        }
+        return dataNew;
+    };
+
+    getMinusData = (value: string, dataNew: IData[]) => {
+        dataNew.filter((user) => {
+            if (user.minus == value) {
+                if (user.amount > 0) {
+                    user.amount--;
+                    user.quantity++;
+                }
+            }
+        });
+        return dataNew;
+    };
 }
 
 const storage = new Storage();

@@ -20,22 +20,30 @@ interface IData {
     size: string;
 }
 const BtnFilter = document.querySelectorAll('.sidebar-left__button');
+const basketContainer = <HTMLElement>document.querySelector('.product-container');
+const quantity = <HTMLElement>document.querySelector('.quantity');
+const buttonReset = <HTMLElement>document.querySelector('.quantity');
+const div = <HTMLElement>document.querySelector('.product-container');
+const activeButton = document.querySelectorAll<HTMLElement>('.active__button');
+
 getData();
 
 function getDataNew(data: IData[]) {
     BtnFilter.forEach((el) => el.addEventListener('click', (e) => AllMetod(e, data)));
-    (<HTMLElement>document.querySelector('.button__reset')).addEventListener('click', (e) => AllMetod(e, data));
+    buttonReset.addEventListener('click', (e) => AllMetod(e, data));
+    basketContainer.addEventListener('click', (e) => AllMetod(e, data));
     addDiv(data);
 }
-const div = <HTMLElement>document.querySelector('.product-container');
 
 function AllMetod(e: Event, data: IData[]) {
     div.innerHTML = '';
     const dataNew = data.slice();
     const dataFilter = filter(e, dataNew);
     const dataReset: IData[] = ResetFunction(e, dataFilter, dataNew);
-    addDiv(dataReset);
+    const dataBasket: IData[] = basketFunction(e, dataReset);
+    addDiv(dataBasket);
 }
+
 function filter(event: Event, dataNew: IData[]) {
     const firmArr: Array<string> = [];
     const SeasonArr: Array<string> = [];
@@ -62,7 +70,7 @@ function filter(event: Event, dataNew: IData[]) {
     if (target.classList.contains('gender')) {
         target.classList.toggle('active__button');
     }
-    document.querySelectorAll<HTMLElement>('.active__button').forEach((el) => {
+    activeButton.forEach((el) => {
         if (typeof el.dataset.firm != 'undefined') {
             firmArr.push(el.dataset.firm);
         }
@@ -109,6 +117,28 @@ function ResetFunction(e: Event, dataFilter: IData[], dataNew: IData[]) {
         return dataNew;
     }
     return dataFilter;
+}
+
+function basketFunction(e: Event, data: IData[]) {
+    const target = <HTMLElement>e.target;
+    const datasetId: string = target.dataset.id || '';
+    if (target.classList.contains('plus')) {
+        const max = storage.getbasketData(data);
+        const dataPlus = storage.getPlusData(datasetId, data, max);
+        const basketSum = storage.getbasketData(dataPlus);
+        showbasket(basketSum);
+        return dataPlus;
+    }
+    if (target.classList.contains('minus')) {
+        const dataMinus = storage.getMinusData(datasetId, data);
+        const basketSum: number = storage.getbasketData(dataMinus);
+        showbasket(basketSum);
+        return dataMinus;
+    }
+    return data;
+}
+function showbasket(basketSum: number) {
+    quantity.innerHTML = `${basketSum}`;
 }
 export function addDiv(data: IData[]) {
     for (let i = 0; i < data.length; i++) {
