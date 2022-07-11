@@ -137,6 +137,24 @@ class Storage {
         });
         return dataNew;
     };
+    getSortData = (value: string, dataNew: IData[]) => {
+        if (value == 'default') {
+            return dataNew.sort((a, b) => a.id - b.id);
+        }
+        if (value == 'ascending-quantity') {
+            return dataNew.sort((a, b) => a.quantity - b.quantity);
+        }
+        if (value == 'descending-quantity') {
+            return dataNew.sort((a, b) => b.quantity - a.quantity);
+        }
+        if (value == 'price-descending') {
+            return dataNew.sort((a, b) => a.price - b.price);
+        }
+        if (value == 'price-ascending') {
+            return dataNew.sort((a, b) => b.price - a.price);
+        }
+        return dataNew;
+    };
 }
 
 const storage = new Storage();
