@@ -176,9 +176,9 @@ export function addDiv(data: IData[]): void {
                         <p class="box-info__quantity">${data[i].quantity}</p>
                     </div>
                     <div class="box-info__basket">
-                        <button class="basket__button plus" data-id="${data[i].plus}">+</button>
-                        <p class="basket__amount">${data[i].amount}</p>
                         <button class="basket__button minus" data-id="${data[i].minus}">-</button>
+                        <p class="basket__amount">${data[i].amount}</p>
+                        <button class="basket__button plus" data-id="${data[i].plus}">+</button>
                     </div>
                 </div>
             </div>
