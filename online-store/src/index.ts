@@ -24,6 +24,7 @@ getData();
 
 function getDataNew(data: IData[]) {
     BtnFilter.forEach((el) => el.addEventListener('click', (e) => AllMetod(e, data)));
+    (<HTMLElement>document.querySelector('.button__reset')).addEventListener('click', (e) => AllMetod(e, data));
     addDiv(data);
 }
 const div = <HTMLElement>document.querySelector('.product-container');
@@ -32,7 +33,8 @@ function AllMetod(e: Event, data: IData[]) {
     div.innerHTML = '';
     const dataNew = data.slice();
     const dataFilter = filter(e, dataNew);
-    addDiv(dataFilter);
+    const dataReset: IData[] = ResetFunction(e, dataFilter, dataNew);
+    addDiv(dataReset);
 }
 function filter(event: Event, dataNew: IData[]) {
     const firmArr: Array<string> = [];
@@ -82,6 +84,31 @@ function filter(event: Event, dataNew: IData[]) {
     });
     const dataAll = storage.getDataFirm(firmArr, SeasonArr, ColorArr, SizeArr, PopularArr, GenderArr, dataNew);
     return dataAll;
+}
+function ResetFunction(e: Event, dataFilter: IData[], dataNew: IData[]) {
+    const target = <HTMLElement>e.target;
+    if (target.classList.contains('reset')) {
+        document.querySelectorAll('.firm').forEach((el) => {
+            el.classList.remove('active__button');
+        });
+        document.querySelectorAll('.season').forEach((el) => {
+            el.classList.remove('active__button');
+        });
+        document.querySelectorAll('.color').forEach((el) => {
+            el.classList.remove('active__button');
+        });
+        document.querySelectorAll('.size').forEach((el) => {
+            el.classList.remove('active__button');
+        });
+        document.querySelectorAll('.popular').forEach((el) => {
+            el.classList.remove('active__button');
+        });
+        document.querySelectorAll('.gender').forEach((el) => {
+            el.classList.remove('active__button');
+        });
+        return dataNew;
+    }
+    return dataFilter;
 }
 export function addDiv(data: IData[]) {
     for (let i = 0; i < data.length; i++) {
