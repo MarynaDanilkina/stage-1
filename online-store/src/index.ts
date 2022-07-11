@@ -25,6 +25,7 @@ const quantity = <HTMLElement>document.querySelector('.quantity');
 const buttonReset = <HTMLElement>document.querySelector('.button__reset');
 const SortContainer = <HTMLElement>document.querySelector('select');
 const select = <HTMLSelectElement>document.querySelector('.container__sort');
+const input = <HTMLInputElement>document.getElementById('filter_users');
 
 getData();
 
@@ -33,6 +34,7 @@ function getDataNew(data: IData[]) {
     buttonReset.addEventListener('click', (e) => AllMetod(e, data));
     basketContainer.addEventListener('click', (e) => AllMetod(e, data));
     SortContainer.addEventListener('change', (e) => AllMetod(e, data));
+    input.addEventListener('keyup', (e) => AllMetod(e, data));
     addDiv(data);
 }
 
@@ -43,7 +45,8 @@ function AllMetod(e: Event, data: IData[]) {
     const dataReset: IData[] = ResetFunction(e, dataFilter, dataNew);
     const dataBasket: IData[] = basketFunction(e, dataReset);
     const dataSort = SortFunction(e, dataBasket);
-    addDiv(dataSort);
+    const dataInput = Search(e, dataSort);
+    addDiv(dataInput);
 }
 
 function filter(event: Event, dataNew: IData[]): IData[] {
@@ -147,6 +150,11 @@ function SortFunction(e: Event, data: IData[]): IData[] {
     const selectValue = select.options[select.selectedIndex].value;
     const result = storage.getSortData(selectValue, data);
     return result;
+}
+function Search(e: Event, data: IData[]) {
+    const keyword = input.value.toLowerCase();
+    const dataSearch = storage.getFilterData(keyword, data);
+    return dataSearch;
 }
 export function addDiv(data: IData[]): void {
     for (let i = 0; i < data.length; i++) {

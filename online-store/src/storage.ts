@@ -155,6 +155,13 @@ class Storage {
         }
         return dataNew;
     };
+    getFilterData = (value: string, dataNew: IData[]) => {
+        if (value.length !== 0) {
+            return dataNew.filter((user) => user.title.toLowerCase().indexOf(value) > -1);
+        }
+
+        return dataNew;
+    };
 }
 
 const storage = new Storage();
