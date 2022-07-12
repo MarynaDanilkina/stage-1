@@ -60,6 +60,29 @@
                     <aside class="sidebar-left">
                         <div class="sidebar-left__firm">
                             <div class="sidebar-left__title">
+                                <p class="title">Цена</p>
+                            </div>
+                            <div class="container__range">
+                                <div class="container__range-slider">
+                                    <div class="range-slider">
+                                        <div class="progress"></div>
+                                        <input class="range-min" value="0" min="0" max="400" type="range">
+                                        <input class="range-max" value="400" min="0" max="400" type="range">
+                                    </div> 
+                                </div>
+                                
+                                <div class="numberVal">
+                                    <div class="min-value">
+                                        <input value="0" min="0" max="400" type="number" disabled>
+                                    </div>
+                                    &nbsp;-
+                                    <div class="max-value">
+                                        <input value="400" min="0" max="400" type="number" disabled>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="sidebar-left__title">
                                 <p class="title">Бренд</p>
                             </div>
                             <ul class="sidebar-left__button-container">
@@ -226,5 +249,18 @@
                 </div> 
             </main>
         </div>
+        <footer class="footer">
+            <p>
+				<a href="https://rs.school/js/" class="footer__git">
+					<svg class="rss">
+							<use xlink:href="#rss"></use>
+					</svg>
+				</a>
+			</p>
+            <p>
+                <a href="https://github.com/MarynaDanilkina" class="footer__git">GitHub</a>
+            </p>
+            
+        </footer>
     </body>
 </html>

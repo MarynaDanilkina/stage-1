@@ -26,6 +26,10 @@ const buttonReset = <HTMLElement>document.querySelector('.button__reset');
 const SortContainer = <HTMLElement>document.querySelector('select');
 const select = <HTMLSelectElement>document.querySelector('.container__sort');
 const input = <HTMLInputElement>document.getElementById('filter_users');
+const range = document.querySelectorAll<HTMLInputElement>('input[type="range"]');
+const progress = <HTMLElement>document.querySelector('.range-slider .progress');
+const gap = 10;
+const inputValue = document.querySelectorAll<HTMLInputElement>('.numberVal input');
 
 getData();
 
@@ -35,6 +39,7 @@ function getDataNew(data: IData[]) {
     basketContainer.addEventListener('click', (e) => AllMetod(e, data));
     SortContainer.addEventListener('change', (e) => AllMetod(e, data));
     input.addEventListener('keyup', (e) => AllMetod(e, data));
+    range.forEach((input) => input.addEventListener('input', (e) => AllMetod(e, data)));
     addDiv(data);
 }
 
@@ -42,7 +47,8 @@ function AllMetod(e: Event, data: IData[]) {
     basketContainer.innerHTML = '';
     const dataNew = data.slice();
     const dataFilter = filter(e, dataNew);
-    const dataReset: IData[] = ResetFunction(e, dataFilter, dataNew);
+    const dataPrice = filterPrice(e, dataFilter);
+    const dataReset: IData[] = ResetFunction(e, dataPrice, dataNew);
     const dataBasket: IData[] = basketFunction(e, dataReset);
     const dataSort = SortFunction(e, dataBasket);
     const dataInput = Search(e, dataSort);
@@ -98,6 +104,32 @@ function filter(event: Event, dataNew: IData[]): IData[] {
     });
     const dataAll = storage.getDataFirm(firmArr, SeasonArr, ColorArr, SizeArr, PopularArr, GenderArr, dataNew);
     return dataAll;
+}
+function filterPrice(e: Event, dataFilter: IData[]) {
+    const rangeMin = range[0];
+    const rangeMax = range[1];
+    const minrange = parseInt(rangeMin.value);
+    const maxrange = parseInt(rangeMax.value);
+    const target = <HTMLElement>e.target;
+    if (maxrange - minrange < gap) {
+        if (target.classList.contains('range-min')) {
+            rangeMin.value = `${maxrange} - ${gap}`;
+        } else {
+            rangeMax.value = `${maxrange} + ${gap}`;
+        }
+    } else {
+        const rangeMinMax = rangeMin.max;
+        const rangeMaxMax = rangeMax.max;
+        progress.style.left = (minrange / +rangeMinMax) * 100 + '%';
+        progress.style.right = 100 - (maxrange / +rangeMaxMax) * 100 + '%';
+        inputValue[0].value = `${minrange}`;
+        inputValue[1].value = `${maxrange}`;
+    }
+    const min = inputValue[0].value;
+    const max = inputValue[1].value;
+    const dataPrice = storage.getPrice(min, max, dataFilter);
+    console.log(dataPrice);
+    return dataPrice;
 }
 function ResetFunction(e: Event, dataFilter: IData[], dataNew: IData[]): IData[] {
     const target = <HTMLElement>e.target;
