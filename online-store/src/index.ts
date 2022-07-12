@@ -241,7 +241,7 @@ export function addDiv(data: IData[]): void {
                 <div class="product-container__box-info">
                     <p class="box-info__title">${data[i].title}</p>
                     <p class="box-info__season">${data[i].season}</p>
-                    <p class="box-info__season">${data[i].color}</p>
+                    <p class="box-info__season">Цвет: ${data[i].color}</p>
                     <p class="box-info__season">Размеры: ${data[i].size}</p>
                     <p class="box-info__season">Популярны: ${data[i].popular}</p>
                     <div class="box-info">
