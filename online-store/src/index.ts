@@ -19,7 +19,7 @@ interface IData {
     amount: number;
     size: string;
 }
-const BtnFilter = document.querySelectorAll('.sidebar-left__button');
+const BtnFilter = document.querySelectorAll<HTMLElement>('.sidebar-left__button');
 const basketContainer = <HTMLElement>document.querySelector('.product-container');
 const quantity = <HTMLElement>document.querySelector('.quantity');
 const buttonReset = <HTMLElement>document.querySelector('.button__reset');
@@ -28,15 +28,15 @@ const select = <HTMLSelectElement>document.querySelector('.container__sort');
 const input = <HTMLInputElement>document.getElementById('filter_users');
 const range = document.querySelectorAll<HTMLInputElement>('.range-slider input[type="range"]');
 const progress = <HTMLElement>document.querySelector('.range-slider .progress');
-const gap = 10;
 const inputValue = document.querySelectorAll<HTMLInputElement>('.numberVal input');
 const rangeQuantity = document.querySelectorAll<HTMLInputElement>('.range-slider__quantity input[type="range"]');
 const progressQuantity = <HTMLElement>document.querySelector('.range-slider__quantity .progress__quantity');
 const inputValueQuantity = document.querySelectorAll<HTMLInputElement>('.numberVal__quantity input');
+const gap = 10;
 
 getData();
 
-function getDataNew(data: IData[]) {
+function getDataNew(data: IData[]): void {
     BtnFilter.forEach((el) => el.addEventListener('click', (e) => AllMetod(e, data)));
     buttonReset.addEventListener('click', (e) => AllMetod(e, data));
     basketContainer.addEventListener('click', (e) => AllMetod(e, data));
@@ -47,7 +47,7 @@ function getDataNew(data: IData[]) {
     addDiv(data);
 }
 
-function AllMetod(e: Event, data: IData[]) {
+function AllMetod(e: Event, data: IData[]): void {
     basketContainer.innerHTML = '';
     const dataNew = data.slice();
     const dataFilter = filter(e, dataNew);
@@ -110,7 +110,7 @@ function filter(event: Event, dataNew: IData[]): IData[] {
     const dataAll = storage.getDataFirm(firmArr, SeasonArr, ColorArr, SizeArr, PopularArr, GenderArr, dataNew);
     return dataAll;
 }
-function filterPrice(e: Event, dataFilter: IData[]) {
+function filterPrice(e: Event, dataFilter: IData[]): IData[] {
     const rangeMin = range[0];
     const rangeMax = range[1];
     const minrange = parseInt(rangeMin.value);
@@ -135,7 +135,7 @@ function filterPrice(e: Event, dataFilter: IData[]) {
     const dataPrice = storage.getPrice(min, max, dataFilter);
     return dataPrice;
 }
-function filterQuantity(e: Event, dataPrice: IData[]) {
+function filterQuantity(e: Event, dataPrice: IData[]): IData[] {
     const rangeQuantityMin = rangeQuantity[0];
     const rangeQuantityMax = rangeQuantity[1];
     const minrangeQuantit = parseInt(rangeQuantityMin.value);
