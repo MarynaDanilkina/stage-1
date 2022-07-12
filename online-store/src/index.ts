@@ -181,6 +181,18 @@ function ResetFunction(e: Event, dataFilter: IData[], dataNew: IData[]): IData[]
         document.querySelectorAll('.gender').forEach((el) => {
             el.classList.remove('active__button');
         });
+        inputValue[0].value = '0';
+        inputValue[1].value = '400';
+        progress.style.left = 0 + '%';
+        progress.style.right = 0 + '%';
+        range[0].value = `0`;
+        range[1].value = `400`;
+        inputValueQuantity[0].value = '0';
+        inputValueQuantity[1].value = '400';
+        progressQuantity.style.left = 0 + '%';
+        progressQuantity.style.right = 0 + '%';
+        rangeQuantity[0].value = `0`;
+        rangeQuantity[1].value = `400`;
         return dataNew;
     }
     return dataFilter;
