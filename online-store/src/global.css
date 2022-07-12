@@ -276,6 +276,13 @@ input.search {
   width: 185px;
   align-items: center;
 }
+.numberVal__quantity{
+  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+  width: 185px;
+  align-items: center;
+}
 input[type="number"]{
   width: 70px;
   height: 25px;
@@ -300,7 +307,24 @@ input[type="number"]::-webkit-inner-spin-button{
   top: 1px;
   margin: 10px;
 }
+.range-slider__quantity{
+  position: relative;
+  width: 185px;
+  height: 5px;
+  background: #ddd;
+  outline: none;
+  top: 1px;
+  margin: 10px;
+}
 .progress{
+  left: 0%;
+  right: 0%;
+  height: 100%;
+  background: rgb(132, 176, 225);
+  border-radius: 50px;
+  position: absolute;
+}
+.progress__quantity{
   left: 0%;
   right: 0%;
   height: 100%;
@@ -326,4 +350,23 @@ input::-webkit-slider-thumb{
   border: 3px solid rgb(132, 176, 225);
   background: rgb(255, 255, 255);
   border-radius: 50px;
+}
+.footer{
+  height: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer__git{
+  text-decoration: none;
+    color: #444;
+}
+.rss:hover {
+    fill: rgb(0, 0, 0);;
+}
+.rss {
+    width: 100px;
+    height: 70px;
+    fill: rgb(119, 119, 119);
 }

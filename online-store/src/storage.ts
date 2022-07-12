@@ -175,6 +175,18 @@ class Storage {
         });
         return data;
     };
+    getQuantit = (min: string, max: string, dataNew: IData[]) => {
+        const data: IData[] = [];
+        if (!min) {
+            return dataNew;
+        }
+        dataNew.filter((user) => {
+            if (user.quantity >= +min && user.quantity <= +max) {
+                data.push(user);
+            }
+        });
+        return data;
+    };
 }
 
 const storage = new Storage();

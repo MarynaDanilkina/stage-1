@@ -26,10 +26,13 @@ const buttonReset = <HTMLElement>document.querySelector('.button__reset');
 const SortContainer = <HTMLElement>document.querySelector('select');
 const select = <HTMLSelectElement>document.querySelector('.container__sort');
 const input = <HTMLInputElement>document.getElementById('filter_users');
-const range = document.querySelectorAll<HTMLInputElement>('input[type="range"]');
+const range = document.querySelectorAll<HTMLInputElement>('.range-slider input[type="range"]');
 const progress = <HTMLElement>document.querySelector('.range-slider .progress');
 const gap = 10;
 const inputValue = document.querySelectorAll<HTMLInputElement>('.numberVal input');
+const rangeQuantity = document.querySelectorAll<HTMLInputElement>('.range-slider__quantity input[type="range"]');
+const progressQuantity = <HTMLElement>document.querySelector('.range-slider__quantity .progress__quantity');
+const inputValueQuantity = document.querySelectorAll<HTMLInputElement>('.numberVal__quantity input');
 
 getData();
 
@@ -40,6 +43,7 @@ function getDataNew(data: IData[]) {
     SortContainer.addEventListener('change', (e) => AllMetod(e, data));
     input.addEventListener('keyup', (e) => AllMetod(e, data));
     range.forEach((input) => input.addEventListener('input', (e) => AllMetod(e, data)));
+    rangeQuantity.forEach((input) => input.addEventListener('input', (e) => AllMetod(e, data)));
     addDiv(data);
 }
 
@@ -48,7 +52,8 @@ function AllMetod(e: Event, data: IData[]) {
     const dataNew = data.slice();
     const dataFilter = filter(e, dataNew);
     const dataPrice = filterPrice(e, dataFilter);
-    const dataReset: IData[] = ResetFunction(e, dataPrice, dataNew);
+    const dataQuantity = filterQuantity(e, dataPrice);
+    const dataReset: IData[] = ResetFunction(e, dataQuantity, dataNew);
     const dataBasket: IData[] = basketFunction(e, dataReset);
     const dataSort = SortFunction(e, dataBasket);
     const dataInput = Search(e, dataSort);
@@ -128,8 +133,32 @@ function filterPrice(e: Event, dataFilter: IData[]) {
     const min = inputValue[0].value;
     const max = inputValue[1].value;
     const dataPrice = storage.getPrice(min, max, dataFilter);
-    console.log(dataPrice);
     return dataPrice;
+}
+function filterQuantity(e: Event, dataPrice: IData[]) {
+    const rangeQuantityMin = rangeQuantity[0];
+    const rangeQuantityMax = rangeQuantity[1];
+    const minrangeQuantit = parseInt(rangeQuantityMin.value);
+    const maxrangeQuantit = parseInt(rangeQuantityMax.value);
+    const target = <HTMLElement>e.target;
+    if (maxrangeQuantit - minrangeQuantit < gap) {
+        if (target.classList.contains('range-min')) {
+            rangeQuantityMin.value = `${maxrangeQuantit} - ${gap}`;
+        } else {
+            rangeQuantityMax.value = `${maxrangeQuantit} + ${gap}`;
+        }
+    } else {
+        const rangeQuantityMinMax = rangeQuantityMin.max;
+        const rangeQuantityMaxMax = rangeQuantityMax.max;
+        progressQuantity.style.left = (minrangeQuantit / +rangeQuantityMinMax) * 100 + '%';
+        progressQuantity.style.right = 100 - (maxrangeQuantit / +rangeQuantityMaxMax) * 100 + '%';
+        inputValueQuantity[0].value = `${minrangeQuantit}`;
+        inputValueQuantity[1].value = `${maxrangeQuantit}`;
+    }
+    const minQuantit = inputValueQuantity[0].value;
+    const maxQuantit = inputValueQuantity[1].value;
+    const dataQuantit = storage.getQuantit(minQuantit, maxQuantit, dataPrice);
+    return dataQuantit;
 }
 function ResetFunction(e: Event, dataFilter: IData[], dataNew: IData[]): IData[] {
     const target = <HTMLElement>e.target;
