@@ -19,30 +19,41 @@ interface IData {
     amount: number;
     size: string;
 }
-const BtnFilter = document.querySelectorAll('.sidebar-left__button');
+const BtnFilter = document.querySelectorAll<HTMLElement>('.sidebar-left__button');
 const basketContainer = <HTMLElement>document.querySelector('.product-container');
 const quantity = <HTMLElement>document.querySelector('.quantity');
 const buttonReset = <HTMLElement>document.querySelector('.button__reset');
 const SortContainer = <HTMLElement>document.querySelector('select');
 const select = <HTMLSelectElement>document.querySelector('.container__sort');
 const input = <HTMLInputElement>document.getElementById('filter_users');
+const range = document.querySelectorAll<HTMLInputElement>('.range-slider input[type="range"]');
+const progress = <HTMLElement>document.querySelector('.range-slider .progress');
+const inputValue = document.querySelectorAll<HTMLInputElement>('.numberVal input');
+const rangeQuantity = document.querySelectorAll<HTMLInputElement>('.range-slider__quantity input[type="range"]');
+const progressQuantity = <HTMLElement>document.querySelector('.range-slider__quantity .progress__quantity');
+const inputValueQuantity = document.querySelectorAll<HTMLInputElement>('.numberVal__quantity input');
+const gap = 10;
 
 getData();
 
-function getDataNew(data: IData[]) {
+function getDataNew(data: IData[]): void {
     BtnFilter.forEach((el) => el.addEventListener('click', (e) => AllMetod(e, data)));
     buttonReset.addEventListener('click', (e) => AllMetod(e, data));
     basketContainer.addEventListener('click', (e) => AllMetod(e, data));
     SortContainer.addEventListener('change', (e) => AllMetod(e, data));
     input.addEventListener('keyup', (e) => AllMetod(e, data));
+    range.forEach((input) => input.addEventListener('input', (e) => AllMetod(e, data)));
+    rangeQuantity.forEach((input) => input.addEventListener('input', (e) => AllMetod(e, data)));
     addDiv(data);
 }
 
-function AllMetod(e: Event, data: IData[]) {
+function AllMetod(e: Event, data: IData[]): void {
     basketContainer.innerHTML = '';
     const dataNew = data.slice();
     const dataFilter = filter(e, dataNew);
-    const dataReset: IData[] = ResetFunction(e, dataFilter, dataNew);
+    const dataPrice = filterPrice(e, dataFilter);
+    const dataQuantity = filterQuantity(e, dataPrice);
+    const dataReset: IData[] = ResetFunction(e, dataQuantity, dataNew);
     const dataBasket: IData[] = basketFunction(e, dataReset);
     const dataSort = SortFunction(e, dataBasket);
     const dataInput = Search(e, dataSort);
@@ -99,6 +110,56 @@ function filter(event: Event, dataNew: IData[]): IData[] {
     const dataAll = storage.getDataFirm(firmArr, SeasonArr, ColorArr, SizeArr, PopularArr, GenderArr, dataNew);
     return dataAll;
 }
+function filterPrice(e: Event, dataFilter: IData[]): IData[] {
+    const rangeMin = range[0];
+    const rangeMax = range[1];
+    const minrange = parseInt(rangeMin.value);
+    const maxrange = parseInt(rangeMax.value);
+    const target = <HTMLElement>e.target;
+    if (maxrange - minrange < gap) {
+        if (target.classList.contains('range-min')) {
+            rangeMin.value = `${maxrange} - ${gap}`;
+        } else {
+            rangeMax.value = `${maxrange} + ${gap}`;
+        }
+    } else {
+        const rangeMinMax = rangeMin.max;
+        const rangeMaxMax = rangeMax.max;
+        progress.style.left = (minrange / +rangeMinMax) * 100 + '%';
+        progress.style.right = 100 - (maxrange / +rangeMaxMax) * 100 + '%';
+        inputValue[0].value = `${minrange}`;
+        inputValue[1].value = `${maxrange}`;
+    }
+    const min = inputValue[0].value;
+    const max = inputValue[1].value;
+    const dataPrice = storage.getPrice(min, max, dataFilter);
+    return dataPrice;
+}
+function filterQuantity(e: Event, dataPrice: IData[]): IData[] {
+    const rangeQuantityMin = rangeQuantity[0];
+    const rangeQuantityMax = rangeQuantity[1];
+    const minrangeQuantit = parseInt(rangeQuantityMin.value);
+    const maxrangeQuantit = parseInt(rangeQuantityMax.value);
+    const target = <HTMLElement>e.target;
+    if (maxrangeQuantit - minrangeQuantit < gap) {
+        if (target.classList.contains('range-min')) {
+            rangeQuantityMin.value = `${maxrangeQuantit} - ${gap}`;
+        } else {
+            rangeQuantityMax.value = `${maxrangeQuantit} + ${gap}`;
+        }
+    } else {
+        const rangeQuantityMinMax = rangeQuantityMin.max;
+        const rangeQuantityMaxMax = rangeQuantityMax.max;
+        progressQuantity.style.left = (minrangeQuantit / +rangeQuantityMinMax) * 100 + '%';
+        progressQuantity.style.right = 100 - (maxrangeQuantit / +rangeQuantityMaxMax) * 100 + '%';
+        inputValueQuantity[0].value = `${minrangeQuantit}`;
+        inputValueQuantity[1].value = `${maxrangeQuantit}`;
+    }
+    const minQuantit = inputValueQuantity[0].value;
+    const maxQuantit = inputValueQuantity[1].value;
+    const dataQuantit = storage.getQuantit(minQuantit, maxQuantit, dataPrice);
+    return dataQuantit;
+}
 function ResetFunction(e: Event, dataFilter: IData[], dataNew: IData[]): IData[] {
     const target = <HTMLElement>e.target;
     if (target.classList.contains('reset')) {
@@ -120,6 +181,18 @@ function ResetFunction(e: Event, dataFilter: IData[], dataNew: IData[]): IData[]
         document.querySelectorAll('.gender').forEach((el) => {
             el.classList.remove('active__button');
         });
+        inputValue[0].value = '0';
+        inputValue[1].value = '400';
+        progress.style.left = 0 + '%';
+        progress.style.right = 0 + '%';
+        range[0].value = `0`;
+        range[1].value = `400`;
+        inputValueQuantity[0].value = '0';
+        inputValueQuantity[1].value = '400';
+        progressQuantity.style.left = 0 + '%';
+        progressQuantity.style.right = 0 + '%';
+        rangeQuantity[0].value = `0`;
+        rangeQuantity[1].value = `400`;
         return dataNew;
     }
     return dataFilter;
@@ -168,7 +241,7 @@ export function addDiv(data: IData[]): void {
                 <div class="product-container__box-info">
                     <p class="box-info__title">${data[i].title}</p>
                     <p class="box-info__season">${data[i].season}</p>
-                    <p class="box-info__season">${data[i].color}</p>
+                    <p class="box-info__season">Цвет: ${data[i].color}</p>
                     <p class="box-info__season">Размеры: ${data[i].size}</p>
                     <p class="box-info__season">Популярны: ${data[i].popular}</p>
                     <div class="box-info">

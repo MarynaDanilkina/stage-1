@@ -19,7 +19,7 @@ interface IData {
 class Storage {
     data = null;
 
-    setData = (data: null) => {
+    setData = (data: null): void => {
         this.data = data;
     };
 
@@ -34,7 +34,7 @@ class Storage {
         value5: string,
         value6: Array<string>,
         dataNew: IData[]
-    ) => {
+    ): IData[] => {
         let result1: IData[] = [];
         let result2: IData[] = [];
         let result3: IData[] = [];
@@ -107,10 +107,10 @@ class Storage {
         }
         return result6;
     };
-    getbasketData = (value: IData[]) => {
+    getbasketData = (value: IData[]): number => {
         return value.reduce((acc, num) => acc + num.amount, 0);
     };
-    getPlusData = (value: string, dataNew: IData[], max: number) => {
+    getPlusData = (value: string, dataNew: IData[], max: number): IData[] => {
         if (max < 20) {
             dataNew.filter((user) => {
                 if (user.plus == value) {
@@ -126,7 +126,7 @@ class Storage {
         return dataNew;
     };
 
-    getMinusData = (value: string, dataNew: IData[]) => {
+    getMinusData = (value: string, dataNew: IData[]): IData[] => {
         dataNew.filter((user) => {
             if (user.minus == value) {
                 if (user.amount > 0) {
@@ -137,7 +137,7 @@ class Storage {
         });
         return dataNew;
     };
-    getSortData = (value: string, dataNew: IData[]) => {
+    getSortData = (value: string, dataNew: IData[]): IData[] => {
         if (value == 'default') {
             return dataNew.sort((a, b) => a.id - b.id);
         }
@@ -155,12 +155,36 @@ class Storage {
         }
         return dataNew;
     };
-    getFilterData = (value: string, dataNew: IData[]) => {
+    getFilterData = (value: string, dataNew: IData[]): IData[] => {
         if (value.length !== 0) {
             return dataNew.filter((user) => user.title.toLowerCase().indexOf(value) > -1);
         }
-
         return dataNew;
+    };
+
+    getPrice = (min: string, max: string, dataNew: IData[]): IData[] => {
+        const data: IData[] = [];
+        if (!min) {
+            return dataNew;
+        }
+        dataNew.filter((user) => {
+            if (user.price >= +min && user.price <= +max) {
+                data.push(user);
+            }
+        });
+        return data;
+    };
+    getQuantit = (min: string, max: string, dataNew: IData[]): IData[] => {
+        const data: IData[] = [];
+        if (!min) {
+            return dataNew;
+        }
+        dataNew.filter((user) => {
+            if (user.quantity >= +min && user.quantity <= +max) {
+                data.push(user);
+            }
+        });
+        return data;
     };
 }
 
