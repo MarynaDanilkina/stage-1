@@ -52,8 +52,8 @@ function getDataNew(data: IData[]): void {
         localStorage.selectedIndex = SortContainer.selectedIndex;
     };
     if (localStorage.getItem('data') !== null) {
-        data = JSON.parse(Items);
-        addDiv(data);
+        const dataNew = JSON.parse(Items);
+        addDiv(dataNew);
     } else {
         addDiv(data);
     }
