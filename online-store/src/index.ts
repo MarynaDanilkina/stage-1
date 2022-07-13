@@ -19,11 +19,12 @@ interface IData {
     amount: number;
     size: string;
 }
+const gap = 10;
 const BtnFilter = document.querySelectorAll<HTMLElement>('.sidebar-left__button');
 const basketContainer = <HTMLElement>document.querySelector('.product-container');
 const quantity = <HTMLElement>document.querySelector('.quantity');
 const buttonReset = <HTMLElement>document.querySelector('.button__reset');
-const SortContainer = <HTMLElement>document.querySelector('select');
+const SortContainer = <HTMLSelectElement>document.querySelector('select');
 const select = <HTMLSelectElement>document.querySelector('.container__sort');
 const input = <HTMLInputElement>document.getElementById('filter_users');
 const range = document.querySelectorAll<HTMLInputElement>('.range-slider input[type="range"]');
@@ -32,7 +33,9 @@ const inputValue = document.querySelectorAll<HTMLInputElement>('.numberVal input
 const rangeQuantity = document.querySelectorAll<HTMLInputElement>('.range-slider__quantity input[type="range"]');
 const progressQuantity = <HTMLElement>document.querySelector('.range-slider__quantity .progress__quantity');
 const inputValueQuantity = document.querySelectorAll<HTMLInputElement>('.numberVal__quantity input');
-const gap = 10;
+const buttonResetSettings = <HTMLElement>document.querySelector('.reset-settings');
+const Items: string = localStorage.getItem('data') || '';
+let basketSum = localStorage.getItem('basket') || '0';
 
 getData();
 
@@ -42,9 +45,19 @@ function getDataNew(data: IData[]): void {
     basketContainer.addEventListener('click', (e) => AllMetod(e, data));
     SortContainer.addEventListener('change', (e) => AllMetod(e, data));
     input.addEventListener('keyup', (e) => AllMetod(e, data));
+    buttonResetSettings.addEventListener('click', clear);
     range.forEach((input) => input.addEventListener('input', (e) => AllMetod(e, data)));
     rangeQuantity.forEach((input) => input.addEventListener('input', (e) => AllMetod(e, data)));
-    addDiv(data);
+    SortContainer.onchange = function () {
+        localStorage.selectedIndex = SortContainer.selectedIndex;
+    };
+    if (localStorage.getItem('data') !== null) {
+        const dataNew = JSON.parse(Items);
+        addDiv(dataNew);
+    } else {
+        addDiv(data);
+    }
+    localStorage1();
 }
 
 function AllMetod(e: Event, data: IData[]): void {
@@ -59,7 +72,15 @@ function AllMetod(e: Event, data: IData[]): void {
     const dataInput = Search(e, dataSort);
     addDiv(dataInput);
 }
-
+function localStorage1() {
+    if (localStorage.selectedIndex !== null) {
+        SortContainer.selectedIndex = localStorage.selectedIndex;
+    }
+}
+function clear() {
+    localStorage.clear();
+    window.location.reload();
+}
 function filter(event: Event, dataNew: IData[]): IData[] {
     const firmArr: Array<string> = [];
     const SeasonArr: Array<string> = [];
@@ -204,14 +225,18 @@ function basketFunction(e: Event, data: IData[]): IData[] {
     if (target.classList.contains('plus')) {
         const max = storage.getbasketData(data);
         const dataPlus = storage.getPlusData(datasetId, data, max);
-        const basketSum = storage.getbasketData(dataPlus);
-        showbasket(basketSum);
+        localStorage.setItem('data', JSON.stringify(dataPlus));
+        basketSum = '' + storage.getbasketData(dataPlus);
+        localStorage.setItem('basket', basketSum);
+        showbasket(+basketSum);
         return dataPlus;
     }
     if (target.classList.contains('minus')) {
         const dataMinus = storage.getMinusData(datasetId, data);
-        const basketSum: number = storage.getbasketData(dataMinus);
-        showbasket(basketSum);
+        localStorage.setItem('data', JSON.stringify(dataMinus));
+        basketSum = '' + storage.getbasketData(dataMinus);
+        localStorage.setItem('basket', basketSum);
+        showbasket(+basketSum);
         return dataMinus;
     }
     return data;
@@ -222,6 +247,7 @@ function showbasket(basketSum: number): void {
 function SortFunction(e: Event, data: IData[]): IData[] {
     const selectValue = select.options[select.selectedIndex].value;
     const result = storage.getSortData(selectValue, data);
+    localStorage.setItem('data', JSON.stringify(result));
     return result;
 }
 function Search(e: Event, data: IData[]) {
@@ -230,6 +256,7 @@ function Search(e: Event, data: IData[]) {
     return dataSearch;
 }
 export function addDiv(data: IData[]): void {
+    showbasket(+basketSum);
     for (let i = 0; i < data.length; i++) {
         const div = <HTMLElement>document.querySelector('.product-container');
         div.innerHTML += `
