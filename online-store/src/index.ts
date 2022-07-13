@@ -24,7 +24,7 @@ const BtnFilter = document.querySelectorAll<HTMLElement>('.sidebar-left__button'
 const basketContainer = <HTMLElement>document.querySelector('.product-container');
 const quantity = <HTMLElement>document.querySelector('.quantity');
 const buttonReset = <HTMLElement>document.querySelector('.button__reset');
-const SortContainer = <HTMLElement>document.querySelector('select');
+const SortContainer = <HTMLSelectElement>document.querySelector('select');
 const select = <HTMLSelectElement>document.querySelector('.container__sort');
 const input = <HTMLInputElement>document.getElementById('filter_users');
 const range = document.querySelectorAll<HTMLInputElement>('.range-slider input[type="range"]');
@@ -48,12 +48,16 @@ function getDataNew(data: IData[]): void {
     buttonResetSettings.addEventListener('click', clear);
     range.forEach((input) => input.addEventListener('input', (e) => AllMetod(e, data)));
     rangeQuantity.forEach((input) => input.addEventListener('input', (e) => AllMetod(e, data)));
+    SortContainer.onchange = function () {
+        localStorage.selectedIndex = SortContainer.selectedIndex;
+    };
     if (localStorage.getItem('data') !== null) {
         data = JSON.parse(Items);
         addDiv(data);
     } else {
         addDiv(data);
     }
+    localStorage1();
 }
 
 function AllMetod(e: Event, data: IData[]): void {
@@ -67,6 +71,11 @@ function AllMetod(e: Event, data: IData[]): void {
     const dataSort = SortFunction(e, dataBasket);
     const dataInput = Search(e, dataSort);
     addDiv(dataInput);
+}
+function localStorage1() {
+    if (localStorage.selectedIndex !== null) {
+        SortContainer.selectedIndex = localStorage.selectedIndex;
+    }
 }
 function clear() {
     localStorage.clear();
@@ -238,6 +247,7 @@ function showbasket(basketSum: number): void {
 function SortFunction(e: Event, data: IData[]): IData[] {
     const selectValue = select.options[select.selectedIndex].value;
     const result = storage.getSortData(selectValue, data);
+    localStorage.setItem('data', JSON.stringify(result));
     return result;
 }
 function Search(e: Event, data: IData[]) {
