@@ -48,16 +48,12 @@ function getDataNew(data: IData[]): void {
     buttonResetSettings.addEventListener('click', clear);
     range.forEach((input) => input.addEventListener('input', (e) => AllMetod(e, data)));
     rangeQuantity.forEach((input) => input.addEventListener('input', (e) => AllMetod(e, data)));
-    SortContainer.onchange = function () {
-        localStorage.selectedIndex = SortContainer.selectedIndex;
-    };
     if (localStorage.getItem('data') !== null) {
         const dataNew = JSON.parse(Items);
         addDiv(dataNew);
     } else {
         addDiv(data);
     }
-    localStorage1();
 }
 
 function AllMetod(e: Event, data: IData[]): void {
@@ -71,11 +67,6 @@ function AllMetod(e: Event, data: IData[]): void {
     const dataSort = SortFunction(e, dataBasket);
     const dataInput = Search(e, dataSort);
     addDiv(dataInput);
-}
-function localStorage1() {
-    if (localStorage.selectedIndex !== null) {
-        SortContainer.selectedIndex = localStorage.selectedIndex;
-    }
 }
 function clear() {
     localStorage.clear();
@@ -247,7 +238,6 @@ function showbasket(basketSum: number): void {
 function SortFunction(e: Event, data: IData[]): IData[] {
     const selectValue = select.options[select.selectedIndex].value;
     const result = storage.getSortData(selectValue, data);
-    localStorage.setItem('data', JSON.stringify(result));
     return result;
 }
 function Search(e: Event, data: IData[]) {
