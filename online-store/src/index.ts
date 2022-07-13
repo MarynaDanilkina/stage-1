@@ -19,6 +19,7 @@ interface IData {
     amount: number;
     size: string;
 }
+const gap = 10;
 const BtnFilter = document.querySelectorAll<HTMLElement>('.sidebar-left__button');
 const basketContainer = <HTMLElement>document.querySelector('.product-container');
 const quantity = <HTMLElement>document.querySelector('.quantity');
@@ -32,7 +33,8 @@ const inputValue = document.querySelectorAll<HTMLInputElement>('.numberVal input
 const rangeQuantity = document.querySelectorAll<HTMLInputElement>('.range-slider__quantity input[type="range"]');
 const progressQuantity = <HTMLElement>document.querySelector('.range-slider__quantity .progress__quantity');
 const inputValueQuantity = document.querySelectorAll<HTMLInputElement>('.numberVal__quantity input');
-const gap = 10;
+const Items: string = localStorage.getItem('data') || '';
+let basketSum = localStorage.getItem('basket') || '0';
 
 getData();
 
@@ -44,7 +46,12 @@ function getDataNew(data: IData[]): void {
     input.addEventListener('keyup', (e) => AllMetod(e, data));
     range.forEach((input) => input.addEventListener('input', (e) => AllMetod(e, data)));
     rangeQuantity.forEach((input) => input.addEventListener('input', (e) => AllMetod(e, data)));
-    addDiv(data);
+    if (localStorage.getItem('data') !== null) {
+        data = JSON.parse(Items);
+        addDiv(data);
+    } else {
+        addDiv(data);
+    }
 }
 
 function AllMetod(e: Event, data: IData[]): void {
@@ -204,14 +211,18 @@ function basketFunction(e: Event, data: IData[]): IData[] {
     if (target.classList.contains('plus')) {
         const max = storage.getbasketData(data);
         const dataPlus = storage.getPlusData(datasetId, data, max);
-        const basketSum = storage.getbasketData(dataPlus);
-        showbasket(basketSum);
+        localStorage.setItem('data', JSON.stringify(dataPlus));
+        basketSum = '' + storage.getbasketData(dataPlus);
+        localStorage.setItem('basket', basketSum);
+        showbasket(+basketSum);
         return dataPlus;
     }
     if (target.classList.contains('minus')) {
         const dataMinus = storage.getMinusData(datasetId, data);
-        const basketSum: number = storage.getbasketData(dataMinus);
-        showbasket(basketSum);
+        localStorage.setItem('data', JSON.stringify(dataMinus));
+        basketSum = '' + storage.getbasketData(dataMinus);
+        localStorage.setItem('basket', basketSum);
+        showbasket(+basketSum);
         return dataMinus;
     }
     return data;
@@ -230,6 +241,7 @@ function Search(e: Event, data: IData[]) {
     return dataSearch;
 }
 export function addDiv(data: IData[]): void {
+    showbasket(+basketSum);
     for (let i = 0; i < data.length; i++) {
         const div = <HTMLElement>document.querySelector('.product-container');
         div.innerHTML += `
