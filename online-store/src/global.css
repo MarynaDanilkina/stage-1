@@ -371,6 +371,23 @@ input::-webkit-slider-thumb{
   height: 70px;
   fill: rgb(119, 119, 119);
 }
+.reset-settings{
+  color: rgb(108, 132, 179);
+}
+.button__reset-settings{
+  display: flex;
+  margin-top: 10px;
+  width: 90%;
+  height: 30px;
+  border-radius: 6px;
+  background-color: rgb(219 232 255);
+  align-items: center;
+  justify-content: center;
+}
+.button__reset-settings:hover{
+  cursor: pointer;
+  background-color: rgb(186, 210, 253);
+}
 @media (max-width: 900px){
   .product-container__box {
     padding: 30px 55px 55px;

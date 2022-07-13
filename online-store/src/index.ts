@@ -33,6 +33,7 @@ const inputValue = document.querySelectorAll<HTMLInputElement>('.numberVal input
 const rangeQuantity = document.querySelectorAll<HTMLInputElement>('.range-slider__quantity input[type="range"]');
 const progressQuantity = <HTMLElement>document.querySelector('.range-slider__quantity .progress__quantity');
 const inputValueQuantity = document.querySelectorAll<HTMLInputElement>('.numberVal__quantity input');
+const buttonResetSettings = <HTMLElement>document.querySelector('.reset-settings');
 const Items: string = localStorage.getItem('data') || '';
 let basketSum = localStorage.getItem('basket') || '0';
 
@@ -44,6 +45,7 @@ function getDataNew(data: IData[]): void {
     basketContainer.addEventListener('click', (e) => AllMetod(e, data));
     SortContainer.addEventListener('change', (e) => AllMetod(e, data));
     input.addEventListener('keyup', (e) => AllMetod(e, data));
+    buttonResetSettings.addEventListener('click', clear);
     range.forEach((input) => input.addEventListener('input', (e) => AllMetod(e, data)));
     rangeQuantity.forEach((input) => input.addEventListener('input', (e) => AllMetod(e, data)));
     if (localStorage.getItem('data') !== null) {
@@ -66,7 +68,10 @@ function AllMetod(e: Event, data: IData[]): void {
     const dataInput = Search(e, dataSort);
     addDiv(dataInput);
 }
-
+function clear() {
+    localStorage.clear();
+    window.location.reload();
+}
 function filter(event: Event, dataNew: IData[]): IData[] {
     const firmArr: Array<string> = [];
     const SeasonArr: Array<string> = [];
