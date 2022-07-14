@@ -42,18 +42,11 @@ function getDataNew(data: IData[]): void {
     rangeQuantity.forEach((input) => input.addEventListener('input', () => mainFunction(data)));
     buttonReset.addEventListener('click', () => ResetFunction(data));
     basketContainer.addEventListener('click', (e) => basketFunction(e, data));
-    SortContainer.addEventListener('change', (e) => AllMetod(e, data));
-    input.addEventListener('keyup', (e) => AllMetod(e, data));
+    SortContainer.addEventListener('change', () => mainFunction(data));
+    input.addEventListener('keyup', () => mainFunction(data));
     mainFunction(data);
 }
 
-function AllMetod(e: Event, data: IData[]): void {
-    basketContainer.innerHTML = '';
-    const dataNew = data.slice();
-    const dataSort = SortFunction(e, dataNew);
-    const dataInput = Search(e, dataSort);
-    addDiv(dataInput);
-}
 function filterActive(e: Event, data: IData[]): void {
     const target = <HTMLElement>e.target;
     if (target.classList.contains('checkbox-box')) {
@@ -128,6 +121,9 @@ function basketFunction(e: Event, data: IData[]) {
         mainFunction(data);
     }
 }
+function showbasket(basketSum: number): void {
+    quantity.innerHTML = `${basketSum}`;
+}
 function mainFunction(data: IData[]) {
     const minPrice = minPriceFunction();
     const maxPrice = maxPriceFunction();
@@ -162,7 +158,8 @@ function mainFunction(data: IData[]) {
             selectedGender.push(el.dataset.gender);
         }
     });
-
+    const selectValue = select.options[select.selectedIndex].value;
+    const keyword = input.value.toLowerCase();
     data = storage.getFilteredItems(
         selectedFirms,
         selectedSeason,
@@ -173,21 +170,11 @@ function mainFunction(data: IData[]) {
     );
     data = storage.getPrice(minPrice, maxPrice, data);
     data = storage.getQuantit(minQuantit, maxQuantit, data);
+    data = storage.getSortData(selectValue, data);
+    data = storage.getSearchData(keyword, data);
     addDiv(data);
 }
-function showbasket(basketSum: number): void {
-    quantity.innerHTML = `${basketSum}`;
-}
-function SortFunction(e: Event, data: IData[]): IData[] {
-    const selectValue = select.options[select.selectedIndex].value;
-    const result = storage.getSortData(selectValue, data);
-    return result;
-}
-function Search(e: Event, data: IData[]) {
-    const keyword = input.value.toLowerCase();
-    const dataSearch = storage.getFilterData(keyword, data);
-    return dataSearch;
-}
+
 export function addDiv(data: IData[]): void {
     for (let i = 0; i < data.length; i++) {
         const div = <HTMLElement>document.querySelector('.product-container');

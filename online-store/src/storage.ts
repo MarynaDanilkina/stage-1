@@ -141,11 +141,11 @@ class Storage {
     getSortData = (value: string, data: IData[]) => {
         return data.sort(mapper[value]);
     };
-    getFilterData = (value: string, dataNew: IData[]): IData[] => {
+    getSearchData = (value: string, data: IData[]): IData[] => {
         if (value.length !== 0) {
-            return dataNew.filter((user) => user.title.toLowerCase().indexOf(value) > -1);
+            return data.filter((user) => user.title.toLowerCase().indexOf(value) > -1);
         }
-        return dataNew;
+        return data;
     };
 }
 
