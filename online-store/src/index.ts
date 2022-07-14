@@ -41,10 +41,9 @@ function getDataNew(data: IData[]): void {
     rangePrice.forEach((input) => input.addEventListener('input', () => mainFunction(data)));
     rangeQuantity.forEach((input) => input.addEventListener('input', () => mainFunction(data)));
     buttonReset.addEventListener('click', () => ResetFunction(data));
-    basketContainer.addEventListener('click', (e) => AllMetod(e, data));
+    basketContainer.addEventListener('click', (e) => basketFunction(e, data));
     SortContainer.addEventListener('change', (e) => AllMetod(e, data));
     input.addEventListener('keyup', (e) => AllMetod(e, data));
-    buttonResetSettings.addEventListener('click', clear);
     mainFunction(data);
 }
 
@@ -54,10 +53,6 @@ function AllMetod(e: Event, data: IData[]): void {
     const dataSort = SortFunction(e, dataNew);
     const dataInput = Search(e, dataSort);
     addDiv(dataInput);
-}
-function clear() {
-    localStorage.clear();
-    window.location.reload();
 }
 function filterActive(e: Event, data: IData[]): void {
     const target = <HTMLElement>e.target;
@@ -116,7 +111,6 @@ function ResetFunction(data: IData[]): void {
     rangeQuantity[1].value = `400`;
     mainFunction(data);
 }
-
 function basketFunction(e: Event, data: IData[]) {
     const target = <HTMLElement>e.target;
     const datasetId: string = target.dataset.id || '';

@@ -106,9 +106,9 @@ class Storage {
     getbasketData = (value: IData[]): number => {
         return value.reduce((acc, num) => acc + num.amount, 0);
     };
-    getPlusData = (value: string, dataNew: IData[], max: number): IData[] => {
+    getPlusData = (value: string, data: IData[], max: number): IData[] => {
         if (max < 20) {
-            dataNew.filter((user) => {
+            data.filter((user) => {
                 if (user.plus == value) {
                     if (user.quantity > 0) {
                         user.amount++;
@@ -119,11 +119,10 @@ class Storage {
         } else {
             alert('Извините, все слоты заполнены');
         }
-        return dataNew;
+        return data;
     };
-
-    getMinusData = (value: string, dataNew: IData[]): IData[] => {
-        dataNew.filter((user) => {
+    getMinusData = (value: string, data: IData[]): IData[] => {
+        data.filter((user) => {
             if (user.minus == value) {
                 if (user.amount > 0) {
                     user.amount--;
@@ -131,7 +130,7 @@ class Storage {
                 }
             }
         });
-        return dataNew;
+        return data;
     };
     getSortData = (value: string, dataNew: IData[]): IData[] => {
         if (value == 'default') {
