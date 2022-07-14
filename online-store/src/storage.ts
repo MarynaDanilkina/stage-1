@@ -26,6 +26,59 @@ class Storage {
     getData = () => {
         return this.data;
     };
+    getFilteredItems = (
+        selectedFirms: Array<string>,
+        selectedSeason: Array<string>,
+        selectedColor: Array<string>,
+        selectedGender: Array<string>,
+        selectedSize: Array<string>,
+        selectedPopular: string
+    ) => {
+        let filterdData: IData[] = this.data.slice();
+        filterdData = this.filterByFirm(selectedFirms, filterdData);
+        filterdData = this.filterBySeason(selectedSeason, filterdData);
+        filterdData = this.filterByColor(selectedColor, filterdData);
+        filterdData = this.filterByGender(selectedGender, filterdData);
+        filterdData = this.filterBySize(selectedSize, filterdData);
+        filterdData = this.filterByPopular(selectedPopular, filterdData);
+        return filterdData;
+    };
+    filterByFirm = (selectedFirms: Array<string>, filterdData: IData[]) => {
+        if (selectedFirms.length === 0) {
+            return filterdData;
+        }
+        return filterdData.filter(({ firm }) => selectedFirms.includes(firm));
+    };
+    filterBySeason = (selectedSeason: Array<string>, filterdData: IData[]) => {
+        if (selectedSeason.length === 0) {
+            return filterdData;
+        }
+        return filterdData.filter(({ season }) => selectedSeason.includes(season));
+    };
+    filterByColor = (selectedColor: Array<string>, filterdData: IData[]) => {
+        if (selectedColor.length === 0) {
+            return filterdData;
+        }
+        return filterdData.filter(({ color }) => selectedColor.includes(color));
+    };
+    filterByGender = (selectedGender: Array<string>, filterdData: IData[]) => {
+        if (selectedGender.length === 0) {
+            return filterdData;
+        }
+        return filterdData.filter(({ gender }) => selectedGender.includes(gender));
+    };
+    filterBySize = (selectedSize: Array<string>, filterdData: IData[]) => {
+        if (selectedSize.length === 0) {
+            return filterdData;
+        }
+        return filterdData.filter(({ size }) => selectedSize.includes(size));
+    };
+    filterByPopular = (selectedPopular: string, filterdData: IData[]) => {
+        if (selectedPopular.length === 0) {
+            return filterdData;
+        }
+        return filterdData.filter(({ popular }) => selectedPopular.includes(popular));
+    };
     getDataFirm = (
         value1: Array<string>,
         value2: Array<string>,

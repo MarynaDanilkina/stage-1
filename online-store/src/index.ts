@@ -37,7 +37,7 @@ const buttonResetSettings = <HTMLElement>document.querySelector('.reset-settings
 getData();
 
 function getDataNew(data: IData[]): void {
-    BtnFilter.forEach((el) => el.addEventListener('click', (e) => AllMetod(e, data)));
+    BtnFilter.forEach((el) => el.addEventListener('click', (e) => filterActive(e, data)));
     buttonReset.addEventListener('click', (e) => AllMetod(e, data));
     basketContainer.addEventListener('click', (e) => AllMetod(e, data));
     SortContainer.addEventListener('change', (e) => AllMetod(e, data));
@@ -51,8 +51,7 @@ function getDataNew(data: IData[]): void {
 function AllMetod(e: Event, data: IData[]): void {
     basketContainer.innerHTML = '';
     const dataNew = data.slice();
-    const dataFilter = filter(e, dataNew);
-    const dataPrice = filterPrice(e, dataFilter);
+    const dataPrice = filterPrice(e, dataNew);
     const dataQuantity = filterQuantity(e, dataPrice);
     const dataReset: IData[] = ResetFunction(e, dataQuantity, dataNew);
     const dataSort = SortFunction(e, dataReset);
@@ -63,55 +62,12 @@ function clear() {
     localStorage.clear();
     window.location.reload();
 }
-function filter(event: Event, dataNew: IData[]): IData[] {
-    const firmArr: Array<string> = [];
-    const SeasonArr: Array<string> = [];
-    const ColorArr: Array<string> = [];
-    const SizeArr: Array<string> = [];
-    let PopularArr = '';
-    const GenderArr: Array<string> = [];
-    const target = <HTMLElement>event.target;
-    if (target.classList.contains('firm')) {
+function filterActive(e: Event, data: IData[]): void {
+    const target = <HTMLElement>e.target;
+    if (target.classList.contains('checkbox-box')) {
         target.classList.toggle('active__button');
     }
-    if (target.classList.contains('season')) {
-        target.classList.toggle('active__button');
-    }
-    if (target.classList.contains('color')) {
-        target.classList.toggle('active__button');
-    }
-    if (target.classList.contains('size')) {
-        target.classList.toggle('active__button');
-    }
-    if (target.classList.contains('popular')) {
-        target.classList.toggle('active__button');
-    }
-    if (target.classList.contains('gender')) {
-        target.classList.toggle('active__button');
-    }
-    const activeButton = document.querySelectorAll<HTMLElement>('.active__button');
-    activeButton.forEach((el) => {
-        if (typeof el.dataset.firm != 'undefined') {
-            firmArr.push(el.dataset.firm);
-        }
-        if (typeof el.dataset.season != 'undefined') {
-            SeasonArr.push(el.dataset.season);
-        }
-        if (typeof el.dataset.color != 'undefined') {
-            ColorArr.push(el.dataset.color);
-        }
-        if (typeof el.dataset.size != 'undefined') {
-            SizeArr.push(el.dataset.size);
-        }
-        if (typeof el.dataset.popular != 'undefined') {
-            PopularArr += el.dataset.popular;
-        }
-        if (typeof el.dataset.gender != 'undefined') {
-            GenderArr.push(el.dataset.gender);
-        }
-    });
-    const dataAll = storage.getDataFirm(firmArr, SeasonArr, ColorArr, SizeArr, PopularArr, GenderArr, dataNew);
-    return dataAll;
+    mainFunction(data);
 }
 function minPriceFunction() {
     const rangeMin = rangePrice[0];
@@ -215,6 +171,43 @@ function basketFunction(e: Event, data: IData[]) {
     }
 }
 function mainFunction(data: IData[]) {
+    const selectedFirms: Array<string> = [];
+    const selectedSeason: Array<string> = [];
+    const selectedColor: Array<string> = [];
+    const selectedGender: Array<string> = [];
+    const selectedSize: Array<string> = [];
+    let selectedPopular = '';
+
+    const activeButton = document.querySelectorAll<HTMLElement>('.active__button');
+    activeButton.forEach((el) => {
+        if (el.dataset.firm) {
+            selectedFirms.push(el.dataset.firm);
+        }
+        if (el.dataset.season) {
+            selectedSeason.push(el.dataset.season);
+        }
+        if (el.dataset.color) {
+            selectedColor.push(el.dataset.color);
+        }
+        if (el.dataset.size) {
+            selectedSize.push(el.dataset.size);
+        }
+        if (el.dataset.popular) {
+            selectedPopular += el.dataset.popular;
+        }
+        if (el.dataset.gender) {
+            selectedGender.push(el.dataset.gender);
+        }
+    });
+
+    data = storage.getFilteredItems(
+        selectedFirms,
+        selectedSeason,
+        selectedColor,
+        selectedGender,
+        selectedSize,
+        selectedPopular
+    );
     addDiv(data);
 }
 function showbasket(basketSum: number): void {
