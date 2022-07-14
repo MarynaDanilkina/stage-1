@@ -15,7 +15,13 @@ interface IData {
     amount: number;
     size: string;
 }
-
+const mapper: Record<string, (a: IData, b: IData) => number> = {
+    default: (a, b) => a.id - b.id,
+    'ascending-quantity': (a, b) => a.quantity - b.quantity,
+    'descending-quantity': (a, b) => b.quantity - a.quantity,
+    'price-descending': (a, b) => a.price - b.price,
+    'price-ascending': (a, b) => b.price - a.price,
+};
 class Storage {
     data = null;
 
@@ -132,23 +138,8 @@ class Storage {
         });
         return data;
     };
-    getSortData = (value: string, dataNew: IData[]): IData[] => {
-        if (value == 'default') {
-            return dataNew.sort((a, b) => a.id - b.id);
-        }
-        if (value == 'ascending-quantity') {
-            return dataNew.sort((a, b) => a.quantity - b.quantity);
-        }
-        if (value == 'descending-quantity') {
-            return dataNew.sort((a, b) => b.quantity - a.quantity);
-        }
-        if (value == 'price-descending') {
-            return dataNew.sort((a, b) => a.price - b.price);
-        }
-        if (value == 'price-ascending') {
-            return dataNew.sort((a, b) => b.price - a.price);
-        }
-        return dataNew;
+    getSortData = (value: string, data: IData[]) => {
+        return data.sort(mapper[value]);
     };
     getFilterData = (value: string, dataNew: IData[]): IData[] => {
         if (value.length !== 0) {
