@@ -19,7 +19,6 @@ interface IData {
     amount: number;
     size: string;
 }
-const gap = 10;
 const BtnFilter = document.querySelectorAll<HTMLElement>('.sidebar-left__button');
 const basketContainer = <HTMLElement>document.querySelector('.product-container');
 const quantity = <HTMLElement>document.querySelector('.quantity');
@@ -34,8 +33,6 @@ const rangeQuantity = document.querySelectorAll<HTMLInputElement>('.range-slider
 const progressQuantity = <HTMLElement>document.querySelector('.range-slider__quantity .progress__quantity');
 const valueQuantity = document.querySelectorAll<HTMLInputElement>('.numberVal__quantity input');
 const buttonResetSettings = <HTMLElement>document.querySelector('.reset-settings');
-const Items: string = localStorage.getItem('data') || '';
-let basketSum = localStorage.getItem('basket') || '0';
 
 getData();
 
@@ -48,12 +45,7 @@ function getDataNew(data: IData[]): void {
     buttonResetSettings.addEventListener('click', clear);
     rangePrice.forEach((input) => input.addEventListener('input', (e) => AllMetod(e, data)));
     rangeQuantity.forEach((input) => input.addEventListener('input', (e) => AllMetod(e, data)));
-    if (localStorage.getItem('data') !== null) {
-        const dataNew = JSON.parse(Items);
-        addDiv(dataNew);
-    } else {
-        addDiv(data);
-    }
+    mainFunction(data);
 }
 
 function AllMetod(e: Event, data: IData[]): void {
@@ -63,8 +55,7 @@ function AllMetod(e: Event, data: IData[]): void {
     const dataPrice = filterPrice(e, dataFilter);
     const dataQuantity = filterQuantity(e, dataPrice);
     const dataReset: IData[] = ResetFunction(e, dataQuantity, dataNew);
-    const dataBasket: IData[] = basketFunction(e, dataReset);
-    const dataSort = SortFunction(e, dataBasket);
+    const dataSort = SortFunction(e, dataReset);
     const dataInput = Search(e, dataSort);
     addDiv(dataInput);
 }
@@ -206,27 +197,25 @@ function ResetFunction(e: Event, dataFilter: IData[], dataNew: IData[]): IData[]
     return dataFilter;
 }
 
-function basketFunction(e: Event, data: IData[]): IData[] {
+function basketFunction(e: Event, data: IData[]) {
     const target = <HTMLElement>e.target;
     const datasetId: string = target.dataset.id || '';
     if (target.classList.contains('plus')) {
         const max = storage.getbasketData(data);
-        const dataPlus = storage.getPlusData(datasetId, data, max);
-        localStorage.setItem('data', JSON.stringify(dataPlus));
-        basketSum = '' + storage.getbasketData(dataPlus);
-        localStorage.setItem('basket', basketSum);
+        data = storage.getPlusData(datasetId, data, max);
+        const basketSum = '' + storage.getbasketData(data);
         showbasket(+basketSum);
-        return dataPlus;
+        mainFunction(data);
     }
     if (target.classList.contains('minus')) {
-        const dataMinus = storage.getMinusData(datasetId, data);
-        localStorage.setItem('data', JSON.stringify(dataMinus));
-        basketSum = '' + storage.getbasketData(dataMinus);
-        localStorage.setItem('basket', basketSum);
+        data = storage.getMinusData(datasetId, data);
+        const basketSum = '' + storage.getbasketData(data);
         showbasket(+basketSum);
-        return dataMinus;
+        mainFunction(data);
     }
-    return data;
+}
+function mainFunction(data: IData[]) {
+    addDiv(data);
 }
 function showbasket(basketSum: number): void {
     quantity.innerHTML = `${basketSum}`;
@@ -242,7 +231,6 @@ function Search(e: Event, data: IData[]) {
     return dataSearch;
 }
 export function addDiv(data: IData[]): void {
-    showbasket(+basketSum);
     for (let i = 0; i < data.length; i++) {
         const div = <HTMLElement>document.querySelector('.product-container');
         div.innerHTML += `
