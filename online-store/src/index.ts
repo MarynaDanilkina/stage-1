@@ -40,7 +40,7 @@ function getDataNew(data: IData[]): void {
     BtnFilter.forEach((el) => el.addEventListener('click', (e) => filterActive(e, data)));
     rangePrice.forEach((input) => input.addEventListener('input', () => mainFunction(data)));
     rangeQuantity.forEach((input) => input.addEventListener('input', () => mainFunction(data)));
-    buttonReset.addEventListener('click', (e) => AllMetod(e, data));
+    buttonReset.addEventListener('click', () => ResetFunction(data));
     basketContainer.addEventListener('click', (e) => AllMetod(e, data));
     SortContainer.addEventListener('change', (e) => AllMetod(e, data));
     input.addEventListener('keyup', (e) => AllMetod(e, data));
@@ -51,8 +51,7 @@ function getDataNew(data: IData[]): void {
 function AllMetod(e: Event, data: IData[]): void {
     basketContainer.innerHTML = '';
     const dataNew = data.slice();
-    const dataReset: IData[] = ResetFunction(e, dataNew, dataNew);
-    const dataSort = SortFunction(e, dataReset);
+    const dataSort = SortFunction(e, dataNew);
     const dataInput = Search(e, dataSort);
     addDiv(dataInput);
 }
@@ -99,42 +98,23 @@ function maxQuantitFunction() {
     valueQuantity[1].value = `${maxrangeQuantit}`;
     return valueQuantity[1].value;
 }
-function ResetFunction(e: Event, dataFilter: IData[], dataNew: IData[]): IData[] {
-    const target = <HTMLElement>e.target;
-    if (target.classList.contains('reset')) {
-        document.querySelectorAll('.firm').forEach((el) => {
-            el.classList.remove('active__button');
-        });
-        document.querySelectorAll('.season').forEach((el) => {
-            el.classList.remove('active__button');
-        });
-        document.querySelectorAll('.color').forEach((el) => {
-            el.classList.remove('active__button');
-        });
-        document.querySelectorAll('.size').forEach((el) => {
-            el.classList.remove('active__button');
-        });
-        document.querySelectorAll('.popular').forEach((el) => {
-            el.classList.remove('active__button');
-        });
-        document.querySelectorAll('.gender').forEach((el) => {
-            el.classList.remove('active__button');
-        });
-        valuePrice[0].value = '0';
-        valuePrice[1].value = '400';
-        progressPrice.style.left = 0 + '%';
-        progressPrice.style.right = 0 + '%';
-        rangePrice[0].value = `0`;
-        rangePrice[1].value = `400`;
-        valueQuantity[0].value = '0';
-        valueQuantity[1].value = '400';
-        progressQuantity.style.left = 0 + '%';
-        progressQuantity.style.right = 0 + '%';
-        rangeQuantity[0].value = `0`;
-        rangeQuantity[1].value = `400`;
-        return dataNew;
-    }
-    return dataFilter;
+function ResetFunction(data: IData[]): void {
+    document.querySelectorAll('.checkbox-box').forEach((el) => {
+        el.classList.remove('active__button');
+    });
+    valuePrice[0].value = '0';
+    valuePrice[1].value = '400';
+    progressPrice.style.left = 0 + '%';
+    progressPrice.style.right = 0 + '%';
+    rangePrice[0].value = `0`;
+    rangePrice[1].value = `400`;
+    valueQuantity[0].value = '0';
+    valueQuantity[1].value = '400';
+    progressQuantity.style.left = 0 + '%';
+    progressQuantity.style.right = 0 + '%';
+    rangeQuantity[0].value = `0`;
+    rangeQuantity[1].value = `400`;
+    mainFunction(data);
 }
 
 function basketFunction(e: Event, data: IData[]) {
