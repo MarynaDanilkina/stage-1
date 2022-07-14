@@ -27,12 +27,12 @@ const buttonReset = <HTMLElement>document.querySelector('.button__reset');
 const SortContainer = <HTMLSelectElement>document.querySelector('select');
 const select = <HTMLSelectElement>document.querySelector('.container__sort');
 const input = <HTMLInputElement>document.getElementById('filter_users');
-const range = document.querySelectorAll<HTMLInputElement>('.range-slider input[type="range"]');
-const progress = <HTMLElement>document.querySelector('.range-slider .progress');
-const inputValue = document.querySelectorAll<HTMLInputElement>('.numberVal input');
+const rangePrice = document.querySelectorAll<HTMLInputElement>('.range-slider input[type="range"]');
+const progressPrice = <HTMLElement>document.querySelector('.range-slider .progress');
+const valuePrice = document.querySelectorAll<HTMLInputElement>('.numberVal input');
 const rangeQuantity = document.querySelectorAll<HTMLInputElement>('.range-slider__quantity input[type="range"]');
 const progressQuantity = <HTMLElement>document.querySelector('.range-slider__quantity .progress__quantity');
-const inputValueQuantity = document.querySelectorAll<HTMLInputElement>('.numberVal__quantity input');
+const valueQuantity = document.querySelectorAll<HTMLInputElement>('.numberVal__quantity input');
 const buttonResetSettings = <HTMLElement>document.querySelector('.reset-settings');
 const Items: string = localStorage.getItem('data') || '';
 let basketSum = localStorage.getItem('basket') || '0';
@@ -46,7 +46,7 @@ function getDataNew(data: IData[]): void {
     SortContainer.addEventListener('change', (e) => AllMetod(e, data));
     input.addEventListener('keyup', (e) => AllMetod(e, data));
     buttonResetSettings.addEventListener('click', clear);
-    range.forEach((input) => input.addEventListener('input', (e) => AllMetod(e, data)));
+    rangePrice.forEach((input) => input.addEventListener('input', (e) => AllMetod(e, data)));
     rangeQuantity.forEach((input) => input.addEventListener('input', (e) => AllMetod(e, data)));
     if (localStorage.getItem('data') !== null) {
         const dataNew = JSON.parse(Items);
@@ -122,53 +122,49 @@ function filter(event: Event, dataNew: IData[]): IData[] {
     const dataAll = storage.getDataFirm(firmArr, SeasonArr, ColorArr, SizeArr, PopularArr, GenderArr, dataNew);
     return dataAll;
 }
-function filterPrice(e: Event, dataFilter: IData[]): IData[] {
-    const rangeMin = range[0];
-    const rangeMax = range[1];
+function minPriceFunction() {
+    const rangeMin = rangePrice[0];
     const minrange = parseInt(rangeMin.value);
+    const rangeMinMax = rangeMin.max;
+    progressPrice.style.left = (minrange / +rangeMinMax) * 100 + '%';
+    valuePrice[0].value = `${minrange}`;
+    return valuePrice[0].value;
+}
+function maxPriceFunction() {
+    const rangeMax = rangePrice[1];
     const maxrange = parseInt(rangeMax.value);
-    const target = <HTMLElement>e.target;
-    if (maxrange - minrange < gap) {
-        if (target.classList.contains('range-min')) {
-            rangeMin.value = `${maxrange} - ${gap}`;
-        } else {
-            rangeMax.value = `${maxrange} + ${gap}`;
-        }
-    } else {
-        const rangeMinMax = rangeMin.max;
-        const rangeMaxMax = rangeMax.max;
-        progress.style.left = (minrange / +rangeMinMax) * 100 + '%';
-        progress.style.right = 100 - (maxrange / +rangeMaxMax) * 100 + '%';
-        inputValue[0].value = `${minrange}`;
-        inputValue[1].value = `${maxrange}`;
-    }
-    const min = inputValue[0].value;
-    const max = inputValue[1].value;
-    const dataPrice = storage.getPrice(min, max, dataFilter);
+    const rangeMaxMax = rangeMax.max;
+    progressPrice.style.right = 100 - (maxrange / +rangeMaxMax) * 100 + '%';
+    valuePrice[1].value = `${maxrange}`;
+    return valuePrice[1].value;
+}
+function filterPrice(e: Event, dataFilter: IData[]): IData[] {
+    const minPrice = minPriceFunction();
+    const maxPrice = maxPriceFunction();
+
+    const dataPrice = storage.getPrice(minPrice, maxPrice, dataFilter);
     return dataPrice;
 }
-function filterQuantity(e: Event, dataPrice: IData[]): IData[] {
+function minQuantitFunction() {
     const rangeQuantityMin = rangeQuantity[0];
-    const rangeQuantityMax = rangeQuantity[1];
     const minrangeQuantit = parseInt(rangeQuantityMin.value);
+    const rangeQuantityMinMax = rangeQuantityMin.max;
+    progressQuantity.style.left = (minrangeQuantit / +rangeQuantityMinMax) * 100 + '%';
+    valueQuantity[0].value = `${minrangeQuantit}`;
+    return valueQuantity[0].value;
+}
+function maxQuantitFunction() {
+    const rangeQuantityMax = rangeQuantity[1];
     const maxrangeQuantit = parseInt(rangeQuantityMax.value);
-    const target = <HTMLElement>e.target;
-    if (maxrangeQuantit - minrangeQuantit < gap) {
-        if (target.classList.contains('range-min')) {
-            rangeQuantityMin.value = `${maxrangeQuantit} - ${gap}`;
-        } else {
-            rangeQuantityMax.value = `${maxrangeQuantit} + ${gap}`;
-        }
-    } else {
-        const rangeQuantityMinMax = rangeQuantityMin.max;
-        const rangeQuantityMaxMax = rangeQuantityMax.max;
-        progressQuantity.style.left = (minrangeQuantit / +rangeQuantityMinMax) * 100 + '%';
-        progressQuantity.style.right = 100 - (maxrangeQuantit / +rangeQuantityMaxMax) * 100 + '%';
-        inputValueQuantity[0].value = `${minrangeQuantit}`;
-        inputValueQuantity[1].value = `${maxrangeQuantit}`;
-    }
-    const minQuantit = inputValueQuantity[0].value;
-    const maxQuantit = inputValueQuantity[1].value;
+    const rangeQuantityMaxMax = rangeQuantityMax.max;
+    progressQuantity.style.right = 100 - (maxrangeQuantit / +rangeQuantityMaxMax) * 100 + '%';
+    valueQuantity[1].value = `${maxrangeQuantit}`;
+    return valueQuantity[1].value;
+}
+function filterQuantity(e: Event, dataPrice: IData[]): IData[] {
+    const minQuantit = minQuantitFunction();
+    const maxQuantit = maxQuantitFunction();
+
     const dataQuantit = storage.getQuantit(minQuantit, maxQuantit, dataPrice);
     return dataQuantit;
 }
@@ -193,14 +189,14 @@ function ResetFunction(e: Event, dataFilter: IData[], dataNew: IData[]): IData[]
         document.querySelectorAll('.gender').forEach((el) => {
             el.classList.remove('active__button');
         });
-        inputValue[0].value = '0';
-        inputValue[1].value = '400';
-        progress.style.left = 0 + '%';
-        progress.style.right = 0 + '%';
-        range[0].value = `0`;
-        range[1].value = `400`;
-        inputValueQuantity[0].value = '0';
-        inputValueQuantity[1].value = '400';
+        valuePrice[0].value = '0';
+        valuePrice[1].value = '400';
+        progressPrice.style.left = 0 + '%';
+        progressPrice.style.right = 0 + '%';
+        rangePrice[0].value = `0`;
+        rangePrice[1].value = `400`;
+        valueQuantity[0].value = '0';
+        valueQuantity[1].value = '400';
         progressQuantity.style.left = 0 + '%';
         progressQuantity.style.right = 0 + '%';
         rangeQuantity[0].value = `0`;
