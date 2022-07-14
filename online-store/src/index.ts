@@ -39,20 +39,19 @@ getData();
 function getDataNew(data: IData[]): void {
     BtnFilter.forEach((el) => el.addEventListener('click', (e) => filterActive(e, data)));
     rangePrice.forEach((input) => input.addEventListener('input', () => mainFunction(data)));
+    rangeQuantity.forEach((input) => input.addEventListener('input', () => mainFunction(data)));
     buttonReset.addEventListener('click', (e) => AllMetod(e, data));
     basketContainer.addEventListener('click', (e) => AllMetod(e, data));
     SortContainer.addEventListener('change', (e) => AllMetod(e, data));
     input.addEventListener('keyup', (e) => AllMetod(e, data));
     buttonResetSettings.addEventListener('click', clear);
-    rangeQuantity.forEach((input) => input.addEventListener('input', (e) => AllMetod(e, data)));
     mainFunction(data);
 }
 
 function AllMetod(e: Event, data: IData[]): void {
     basketContainer.innerHTML = '';
     const dataNew = data.slice();
-    const dataQuantity = filterQuantity(e, dataNew);
-    const dataReset: IData[] = ResetFunction(e, dataQuantity, dataNew);
+    const dataReset: IData[] = ResetFunction(e, dataNew, dataNew);
     const dataSort = SortFunction(e, dataReset);
     const dataInput = Search(e, dataSort);
     addDiv(dataInput);
@@ -99,13 +98,6 @@ function maxQuantitFunction() {
     progressQuantity.style.right = 100 - (maxrangeQuantit / +rangeQuantityMaxMax) * 100 + '%';
     valueQuantity[1].value = `${maxrangeQuantit}`;
     return valueQuantity[1].value;
-}
-function filterQuantity(e: Event, dataPrice: IData[]): IData[] {
-    const minQuantit = minQuantitFunction();
-    const maxQuantit = maxQuantitFunction();
-
-    const dataQuantit = storage.getQuantit(minQuantit, maxQuantit, dataPrice);
-    return dataQuantit;
 }
 function ResetFunction(e: Event, dataFilter: IData[], dataNew: IData[]): IData[] {
     const target = <HTMLElement>e.target;
@@ -165,6 +157,8 @@ function basketFunction(e: Event, data: IData[]) {
 function mainFunction(data: IData[]) {
     const minPrice = minPriceFunction();
     const maxPrice = maxPriceFunction();
+    const minQuantit = minQuantitFunction();
+    const maxQuantit = maxQuantitFunction();
 
     const selectedFirms: Array<string> = [];
     const selectedSeason: Array<string> = [];
@@ -204,6 +198,7 @@ function mainFunction(data: IData[]) {
         selectedPopular
     );
     data = storage.getPrice(minPrice, maxPrice, data);
+    data = storage.getQuantit(minQuantit, maxQuantit, data);
     addDiv(data);
 }
 function showbasket(basketSum: number): void {

@@ -91,6 +91,18 @@ class Storage {
         });
         return dataNew;
     };
+    getQuantit = (min: string, max: string, data: IData[]): IData[] => {
+        const dataNew: IData[] = [];
+        if (!min) {
+            return data;
+        }
+        data.filter((user) => {
+            if (user.quantity >= +min && user.quantity <= +max) {
+                data.push(user);
+            }
+        });
+        return dataNew;
+    };
     getbasketData = (value: IData[]): number => {
         return value.reduce((acc, num) => acc + num.amount, 0);
     };
@@ -144,18 +156,6 @@ class Storage {
             return dataNew.filter((user) => user.title.toLowerCase().indexOf(value) > -1);
         }
         return dataNew;
-    };
-    getQuantit = (min: string, max: string, dataNew: IData[]): IData[] => {
-        const data: IData[] = [];
-        if (!min) {
-            return dataNew;
-        }
-        dataNew.filter((user) => {
-            if (user.quantity >= +min && user.quantity <= +max) {
-                data.push(user);
-            }
-        });
-        return data;
     };
 }
 
