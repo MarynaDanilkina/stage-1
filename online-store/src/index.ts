@@ -33,11 +33,13 @@ const rangeQuantity = document.querySelectorAll<HTMLInputElement>('.range-slider
 const progressQuantity = <HTMLElement>document.querySelector('.range-slider__quantity .progress__quantity');
 const valueQuantity = document.querySelectorAll<HTMLInputElement>('.numberVal__quantity input');
 const buttonResetSettings = <HTMLElement>document.querySelector('.reset-settings');
+const Items = localStorage.getItem('data') || '';
+let basketSum = localStorage.getItem('basket') || '0';
 
 getData();
 
 function getDataNew(): void {
-    const data: IData[] = storage.data.slice();
+    let data: IData[] = storage.data.slice();
     BtnFilter.forEach((el) => el.addEventListener('click', (e) => filterActive(e, data)));
     rangePrice.forEach((input) => input.addEventListener('input', () => mainFunction(data)));
     rangeQuantity.forEach((input) => input.addEventListener('input', () => mainFunction(data)));
@@ -46,7 +48,12 @@ function getDataNew(): void {
     SortContainer.addEventListener('change', () => mainFunction(data));
     input.addEventListener('keyup', () => mainFunction(data));
     buttonResetSettings.addEventListener('click', () => clear());
-    mainFunction(data);
+    if (localStorage.getItem('data') !== null) {
+        data = JSON.parse(Items);
+        mainFunction(data);
+    } else {
+        mainFunction(data);
+    }
 }
 
 function filterActive(e: Event, data: IData[]): void {
@@ -112,13 +119,17 @@ function basketFunction(e: Event, data: IData[]): void {
     if (target.classList.contains('plus')) {
         const max = storage.getbasketData(data);
         data = storage.getPlusData(datasetId, data, max);
-        const basketSum = '' + storage.getbasketData(data);
+        localStorage.setItem('data', JSON.stringify(data));
+        basketSum = '' + storage.getbasketData(data);
+        localStorage.setItem('basket', basketSum);
         showbasket(+basketSum);
         mainFunction(data);
     }
     if (target.classList.contains('minus')) {
         data = storage.getMinusData(datasetId, data);
-        const basketSum = '' + storage.getbasketData(data);
+        localStorage.setItem('data', JSON.stringify(data));
+        basketSum = '' + storage.getbasketData(data);
+        localStorage.setItem('basket', basketSum);
         showbasket(+basketSum);
         mainFunction(data);
     }
