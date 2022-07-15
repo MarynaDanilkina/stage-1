@@ -38,9 +38,9 @@ class Storage {
         selectedColor: Array<string>,
         selectedGender: Array<string>,
         selectedSize: Array<string>,
-        selectedPopular: string
+        selectedPopular: string,
+        filterdData: IData[]
     ): IData[] => {
-        let filterdData: IData[] = this.data.slice();
         filterdData = this.filterByFirm(selectedFirms, filterdData);
         filterdData = this.filterBySeason(selectedSeason, filterdData);
         filterdData = this.filterByColor(selectedColor, filterdData);
