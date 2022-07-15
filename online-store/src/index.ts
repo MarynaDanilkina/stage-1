@@ -225,6 +225,7 @@ function mainFunction(data: IData[]): void {
 }
 
 export function addDiv(data: IData[]): void {
+    showbasket(+basketSum);
     const div = <HTMLElement>document.querySelector('.product-container');
     div.innerHTML = '';
     for (let i = 0; i < data.length; i++) {
