@@ -45,6 +45,7 @@ function getDataNew(): void {
     basketContainer.addEventListener('click', (e) => basketFunction(e, data));
     SortContainer.addEventListener('change', () => mainFunction(data));
     input.addEventListener('keyup', () => mainFunction(data));
+    buttonResetSettings.addEventListener('click', () => clear());
     mainFunction(data);
 }
 
@@ -124,6 +125,10 @@ function basketFunction(e: Event, data: IData[]): void {
 }
 function showbasket(basketSum: number): void {
     quantity.innerHTML = `${basketSum}`;
+}
+function clear() {
+    localStorage.clear();
+    window.location.reload();
 }
 function mainFunction(data: IData[]): void {
     const minPrice = minPriceFunction();

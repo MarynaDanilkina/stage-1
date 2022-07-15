@@ -17,13 +17,13 @@ interface IData {
     amount: number;
     size: string;
 }
-export async function getData() {
+export async function getData(): Promise<void> {
     const data: IData[] = await getSomeData();
     storage.setData(data);
     getDataNew();
 }
 
-async function getSomeData() {
+async function getSomeData(): Promise<IData[]> {
     const url = './data.json';
     const res = await fetch(url);
     const data = await res.json();
