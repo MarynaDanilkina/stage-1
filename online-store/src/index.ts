@@ -1,5 +1,6 @@
 import { storage } from './storage';
 import { getData } from './getData';
+import { localStorageSort } from './localStorage';
 export { getDataNew };
 import './global.css';
 interface IData {
@@ -48,6 +49,10 @@ function getDataNew(): void {
     SortContainer.addEventListener('change', () => mainFunction(data));
     input.addEventListener('keyup', () => mainFunction(data));
     buttonResetSettings.addEventListener('click', () => clear());
+    SortContainer.onchange = function () {
+        localStorage.selectedIndex = SortContainer.selectedIndex;
+    };
+    localStorageSort();
     if (localStorage.getItem('data') !== null) {
         data = JSON.parse(Items);
         mainFunction(data);
