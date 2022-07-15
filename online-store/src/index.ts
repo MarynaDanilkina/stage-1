@@ -19,7 +19,6 @@ interface IData {
     amount: number;
     size: string;
 }
-const gap = 10;
 const BtnFilter = document.querySelectorAll<HTMLElement>('.sidebar-left__button');
 const basketContainer = <HTMLElement>document.querySelector('.product-container');
 const quantity = <HTMLElement>document.querySelector('.quantity');
@@ -27,226 +26,159 @@ const buttonReset = <HTMLElement>document.querySelector('.button__reset');
 const SortContainer = <HTMLSelectElement>document.querySelector('select');
 const select = <HTMLSelectElement>document.querySelector('.container__sort');
 const input = <HTMLInputElement>document.getElementById('filter_users');
-const range = document.querySelectorAll<HTMLInputElement>('.range-slider input[type="range"]');
-const progress = <HTMLElement>document.querySelector('.range-slider .progress');
-const inputValue = document.querySelectorAll<HTMLInputElement>('.numberVal input');
+const rangePrice = document.querySelectorAll<HTMLInputElement>('.range-slider input[type="range"]');
+const progressPrice = <HTMLElement>document.querySelector('.range-slider .progress');
+const valuePrice = document.querySelectorAll<HTMLInputElement>('.numberVal input');
 const rangeQuantity = document.querySelectorAll<HTMLInputElement>('.range-slider__quantity input[type="range"]');
 const progressQuantity = <HTMLElement>document.querySelector('.range-slider__quantity .progress__quantity');
-const inputValueQuantity = document.querySelectorAll<HTMLInputElement>('.numberVal__quantity input');
+const valueQuantity = document.querySelectorAll<HTMLInputElement>('.numberVal__quantity input');
 const buttonResetSettings = <HTMLElement>document.querySelector('.reset-settings');
-const Items: string = localStorage.getItem('data') || '';
-let basketSum = localStorage.getItem('basket') || '0';
 
 getData();
 
-function getDataNew(data: IData[]): void {
-    BtnFilter.forEach((el) => el.addEventListener('click', (e) => AllMetod(e, data)));
-    buttonReset.addEventListener('click', (e) => AllMetod(e, data));
-    basketContainer.addEventListener('click', (e) => AllMetod(e, data));
-    SortContainer.addEventListener('change', (e) => AllMetod(e, data));
-    input.addEventListener('keyup', (e) => AllMetod(e, data));
-    buttonResetSettings.addEventListener('click', clear);
-    range.forEach((input) => input.addEventListener('input', (e) => AllMetod(e, data)));
-    rangeQuantity.forEach((input) => input.addEventListener('input', (e) => AllMetod(e, data)));
-    if (localStorage.getItem('data') !== null) {
-        const dataNew = JSON.parse(Items);
-        addDiv(dataNew);
-    } else {
-        addDiv(data);
-    }
+function getDataNew(): void {
+    const data: IData[] = storage.data.slice();
+    BtnFilter.forEach((el) => el.addEventListener('click', (e) => filterActive(e, data)));
+    rangePrice.forEach((input) => input.addEventListener('input', () => mainFunction(data)));
+    rangeQuantity.forEach((input) => input.addEventListener('input', () => mainFunction(data)));
+    buttonReset.addEventListener('click', () => ResetFunction(data));
+    basketContainer.addEventListener('click', (e) => basketFunction(e, data));
+    SortContainer.addEventListener('change', () => mainFunction(data));
+    input.addEventListener('keyup', () => mainFunction(data));
+    mainFunction(data);
 }
 
-function AllMetod(e: Event, data: IData[]): void {
-    basketContainer.innerHTML = '';
-    const dataNew = data.slice();
-    const dataFilter = filter(e, dataNew);
-    const dataPrice = filterPrice(e, dataFilter);
-    const dataQuantity = filterQuantity(e, dataPrice);
-    const dataReset: IData[] = ResetFunction(e, dataQuantity, dataNew);
-    const dataBasket: IData[] = basketFunction(e, dataReset);
-    const dataSort = SortFunction(e, dataBasket);
-    const dataInput = Search(e, dataSort);
-    addDiv(dataInput);
+function filterActive(e: Event, data: IData[]): void {
+    const target = <HTMLElement>e.target;
+    if (target.classList.contains('checkbox-box')) {
+        target.classList.toggle('active__button');
+    }
+    mainFunction(data);
 }
-function clear() {
-    localStorage.clear();
-    window.location.reload();
-}
-function filter(event: Event, dataNew: IData[]): IData[] {
-    const firmArr: Array<string> = [];
-    const SeasonArr: Array<string> = [];
-    const ColorArr: Array<string> = [];
-    const SizeArr: Array<string> = [];
-    let PopularArr = '';
-    const GenderArr: Array<string> = [];
-    const target = <HTMLElement>event.target;
-    if (target.classList.contains('firm')) {
-        target.classList.toggle('active__button');
-    }
-    if (target.classList.contains('season')) {
-        target.classList.toggle('active__button');
-    }
-    if (target.classList.contains('color')) {
-        target.classList.toggle('active__button');
-    }
-    if (target.classList.contains('size')) {
-        target.classList.toggle('active__button');
-    }
-    if (target.classList.contains('popular')) {
-        target.classList.toggle('active__button');
-    }
-    if (target.classList.contains('gender')) {
-        target.classList.toggle('active__button');
-    }
-    const activeButton = document.querySelectorAll<HTMLElement>('.active__button');
-    activeButton.forEach((el) => {
-        if (typeof el.dataset.firm != 'undefined') {
-            firmArr.push(el.dataset.firm);
-        }
-        if (typeof el.dataset.season != 'undefined') {
-            SeasonArr.push(el.dataset.season);
-        }
-        if (typeof el.dataset.color != 'undefined') {
-            ColorArr.push(el.dataset.color);
-        }
-        if (typeof el.dataset.size != 'undefined') {
-            SizeArr.push(el.dataset.size);
-        }
-        if (typeof el.dataset.popular != 'undefined') {
-            PopularArr += el.dataset.popular;
-        }
-        if (typeof el.dataset.gender != 'undefined') {
-            GenderArr.push(el.dataset.gender);
-        }
-    });
-    const dataAll = storage.getDataFirm(firmArr, SeasonArr, ColorArr, SizeArr, PopularArr, GenderArr, dataNew);
-    return dataAll;
-}
-function filterPrice(e: Event, dataFilter: IData[]): IData[] {
-    const rangeMin = range[0];
-    const rangeMax = range[1];
+function minPriceFunction(): string {
+    const rangeMin = rangePrice[0];
     const minrange = parseInt(rangeMin.value);
+    const rangeMinMax = rangeMin.max;
+    progressPrice.style.left = (minrange / +rangeMinMax) * 100 + '%';
+    valuePrice[0].value = `${minrange}`;
+    return valuePrice[0].value;
+}
+function maxPriceFunction(): string {
+    const rangeMax = rangePrice[1];
     const maxrange = parseInt(rangeMax.value);
-    const target = <HTMLElement>e.target;
-    if (maxrange - minrange < gap) {
-        if (target.classList.contains('range-min')) {
-            rangeMin.value = `${maxrange} - ${gap}`;
-        } else {
-            rangeMax.value = `${maxrange} + ${gap}`;
-        }
-    } else {
-        const rangeMinMax = rangeMin.max;
-        const rangeMaxMax = rangeMax.max;
-        progress.style.left = (minrange / +rangeMinMax) * 100 + '%';
-        progress.style.right = 100 - (maxrange / +rangeMaxMax) * 100 + '%';
-        inputValue[0].value = `${minrange}`;
-        inputValue[1].value = `${maxrange}`;
-    }
-    const min = inputValue[0].value;
-    const max = inputValue[1].value;
-    const dataPrice = storage.getPrice(min, max, dataFilter);
-    return dataPrice;
+    const rangeMaxMax = rangeMax.max;
+    progressPrice.style.right = 100 - (maxrange / +rangeMaxMax) * 100 + '%';
+    valuePrice[1].value = `${maxrange}`;
+    return valuePrice[1].value;
 }
-function filterQuantity(e: Event, dataPrice: IData[]): IData[] {
+function minQuantitFunction(): string {
     const rangeQuantityMin = rangeQuantity[0];
-    const rangeQuantityMax = rangeQuantity[1];
     const minrangeQuantit = parseInt(rangeQuantityMin.value);
+    const rangeQuantityMinMax = rangeQuantityMin.max;
+    progressQuantity.style.left = (minrangeQuantit / +rangeQuantityMinMax) * 100 + '%';
+    valueQuantity[0].value = `${minrangeQuantit}`;
+    return valueQuantity[0].value;
+}
+function maxQuantitFunction(): string {
+    const rangeQuantityMax = rangeQuantity[1];
     const maxrangeQuantit = parseInt(rangeQuantityMax.value);
-    const target = <HTMLElement>e.target;
-    if (maxrangeQuantit - minrangeQuantit < gap) {
-        if (target.classList.contains('range-min')) {
-            rangeQuantityMin.value = `${maxrangeQuantit} - ${gap}`;
-        } else {
-            rangeQuantityMax.value = `${maxrangeQuantit} + ${gap}`;
-        }
-    } else {
-        const rangeQuantityMinMax = rangeQuantityMin.max;
-        const rangeQuantityMaxMax = rangeQuantityMax.max;
-        progressQuantity.style.left = (minrangeQuantit / +rangeQuantityMinMax) * 100 + '%';
-        progressQuantity.style.right = 100 - (maxrangeQuantit / +rangeQuantityMaxMax) * 100 + '%';
-        inputValueQuantity[0].value = `${minrangeQuantit}`;
-        inputValueQuantity[1].value = `${maxrangeQuantit}`;
-    }
-    const minQuantit = inputValueQuantity[0].value;
-    const maxQuantit = inputValueQuantity[1].value;
-    const dataQuantit = storage.getQuantit(minQuantit, maxQuantit, dataPrice);
-    return dataQuantit;
+    const rangeQuantityMaxMax = rangeQuantityMax.max;
+    progressQuantity.style.right = 100 - (maxrangeQuantit / +rangeQuantityMaxMax) * 100 + '%';
+    valueQuantity[1].value = `${maxrangeQuantit}`;
+    return valueQuantity[1].value;
 }
-function ResetFunction(e: Event, dataFilter: IData[], dataNew: IData[]): IData[] {
-    const target = <HTMLElement>e.target;
-    if (target.classList.contains('reset')) {
-        document.querySelectorAll('.firm').forEach((el) => {
-            el.classList.remove('active__button');
-        });
-        document.querySelectorAll('.season').forEach((el) => {
-            el.classList.remove('active__button');
-        });
-        document.querySelectorAll('.color').forEach((el) => {
-            el.classList.remove('active__button');
-        });
-        document.querySelectorAll('.size').forEach((el) => {
-            el.classList.remove('active__button');
-        });
-        document.querySelectorAll('.popular').forEach((el) => {
-            el.classList.remove('active__button');
-        });
-        document.querySelectorAll('.gender').forEach((el) => {
-            el.classList.remove('active__button');
-        });
-        inputValue[0].value = '0';
-        inputValue[1].value = '400';
-        progress.style.left = 0 + '%';
-        progress.style.right = 0 + '%';
-        range[0].value = `0`;
-        range[1].value = `400`;
-        inputValueQuantity[0].value = '0';
-        inputValueQuantity[1].value = '400';
-        progressQuantity.style.left = 0 + '%';
-        progressQuantity.style.right = 0 + '%';
-        rangeQuantity[0].value = `0`;
-        rangeQuantity[1].value = `400`;
-        return dataNew;
-    }
-    return dataFilter;
+function ResetFunction(data: IData[]): void {
+    document.querySelectorAll('.checkbox-box').forEach((el) => {
+        el.classList.remove('active__button');
+    });
+    valuePrice[0].value = '0';
+    valuePrice[1].value = '400';
+    progressPrice.style.left = 0 + '%';
+    progressPrice.style.right = 0 + '%';
+    rangePrice[0].value = `0`;
+    rangePrice[1].value = `400`;
+    valueQuantity[0].value = '0';
+    valueQuantity[1].value = '400';
+    progressQuantity.style.left = 0 + '%';
+    progressQuantity.style.right = 0 + '%';
+    rangeQuantity[0].value = `0`;
+    rangeQuantity[1].value = `400`;
+    mainFunction(data);
 }
-
-function basketFunction(e: Event, data: IData[]): IData[] {
+function basketFunction(e: Event, data: IData[]): void {
     const target = <HTMLElement>e.target;
     const datasetId: string = target.dataset.id || '';
     if (target.classList.contains('plus')) {
         const max = storage.getbasketData(data);
-        const dataPlus = storage.getPlusData(datasetId, data, max);
-        localStorage.setItem('data', JSON.stringify(dataPlus));
-        basketSum = '' + storage.getbasketData(dataPlus);
-        localStorage.setItem('basket', basketSum);
+        data = storage.getPlusData(datasetId, data, max);
+        const basketSum = '' + storage.getbasketData(data);
         showbasket(+basketSum);
-        return dataPlus;
+        mainFunction(data);
     }
     if (target.classList.contains('minus')) {
-        const dataMinus = storage.getMinusData(datasetId, data);
-        localStorage.setItem('data', JSON.stringify(dataMinus));
-        basketSum = '' + storage.getbasketData(dataMinus);
-        localStorage.setItem('basket', basketSum);
+        data = storage.getMinusData(datasetId, data);
+        const basketSum = '' + storage.getbasketData(data);
         showbasket(+basketSum);
-        return dataMinus;
+        mainFunction(data);
     }
-    return data;
 }
 function showbasket(basketSum: number): void {
     quantity.innerHTML = `${basketSum}`;
 }
-function SortFunction(e: Event, data: IData[]): IData[] {
+function mainFunction(data: IData[]): void {
+    const minPrice = minPriceFunction();
+    const maxPrice = maxPriceFunction();
+    const minQuantit = minQuantitFunction();
+    const maxQuantit = maxQuantitFunction();
+
+    const selectedFirms: Array<string> = [];
+    const selectedSeason: Array<string> = [];
+    const selectedColor: Array<string> = [];
+    const selectedGender: Array<string> = [];
+    const selectedSize: Array<string> = [];
+    let selectedPopular = '';
+
+    const activeButton = document.querySelectorAll<HTMLElement>('.active__button');
+    activeButton.forEach((el) => {
+        if (el.dataset.firm) {
+            selectedFirms.push(el.dataset.firm);
+        }
+        if (el.dataset.season) {
+            selectedSeason.push(el.dataset.season);
+        }
+        if (el.dataset.color) {
+            selectedColor.push(el.dataset.color);
+        }
+        if (el.dataset.size) {
+            selectedSize.push(el.dataset.size);
+        }
+        if (el.dataset.popular) {
+            selectedPopular += el.dataset.popular;
+        }
+        if (el.dataset.gender) {
+            selectedGender.push(el.dataset.gender);
+        }
+    });
     const selectValue = select.options[select.selectedIndex].value;
-    const result = storage.getSortData(selectValue, data);
-    return result;
-}
-function Search(e: Event, data: IData[]) {
     const keyword = input.value.toLowerCase();
-    const dataSearch = storage.getFilterData(keyword, data);
-    return dataSearch;
+    data = storage.getFilteredItems(
+        selectedFirms,
+        selectedSeason,
+        selectedColor,
+        selectedGender,
+        selectedSize,
+        selectedPopular
+    );
+    data = storage.getPrice(minPrice, maxPrice, data);
+    data = storage.getQuantit(minQuantit, maxQuantit, data);
+    data = storage.getSortData(selectValue, data);
+    data = storage.getSearchData(keyword, data);
+    addDiv(data);
 }
+
 export function addDiv(data: IData[]): void {
-    showbasket(+basketSum);
+    const div = <HTMLElement>document.querySelector('.product-container');
+    div.innerHTML = '';
     for (let i = 0; i < data.length; i++) {
         const div = <HTMLElement>document.querySelector('.product-container');
         div.innerHTML += `
