@@ -7,14 +7,14 @@ function localStorageSort() {
 function localStorageFirm() {
     const firm: string = localStorage.getItem('firm') || '';
     if (localStorage.getItem('firm') !== null) {
-        const arr = JSON.parse(firm);
+        const result = JSON.parse(firm);
         if (localStorage.getItem('firm') !== null) {
             const checkbox = document.querySelectorAll<HTMLElement>('.checkbox-box');
             checkbox.forEach((el) => {
-                if (arr.length !== 0) {
-                    for (let i = 0; i < arr.length; i++) {
+                if (result.length !== 0) {
+                    for (let i = 0; i < result.length; i++) {
                         if (el.dataset.firm) {
-                            if (el.dataset.firm.indexOf(arr[i]) > -1) {
+                            if (el.dataset.firm.indexOf(result[i]) > -1) {
                                 el.classList.add('active__button');
                             }
                         }
@@ -27,14 +27,14 @@ function localStorageFirm() {
 function localStorageSeason() {
     const season = localStorage.getItem('season') || '';
     if (localStorage.getItem('season') !== null) {
-        const arr = JSON.parse(season);
+        const result = JSON.parse(season);
         if (localStorage.getItem('season') !== null) {
             const checkbox = document.querySelectorAll<HTMLElement>('.checkbox-box');
             checkbox.forEach((el) => {
-                if (arr.length !== 0) {
-                    for (let i = 0; i < arr.length; i++) {
+                if (result.length !== 0) {
+                    for (let i = 0; i < result.length; i++) {
                         if (el.dataset.season) {
-                            if (el.dataset.season.indexOf(arr[i]) > -1) {
+                            if (el.dataset.season.indexOf(result[i]) > -1) {
                                 el.classList.add('active__button');
                             }
                         }
@@ -47,14 +47,14 @@ function localStorageSeason() {
 function localStorageColor() {
     const color = localStorage.getItem('color') || '';
     if (localStorage.getItem('color') !== null) {
-        const arr = JSON.parse(color);
+        const result = JSON.parse(color);
         if (localStorage.getItem('color') !== null) {
             const checkbox = document.querySelectorAll<HTMLElement>('.checkbox-box');
             checkbox.forEach((el) => {
-                if (arr.length !== 0) {
-                    for (let i = 0; i < arr.length; i++) {
+                if (result.length !== 0) {
+                    for (let i = 0; i < result.length; i++) {
                         if (el.dataset.color) {
-                            if (el.dataset.color.indexOf(arr[i]) > -1) {
+                            if (el.dataset.color.indexOf(result[i]) > -1) {
                                 el.classList.add('active__button');
                             }
                         }
@@ -67,14 +67,14 @@ function localStorageColor() {
 function localStorageGender() {
     const gender = localStorage.getItem('gender') || '';
     if (localStorage.getItem('gender') !== null) {
-        const arr = JSON.parse(gender);
+        const result = JSON.parse(gender);
         if (localStorage.getItem('gender') !== null) {
             const checkbox = document.querySelectorAll<HTMLElement>('.checkbox-box');
             checkbox.forEach((el) => {
-                if (arr.length !== 0) {
-                    for (let i = 0; i < arr.length; i++) {
+                if (result.length !== 0) {
+                    for (let i = 0; i < result.length; i++) {
                         if (el.dataset.gender) {
-                            if (el.dataset.gender.indexOf(arr[i]) > -1) {
+                            if (el.dataset.gender.indexOf(result[i]) > -1) {
                                 el.classList.add('active__button');
                             }
                         }
@@ -87,14 +87,14 @@ function localStorageGender() {
 function localStorageSize() {
     const size = localStorage.getItem('size') || '';
     if (localStorage.getItem('size') !== null) {
-        const arr = JSON.parse(size);
+        const result = JSON.parse(size);
         if (localStorage.getItem('size') !== null) {
             const checkbox = document.querySelectorAll<HTMLElement>('.checkbox-box');
             checkbox.forEach((el) => {
-                if (arr.length !== 0) {
-                    for (let i = 0; i < arr.length; i++) {
+                if (result.length !== 0) {
+                    for (let i = 0; i < result.length; i++) {
                         if (el.dataset.size) {
-                            if (el.dataset.size.indexOf(arr[i]) > -1) {
+                            if (el.dataset.size.indexOf(result[i]) > -1) {
                                 el.classList.add('active__button');
                             }
                         }
@@ -105,14 +105,14 @@ function localStorageSize() {
     }
 }
 function localStoragePopular() {
-    const arr = localStorage.getItem('popular') || '';
+    const result = localStorage.getItem('popular') || '';
     if (localStorage.getItem('popular') !== null) {
         const checkbox = document.querySelectorAll<HTMLElement>('.checkbox-box');
         checkbox.forEach((el) => {
-            if (arr.length !== 0) {
-                for (let i = 0; i < arr.length; i++) {
+            if (result.length !== 0) {
+                for (let i = 0; i < result.length; i++) {
                     if (el.dataset.popular) {
-                        if (el.dataset.popular.indexOf(arr[i]) > -1) {
+                        if (el.dataset.popular.indexOf(result[i]) > -1) {
                             el.classList.add('active__button');
                         }
                     }
