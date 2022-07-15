@@ -23,13 +23,13 @@ const mapper: Record<string, (a: IData, b: IData) => number> = {
     'price-ascending': (a, b) => b.price - a.price,
 };
 class Storage {
-    data = null;
+    data!: IData[];
 
-    setData = (data: null): void => {
+    setData = (data: IData[]): void => {
         this.data = data;
     };
 
-    getData = () => {
+    getData = (): IData[] => {
         return this.data;
     };
     getFilteredItems = (
@@ -39,7 +39,7 @@ class Storage {
         selectedGender: Array<string>,
         selectedSize: Array<string>,
         selectedPopular: string
-    ) => {
+    ): IData[] => {
         let filterdData: IData[] = this.data.slice();
         filterdData = this.filterByFirm(selectedFirms, filterdData);
         filterdData = this.filterBySeason(selectedSeason, filterdData);
@@ -49,37 +49,37 @@ class Storage {
         filterdData = this.filterByPopular(selectedPopular, filterdData);
         return filterdData;
     };
-    filterByFirm = (selectedFirms: Array<string>, filterdData: IData[]) => {
+    filterByFirm = (selectedFirms: Array<string>, filterdData: IData[]): IData[] => {
         if (selectedFirms.length === 0) {
             return filterdData;
         }
         return filterdData.filter(({ firm }) => selectedFirms.includes(firm));
     };
-    filterBySeason = (selectedSeason: Array<string>, filterdData: IData[]) => {
+    filterBySeason = (selectedSeason: Array<string>, filterdData: IData[]): IData[] => {
         if (selectedSeason.length === 0) {
             return filterdData;
         }
         return filterdData.filter(({ season }) => selectedSeason.includes(season));
     };
-    filterByColor = (selectedColor: Array<string>, filterdData: IData[]) => {
+    filterByColor = (selectedColor: Array<string>, filterdData: IData[]): IData[] => {
         if (selectedColor.length === 0) {
             return filterdData;
         }
         return filterdData.filter(({ color }) => selectedColor.includes(color));
     };
-    filterByGender = (selectedGender: Array<string>, filterdData: IData[]) => {
+    filterByGender = (selectedGender: Array<string>, filterdData: IData[]): IData[] => {
         if (selectedGender.length === 0) {
             return filterdData;
         }
         return filterdData.filter(({ gender }) => selectedGender.includes(gender));
     };
-    filterBySize = (selectedSize: Array<string>, filterdData: IData[]) => {
+    filterBySize = (selectedSize: Array<string>, filterdData: IData[]): IData[] => {
         if (selectedSize.length === 0) {
             return filterdData;
         }
         return filterdData.filter(({ size }) => selectedSize.includes(size));
     };
-    filterByPopular = (selectedPopular: string, filterdData: IData[]) => {
+    filterByPopular = (selectedPopular: string, filterdData: IData[]): IData[] => {
         if (selectedPopular.length === 0) {
             return filterdData;
         }
@@ -104,7 +104,7 @@ class Storage {
         }
         data.filter((user) => {
             if (user.quantity >= +min && user.quantity <= +max) {
-                data.push(user);
+                dataNew.push(user);
             }
         });
         return dataNew;
