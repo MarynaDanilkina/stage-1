@@ -156,7 +156,7 @@ function basketFunction(e: Event, data: IData[]): void {
 function showbasket(basketSum: number): void {
     quantity.innerHTML = `${basketSum}`;
 }
-function clear() {
+function clear(): void {
     localStorage.clear();
     rangePrice[0].value = `0`;
     rangePrice[1].value = `400`;
@@ -246,6 +246,9 @@ function mainFunction(data: IData[]): void {
 }
 
 export default function addDiv(data: IData[]): void {
+    if (localStorage.getItem('basket') !== null) {
+        showbasket(+basketSum);
+    }
     const div = <HTMLElement>document.querySelector('.product-container');
     div.innerHTML = '';
     for (let i = 0; i < data.length; i++) {
@@ -278,7 +281,6 @@ export default function addDiv(data: IData[]): void {
     if (data.length === 0) {
         alert('Извините, совпадений не обнаружено');
     }
-    //showbasket(+basketSum);
 }
 console.log(`
 Самопроверка: 218 / 220;
