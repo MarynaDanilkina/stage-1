@@ -22,7 +22,7 @@ const mapper: Record<string, (a: IData, b: IData) => number> = {
     'price-descending': (a, b) => a.price - b.price,
     'price-ascending': (a, b) => b.price - a.price,
 };
-class Storage {
+export default class Storage {
     data!: IData[];
 
     setData = (data: IData[]): void => {
