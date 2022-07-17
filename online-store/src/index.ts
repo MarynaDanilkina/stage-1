@@ -158,7 +158,28 @@ function showbasket(basketSum: number): void {
 }
 function clear() {
     localStorage.clear();
-    window.location.reload();
+    rangePrice[0].value = `0`;
+    rangePrice[1].value = `400`;
+    rangeQuantity[0].value = `0`;
+    rangeQuantity[1].value = `400`;
+    progressPrice.style.left = 0 + '%';
+    progressPrice.style.right = 0 + '%';
+    progressQuantity.style.left = 0 + '%';
+    progressQuantity.style.right = 0 + '%';
+    valuePrice[0].value = '0';
+    valuePrice[1].value = '400';
+    valueQuantity[0].value = '0';
+    valueQuantity[1].value = '400';
+    document.querySelectorAll('.checkbox-box').forEach((el) => {
+        el.classList.remove('active__button');
+    });
+    SortContainer.selectedIndex = 0;
+    quantity.innerHTML = '0';
+    const dataNew = storage.data.slice();
+    dataNew.forEach((el) => {
+        el.amount = 0;
+    });
+    addDiv(dataNew);
 }
 function mainFunction(data: IData[]): void {
     const selectedFirms: Array<string> = [];
@@ -224,8 +245,7 @@ function mainFunction(data: IData[]): void {
     addDiv(data);
 }
 
-export function addDiv(data: IData[]): void {
-    showbasket(+basketSum);
+export default function addDiv(data: IData[]): void {
     const div = <HTMLElement>document.querySelector('.product-container');
     div.innerHTML = '';
     for (let i = 0; i < data.length; i++) {
@@ -258,6 +278,7 @@ export function addDiv(data: IData[]): void {
     if (data.length === 0) {
         alert('Извините, совпадений не обнаружено');
     }
+    //showbasket(+basketSum);
 }
 //console.log(`
 //Самопроверка: 213 / 220;
