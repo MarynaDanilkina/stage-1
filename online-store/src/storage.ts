@@ -138,7 +138,7 @@ export default class Storage {
         });
         return data;
     };
-    getSortData = (value: string, data: IData[]) => {
+    getSortData = (value: string, data: IData[]): IData[] => {
         return data.sort(mapper[value]);
     };
     getSearchData = (value: string, data: IData[]): IData[] => {
