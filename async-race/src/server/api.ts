@@ -36,6 +36,17 @@ export async function deleteCar(id: number) {
     });
     return await res.json();
 }
-//export const main = async () => {
-//    const car = await getCars(1);
-//};
+export async function getCar(id: string) {
+    const res = await fetch(`${url}${path.garage}/${id}`);
+    return await res.json();
+}
+export async function updateCar(id: string, body: Car) {
+    const res = await fetch(`${url}${path.garage}/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+    });
+    return await res.json();
+}
