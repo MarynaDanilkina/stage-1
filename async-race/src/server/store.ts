@@ -34,7 +34,13 @@ export default class Storage {
         return (this.pages += 1);
     };
     getPagesPrev = () => {
+        if (this.pages === 1) {
+            return this.pages;
+        }
         return (this.pages -= 1);
+    };
+    getPages = () => {
+        return this.pages;
     };
 }
 const storage = new Storage();

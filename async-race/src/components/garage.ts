@@ -21,7 +21,7 @@ export function getGarage() {
             </ul>  
               <div class="garage__block">
                 <h2 class="title">Garage (${storage.getCarsCount()})</h2>
-                <p class="page">Page #1</p>
+                <p class="page">Page #${storage.getPages()}</p>
                 <ul class="cars">
                   <li class="li">
                     ${storage.data.map((car) => getCar(car)).join('')}
