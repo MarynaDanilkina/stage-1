@@ -28,6 +28,9 @@ const baseConfig = {
             },
         ],
     },
+    experiments: {
+        topLevelAwait: true,
+    },
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
     },

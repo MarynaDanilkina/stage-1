@@ -5,3 +5,138 @@
   margin: 0;
   border: 0;
 }
+body{
+  background-color: rgb(33, 31, 31);
+}
+.header{
+  display: flex;
+  padding: 15px 0px 30px;
+}
+.container{
+  margin: 0px 30px;
+}
+.button{
+  padding: 5px;
+  margin-right: 15px;
+  width: 90px;
+  height: 30px;
+  border-radius: 15px;
+  font-size: 15px;
+  background-color:  rgb(116 119 144);
+}
+.button:hover{
+  background-color: rgb(117, 131, 239);
+}
+.bttn{
+  width: 95px;
+  height: 30px;
+  margin-right: 10px;
+  background-color: rgb(182 216 144);
+}
+.button-generate{
+  width: 150px;
+  height: 30px;
+  background-color: rgb(187, 239, 248);
+}
+.button__form{
+  width: 90px;
+  height: 30px;
+  background-color: rgb(187, 239, 248);
+}
+.garage{
+  display: block;
+}
+.winners{
+  display: none; 
+}
+.main{
+  padding: 15px 0px 60px;
+}
+.garage__form{
+  margin-bottom: 15px;
+}
+.form{
+  margin: 15px 0px;
+  display: flex;
+  align-items: center;
+}
+.input{
+  width: 200px;
+  height: 30px;
+  margin-right: 10px;
+}
+.color{
+  margin-right: 10px;
+}
+.garage__list{
+  display: flex;
+}
+.li{
+  list-style: none;
+}
+.garage__block{
+  margin-top: 30px;
+  color: aliceblue;
+}
+.page{
+  margin-top: 10px;
+  font-size: 20px;
+}
+.cars__buttons{
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+}
+.cars__container{
+  display: flex;
+  border-bottom: 2px solid #fefffe;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.cars-info{
+  display: flex;
+  justify-content: left;
+}
+.cars-container__button{
+  display: flex;
+  flex-direction: column;
+  
+}
+.button-car{
+  width: 50px;
+  margin-top: 10px;
+}
+.btn{
+  width: 70px;
+  margin-right: 10px;
+  height: 30px;background-color: rgb(187, 239, 248);
+}
+.button__start{
+  border: #72cd22 solid 3px;
+}
+.button__stop{
+  border: #ec0d0d solid 2px;
+}
+.car{
+  width: 90px;
+}
+.finish{
+  fill: aliceblue;
+  width: 50px;
+  margin-right: 100px;
+}
+.pagination{
+  margin-top: 50px;
+}
+.pagination .button{
+  color: aliceblue;
+}
+.winners{
+  color: #fefffe;
+}
+.table{
+  display: flex;
+}
+.table div{
+  margin-right: 20px;
+}
