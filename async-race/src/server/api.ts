@@ -18,7 +18,7 @@ export async function getCars(page: number, limit = 7) {
     const data: Cars[] = await res.json();
     storage.setСars(data);
     const count = Number(res.headers.get('X-Total-Count'));
-    // return { count };
+    storage.setCarsCount(count);
 }
 export async function createCar(car: Car) {
     const res = await fetch(`${url}${path.garage}`, {

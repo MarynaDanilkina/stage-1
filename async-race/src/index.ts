@@ -2,7 +2,6 @@ import './global.css';
 import { getPage } from './components/page';
 import { getGarage } from './components/garage';
 import { getCars, createCar, deleteCar } from './server/api';
-// import { data } from './server/store';
 import { storage } from './server/store';
 await getCars(1);
 const car = storage.data.slice();

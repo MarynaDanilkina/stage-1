@@ -1,4 +1,3 @@
-// import { data } from '../server/store';
 import { getCar } from './car';
 import { storage } from '../server/store';
 export function getGarage() {
@@ -21,7 +20,7 @@ export function getGarage() {
               <li class="li"><button class="button-generate" id="generate">Generate</button></li>
             </ul>  
               <div class="garage__block">
-                <h2 class="title">Garage ()</h2>
+                <h2 class="title">Garage (${storage.getCarsCount()})</h2>
                 <p class="page">Page #1</p>
                 <ul class="cars">
                   <li class="li">
