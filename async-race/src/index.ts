@@ -3,9 +3,8 @@ import { getPage } from './components/page';
 import { getGarage } from './components/garage';
 import { getCars, createCar, deleteCar, updateCar } from './server/api';
 import { storage } from './server/store';
-await getCars(1);
-const car = storage.data.slice();
-console.log(car);
+let pages = localStorage.getItem('pages') || '1';
+await getCars(+pages);
 getPage();
 const newForm = document.getElementById('new-form') as HTMLDivElement;
 const garage = document.getElementById('garage') as HTMLDivElement;
@@ -26,6 +25,18 @@ const garage = document.getElementById('garage') as HTMLDivElement;
         editColor.disabled = false;
         editButton.disabled = false;
     }
+    if (target.classList.contains('button_next')) {
+        pages = '' + storage.getPagesNext();
+        localStorage.setItem('pages', pages);
+        await getCars(+pages);
+        garage.innerHTML = getGarage();
+    }
+    if (target.classList.contains('button_prev')) {
+        pages = '' + storage.getPagesPrev();
+        localStorage.setItem('pages', pages);
+        await getCars(+pages);
+        garage.innerHTML = getGarage();
+    }
 });
 
 newForm.addEventListener('submit', async () => {
@@ -37,7 +48,7 @@ newForm.addEventListener('submit', async () => {
 });
 
 const editForm = document.getElementById('edit-form') as HTMLInputElement;
-editForm.addEventListener('submit', async (event) => {
+editForm.addEventListener('submit', async () => {
     const editName = document.getElementById('edit-name') as HTMLInputElement;
     const editColor = document.getElementById('edit-color') as HTMLInputElement;
     const id = storage.getID();

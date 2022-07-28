@@ -10,8 +10,8 @@ export function getPage() {
           <div class="winners" id="winners">
           </div>
           <div class="pagination">
-            <button class="button button_prev" disabled id="prev">←</button>
-            <button class="button button_ext" disabled id="next">→</button>
+            <button class="button button_prev" id="prev">←</button>
+            <button class="button button_next" id="next">→</button>
           </div>
         </main> 
 `;

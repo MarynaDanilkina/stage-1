@@ -127,6 +127,7 @@ body{
 }
 .pagination{
   margin-top: 50px;
+  display: flex;
 }
 .pagination .button{
   color: aliceblue;

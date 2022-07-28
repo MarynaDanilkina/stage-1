@@ -11,6 +11,7 @@ export default class Storage {
     data!: Сars[];
     CarsCount!: number;
     id!: string;
+    pages = 1;
     setСars = (data: Сars[]): void => {
         this.data = data;
     };
@@ -28,6 +29,12 @@ export default class Storage {
     };
     getID = () => {
         return this.id;
+    };
+    getPagesNext = () => {
+        return (this.pages += 1);
+    };
+    getPagesPrev = () => {
+        return (this.pages -= 1);
     };
 }
 const storage = new Storage();
