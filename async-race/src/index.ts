@@ -16,7 +16,7 @@ const winners = document.getElementById('winners') as HTMLDivElement;
     if (target.classList.contains('button__remove')) {
         const id = Number(target.id.split('car')[1]);
         await deleteCar(id);
-        await getCars(1);
+        await getCars(+pages);
         garage.innerHTML = getGarage();
     }
     if (target.classList.contains('button__select')) {
@@ -54,7 +54,7 @@ newForm.addEventListener('submit', async () => {
     const newName = document.getElementById('new-name') as HTMLInputElement;
     const newColor = document.getElementById('new-color') as HTMLInputElement;
     await createCar({ name: newName.value, color: newColor.value });
-    await getCars(1);
+    await getCars(+pages);
     garage.innerHTML = getGarage();
 });
 
