@@ -1,3 +1,5 @@
+import { storage } from './store';
+
 const url = 'http://127.0.0.1:3000';
 const path = {
     garage: '/garage',
@@ -13,9 +15,10 @@ export type Car = {
 };
 export async function getCars(page: number, limit = 7) {
     const res = await fetch(`${url}${path.garage}?_page=${page}&_limit=${limit}`);
-    const items: Cars[] = await res.json();
+    const data: Cars[] = await res.json();
+    storage.setСars(data);
     const count = Number(res.headers.get('X-Total-Count'));
-    return { items, count };
+    // return { count };
 }
 export async function createCar(car: Car) {
     const res = await fetch(`${url}${path.garage}`, {
@@ -24,6 +27,12 @@ export async function createCar(car: Car) {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(car),
+    });
+    return await res.json();
+}
+export async function deleteCar(id: number) {
+    const res = await fetch(`${url}${path.garage}/${id}`, {
+        method: 'DELETE',
     });
     return await res.json();
 }
