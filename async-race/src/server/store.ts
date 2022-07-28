@@ -39,8 +39,8 @@ export default class Storage {
         }
         return (this.pages -= 1);
     };
-    getPages = () => {
-        return this.pages;
+    setPages = (pages: number) => {
+        this.pages = pages;
     };
 }
 const storage = new Storage();

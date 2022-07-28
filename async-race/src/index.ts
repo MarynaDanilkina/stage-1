@@ -3,11 +3,14 @@ import { getPage } from './components/page';
 import { getGarage } from './components/garage';
 import { getCars, createCar, deleteCar, updateCar } from './server/api';
 import { storage } from './server/store';
-let pages = localStorage.getItem('pages') || '1';
+export let pages = localStorage.getItem('pages') || '1';
+storage.setPages(+pages);
 await getCars(+pages);
 getPage();
+
 const newForm = document.getElementById('new-form') as HTMLDivElement;
 const garage = document.getElementById('garage') as HTMLDivElement;
+const winners = document.getElementById('winners') as HTMLDivElement;
 (<HTMLElement>document.querySelector('#body')).addEventListener('click', async (e) => {
     const target = <HTMLElement>e.target;
     if (target.classList.contains('button__remove')) {
@@ -36,6 +39,14 @@ const garage = document.getElementById('garage') as HTMLDivElement;
         localStorage.setItem('pages', pages);
         await getCars(+pages);
         garage.innerHTML = getGarage();
+    }
+    if (target.classList.contains('garage_button')) {
+        winners.style.display = 'none';
+        garage.style.display = 'block';
+    }
+    if (target.classList.contains('winners_button')) {
+        garage.style.display = 'none';
+        winners.style.display = 'block';
     }
 });
 
