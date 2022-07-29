@@ -3,6 +3,7 @@ import { getPage } from './components/page';
 import { getGarage } from './components/garage';
 import { getCars, createCar, deleteCar, updateCar } from './server/api';
 import { storage } from './server/store';
+import { generateRandomCars } from './random';
 export let pages = localStorage.getItem('pages') || '1';
 storage.setPages(+pages);
 await getCars(+pages);
@@ -47,6 +48,14 @@ const winners = document.getElementById('winners') as HTMLDivElement;
     if (target.classList.contains('winners_button')) {
         garage.style.display = 'none';
         winners.style.display = 'block';
+    }
+    if (target.classList.contains('button-generate')) {
+        const randomCars = generateRandomCars();
+        randomCars.map(async (car) => {
+            await createCar(car);
+        });
+        await getCars(+pages);
+        garage.innerHTML = getGarage();
     }
 });
 
