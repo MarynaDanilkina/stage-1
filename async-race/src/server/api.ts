@@ -3,6 +3,7 @@ import { storage } from './store';
 const url = 'http://127.0.0.1:3000';
 const path = {
     garage: '/garage',
+    engine: '/engine',
 };
 export type Cars = {
     name: string;
@@ -48,5 +49,9 @@ export async function updateCar(id: string, body: Car) {
         },
         body: JSON.stringify(body),
     });
+    return await res.json();
+}
+export async function startCar(id: string) {
+    const res = await fetch(`${url}${path.engine}?id=${id}&status=started`, { method: 'PATCH' });
     return await res.json();
 }
