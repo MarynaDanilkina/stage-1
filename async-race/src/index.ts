@@ -13,8 +13,9 @@ getPage();
 const newForm = document.getElementById('new-form') as HTMLDivElement;
 const garage = document.getElementById('garage') as HTMLDivElement;
 const winners = document.getElementById('winners') as HTMLDivElement;
+const buttonReset = <HTMLButtonElement>document.getElementById('reset');
 (<HTMLElement>document.querySelector('#body')).addEventListener('click', async (e) => {
-    const target = <HTMLElement>e.target;
+    const target = <HTMLButtonElement>e.target;
     if (target.classList.contains('button__remove')) {
         const id = Number(target.id.split('car')[1]);
         await deleteCar(id);
@@ -71,6 +72,14 @@ const winners = document.getElementById('winners') as HTMLDivElement;
     if (target.classList.contains('button-race')) {
         const cars = storage.getСars();
         cars.map((car) => startDriving(`${car.id}`));
+        target.disabled = true;
+        buttonReset.disabled = false;
+    }
+    if (target.classList.contains('button-reset')) {
+        const cars = storage.getСars();
+        cars.map((car) => stopDriving(`${car.id}`));
+        target.disabled = false;
+        buttonReset.disabled = true;
     }
 });
 async function stopDriving(id: string) {
