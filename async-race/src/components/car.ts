@@ -14,7 +14,7 @@ export function getCar(car: Car) {
     <div class="cars-info">
       <div class="cars-container__button">
         <button class="button-car button__start" id="start-car${car.id}">A</button>
-        <button class="button-car button__stop" id="stop-car${car.id}">B</button>
+        <button class="button-car button__stop" id="stop-car${car.id}" disabled>B</button>
       </div>
       <div class="car " id="car__${car.id}">
         <svg id="Layer_1" style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 400" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><style type="text/css">

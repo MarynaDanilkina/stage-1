@@ -63,11 +63,17 @@ const buttonReset = <HTMLButtonElement>document.getElementById('reset');
         storage.setID(target.id.split('car')[1]);
         const id = storage.getID();
         startDriving(id);
+        target.disabled = true;
+        const buttonStop = <HTMLButtonElement>document.getElementById(`stop-car${id}`);
+        buttonStop.disabled = false;
     }
     if (target.classList.contains('button__stop')) {
         storage.setID(target.id.split('car')[1]);
         const id = storage.getID();
         stopDriving(id);
+        target.disabled = true;
+        const buttonStart = <HTMLButtonElement>document.getElementById(`start-car${id}`);
+        buttonStart.disabled = false;
     }
     if (target.classList.contains('button-race')) {
         const cars = storage.getСars();
