@@ -12,6 +12,7 @@ export default class Storage {
     CarsCount!: number;
     id!: string;
     pages = 1;
+    requestId!: number;
     setСars = (data: Сars[]): void => {
         this.data = data;
     };

@@ -1,10 +1,10 @@
 import './global.css';
 import { getPage } from './components/page';
 import { getGarage } from './components/garage';
-import { getCars, createCar, deleteCar, updateCar, startCar } from './server/api';
+import { getCars, createCar, deleteCar, updateCar, startCar, stoptCar } from './server/api';
 import { storage } from './server/store';
 import { generateRandomCars } from './random';
-import { stat } from 'fs';
+import { animation, requestID } from './animation';
 export let pages = localStorage.getItem('pages') || '1';
 storage.setPages(+pages);
 await getCars(+pages);
@@ -59,31 +59,34 @@ const winners = document.getElementById('winners') as HTMLDivElement;
         garage.innerHTML = getGarage();
     }
     if (target.classList.contains('button__start')) {
-        storage.setID(target.id.split('car')[1]);
-        const id = storage.getID();
-        const { velocity, distance } = await startCar(id);
-        const time = Math.round(distance / velocity);
-        const car = <HTMLElement>document.getElementById(`car__${id}`);
-        const result = car.getBoundingClientRect();
-        console.log(result);
-        const finish = <HTMLElement>document.getElementById(`finish__${id}`);
-        const result1 = finish.getBoundingClientRect();
-        console.log(result1);
-        const distanceEl = result1.left - result.left + 50;
-        animation(car, distanceEl, time);
+        startDriving(target);
+    }
+    if (target.classList.contains('button__stop')) {
+        stopDriving(target);
     }
 });
-export const animation = (car: HTMLElement, distanceEl: number, timeAn: number) => {
-    const start = performance.now();
-    requestAnimationFrame(function animate(time: number) {
-        let timeFraction = (time - start) / timeAn;
-        if (timeFraction > 1) timeFraction = 1;
-        car.style.transform = `translateX(${timeFraction * distanceEl}px)`;
-        if (timeFraction < 1) {
-            requestAnimationFrame(animate);
-        }
-    });
-};
+async function stopDriving(target: HTMLElement) {
+    storage.setID(target.id.split('car')[1]);
+    const id = storage.getID();
+    await stoptCar(id);
+    const car = <HTMLElement>document.getElementById(`car__${id}`);
+    car.style.transform = `translateX(0px)`;
+    cancelAnimationFrame(requestID);
+}
+
+async function startDriving(target: HTMLElement) {
+    storage.setID(target.id.split('car')[1]);
+    const id = storage.getID();
+    const { velocity, distance } = await startCar(id);
+    const time = Math.round(distance / velocity);
+    const car = <HTMLElement>document.getElementById(`car__${id}`);
+    const result = car.getBoundingClientRect();
+    const finish = <HTMLElement>document.getElementById(`finish__${id}`);
+    const result1 = finish.getBoundingClientRect();
+    const distanceEl = result1.left - result.left + 50;
+    animation(car, distanceEl, time);
+}
+
 newForm.addEventListener('submit', async () => {
     const newName = document.getElementById('new-name') as HTMLInputElement;
     const newColor = document.getElementById('new-color') as HTMLInputElement;

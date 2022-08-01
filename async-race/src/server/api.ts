@@ -55,3 +55,7 @@ export async function startCar(id: string) {
     const res = await fetch(`${url}${path.engine}?id=${id}&status=started`, { method: 'PATCH' });
     return await res.json();
 }
+export async function stoptCar(id: string) {
+    const res = await fetch(`${url}${path.engine}?id=${id}&status=stopped`, { method: 'PATCH' });
+    return await res.json();
+}
