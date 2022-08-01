@@ -1,7 +1,7 @@
 import './global.css';
 import { getPage } from './components/page';
 import { getGarage } from './components/garage';
-import { getCars, createCar, deleteCar, updateCar, startCar, stoptCar } from './server/api';
+import { getCars, createCar, deleteCar, updateCar, startCar, stoptCar, switchCar } from './server/api';
 import { storage } from './server/store';
 import { generateRandomCars } from './random';
 import { animation, requestID } from './animation';
@@ -85,6 +85,10 @@ async function startDriving(target: HTMLElement) {
     const result1 = finish.getBoundingClientRect();
     const distanceEl = result1.left - result.left + 50;
     animation(car, distanceEl, time);
+    const { success } = await switchCar(id);
+    if (!success) {
+        cancelAnimationFrame(requestID);
+    }
 }
 
 newForm.addEventListener('submit', async () => {

@@ -59,3 +59,10 @@ export async function stoptCar(id: string) {
     const res = await fetch(`${url}${path.engine}?id=${id}&status=stopped`, { method: 'PATCH' });
     return await res.json();
 }
+export async function switchCar(id: string) {
+    const res = await fetch(`${url}${path.engine}?id=${id}&status=drive`, { method: 'PATCH' });
+    if (res.status !== 200) {
+        return { success: false };
+    }
+    return await res.json();
+}
