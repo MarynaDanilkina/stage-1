@@ -1,7 +1,7 @@
-import { getCar } from './car';
+import { drawCar } from './car';
 import { storage } from '../server/store';
 import { pages } from '../index';
-export function getGarage() {
+export function drawGarage() {
     return `
             <div class="garage__form">
               <form class="form new-form" id="new-form">
@@ -25,7 +25,7 @@ export function getGarage() {
                 <p class="page">Page #${pages}</p>
                 <ul class="cars">
                   <li class="li">
-                    ${storage.data.map((car) => getCar(car)).join('')}
+                    ${storage.data.map((car) => drawCar(car)).join('')}
                   </li>
                 </ul>
               </div>

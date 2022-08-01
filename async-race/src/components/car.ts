@@ -3,7 +3,7 @@ export type Car = {
     color: string;
     id: number;
 };
-export function getCar(car: Car) {
+export function drawCar(car: Car) {
     return `
   <div class="cars__buttons">
     <button class="btn button__select" id="select-car${car.id}">Select</button>
