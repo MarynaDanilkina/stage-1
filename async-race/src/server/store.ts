@@ -1,17 +1,10 @@
-export type Сars = {
-    name: string;
-    color: string;
-    id: number;
-};
-export type Car = {
-    name: string;
-    color: string;
-};
+import { Сars } from '../type';
 export default class Storage {
     data!: Сars[];
     CarsCount!: number;
     id!: string;
     pages = 1;
+    requestId!: number;
     setСars = (data: Сars[]): void => {
         this.data = data;
     };

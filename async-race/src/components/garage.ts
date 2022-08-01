@@ -1,7 +1,11 @@
-import { getCar } from './car';
-import { storage } from '../server/store';
+import { drawCar } from './car';
 import { pages } from '../index';
-export function getGarage() {
+export type Сars = {
+    name: string;
+    color: string;
+    id: number;
+};
+export function drawGarage(Count: number, data: Сars[]) {
     return `
             <div class="garage__form">
               <form class="form new-form" id="new-form">
@@ -21,11 +25,11 @@ export function getGarage() {
               <li class="li"><button class="button-generate" id="generate">Generate</button></li>
             </ul>  
               <div class="garage__block">
-                <h2 class="title">Garage (${storage.getCarsCount()})</h2>
+                <h2 class="title">Garage (${Count})</h2>
                 <p class="page">Page #${pages}</p>
                 <ul class="cars">
                   <li class="li">
-                    ${storage.data.map((car) => getCar(car)).join('')}
+                    ${data.map((car) => drawCar(car)).join('')}
                   </li>
                 </ul>
               </div>
