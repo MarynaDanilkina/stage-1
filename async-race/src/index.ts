@@ -59,24 +59,28 @@ const winners = document.getElementById('winners') as HTMLDivElement;
         garage.innerHTML = getGarage();
     }
     if (target.classList.contains('button__start')) {
-        startDriving(target);
+        storage.setID(target.id.split('car')[1]);
+        const id = storage.getID();
+        startDriving(id);
     }
     if (target.classList.contains('button__stop')) {
-        stopDriving(target);
+        storage.setID(target.id.split('car')[1]);
+        const id = storage.getID();
+        stopDriving(id);
+    }
+    if (target.classList.contains('button-race')) {
+        const cars = storage.getСars();
+        cars.map((car) => startDriving(`${car.id}`));
     }
 });
-async function stopDriving(target: HTMLElement) {
-    storage.setID(target.id.split('car')[1]);
-    const id = storage.getID();
+async function stopDriving(id: string) {
     await stoptCar(id);
     const car = <HTMLElement>document.getElementById(`car__${id}`);
     car.style.transform = `translateX(0px)`;
     cancelAnimationFrame(requestID);
 }
 
-async function startDriving(target: HTMLElement) {
-    storage.setID(target.id.split('car')[1]);
-    const id = storage.getID();
+async function startDriving(id: string) {
     const { velocity, distance } = await startCar(id);
     const time = Math.round(distance / velocity);
     const car = <HTMLElement>document.getElementById(`car__${id}`);
@@ -89,6 +93,7 @@ async function startDriving(target: HTMLElement) {
     if (!success) {
         cancelAnimationFrame(requestID);
     }
+    return { id, time, success };
 }
 
 newForm.addEventListener('submit', async () => {
