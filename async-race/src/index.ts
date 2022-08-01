@@ -8,7 +8,9 @@ import { animation, requestID } from './animation';
 export let pages = localStorage.getItem('pages') || '1';
 storage.setPages(+pages);
 await getCars(+pages);
-drawPage();
+const Count = storage.getCarsCount();
+const data = storage.data;
+drawPage(Count, data);
 
 const newForm = document.getElementById('new-form') as HTMLDivElement;
 const garage = document.getElementById('garage') as HTMLDivElement;
@@ -20,7 +22,7 @@ const buttonReset = <HTMLButtonElement>document.getElementById('reset');
         const id = Number(target.id.split('car')[1]);
         await deleteCar(id);
         await getCars(+pages);
-        garage.innerHTML = drawGarage();
+        garage.innerHTML = drawGarage(Count, data);
     }
     if (target.classList.contains('button__select')) {
         const editName = document.getElementById('edit-name') as HTMLInputElement;
@@ -35,13 +37,13 @@ const buttonReset = <HTMLButtonElement>document.getElementById('reset');
         pages = '' + storage.getPagesNext();
         localStorage.setItem('pages', pages);
         await getCars(+pages);
-        garage.innerHTML = drawGarage();
+        garage.innerHTML = drawGarage(Count, data);
     }
     if (target.classList.contains('button_prev')) {
         pages = '' + storage.getPagesPrev();
         localStorage.setItem('pages', pages);
         await getCars(+pages);
-        garage.innerHTML = drawGarage();
+        garage.innerHTML = drawGarage(Count, data);
     }
     if (target.classList.contains('garage_button')) {
         winners.style.display = 'none';
@@ -57,7 +59,7 @@ const buttonReset = <HTMLButtonElement>document.getElementById('reset');
             await createCar(car);
         });
         await getCars(+pages);
-        garage.innerHTML = drawGarage();
+        garage.innerHTML = drawGarage(Count, data);
     }
     if (target.classList.contains('button__start')) {
         storage.setID(target.id.split('car')[1]);
@@ -116,7 +118,7 @@ newForm.addEventListener('submit', async () => {
     const newColor = document.getElementById('new-color') as HTMLInputElement;
     await createCar({ name: newName.value, color: newColor.value });
     await getCars(+pages);
-    garage.innerHTML = drawGarage();
+    garage.innerHTML = drawGarage(Count, data);
 });
 
 const editForm = document.getElementById('edit-form') as HTMLInputElement;

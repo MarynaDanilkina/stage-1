@@ -1,22 +1,13 @@
 import { storage } from './store';
-
+import { Сars, Car } from '../type';
 const url = 'http://127.0.0.1:3000';
 const path = {
     garage: '/garage',
     engine: '/engine',
 };
-export type Cars = {
-    name: string;
-    color: string;
-    id: number;
-};
-export type Car = {
-    name: string;
-    color: string;
-};
 export async function getCars(page: number, limit = 7) {
     const res = await fetch(`${url}${path.garage}?_page=${page}&_limit=${limit}`);
-    const data: Cars[] = await res.json();
+    const data: Сars[] = await res.json();
     storage.setСars(data);
     const count = Number(res.headers.get('X-Total-Count'));
     storage.setCarsCount(count);

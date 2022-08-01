@@ -1,7 +1,4 @@
-export type Car = {
-    name: string;
-    color: string;
-};
+import { Car } from './type';
 function getNameRandom() {
     const brand = ['AUDI', 'ALFA ROMEO', 'BMW', 'FORD', 'HONDA', 'VOLKSWAGEN', 'SKODA', 'KIA', 'GEELY', 'BENTLEY'];
     const model = ['G11', '80 B4', 'C5 I', 'Model S', 'Mustang', 'RC', 'S60 I', 'Astra G', 'S80 II', 'Jetta VII'];
