@@ -1,11 +1,12 @@
 import { drawCar } from './car';
 import { pages } from '../index';
+import { storage } from '../server/store';
 export type Сars = {
     name: string;
     color: string;
     id: number;
 };
-export function drawGarage(Count: number, data: Сars[]) {
+export function drawGarage(Count: number) {
     return `
             <div class="garage__form">
               <form class="form new-form" id="new-form">
@@ -29,7 +30,7 @@ export function drawGarage(Count: number, data: Сars[]) {
                 <p class="page">Page #${pages}</p>
                 <ul class="cars">
                   <li class="li">
-                    ${data.map((car) => drawCar(car)).join('')}
+                    ${storage.data.map((car) => drawCar(car)).join('')}
                   </li>
                 </ul>
               </div>

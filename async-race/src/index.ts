@@ -1,7 +1,7 @@
 import './global.css';
 import { drawPage } from './components/page';
 import { drawGarage } from './components/garage';
-import { getCars, createCar, deleteCar, updateCar, startCar, stoptCar, switchCar } from './server/api';
+import { getCars, createCar, deleteCar, updateCar, startCar, stoptCar, switchCar, getWinners } from './server/api';
 import { storage } from './server/store';
 import { generateRandomCars } from './random';
 import { animation, requestID } from './animation';
@@ -10,7 +10,7 @@ storage.setPages(+pages);
 await getCars(+pages);
 const Count = storage.getCarsCount();
 const data = storage.data;
-drawPage(Count, data);
+drawPage(Count);
 
 const newForm = document.getElementById('new-form') as HTMLDivElement;
 const garage = document.getElementById('garage') as HTMLDivElement;
@@ -22,7 +22,7 @@ const buttonReset = <HTMLButtonElement>document.getElementById('reset');
         const id = Number(target.id.split('car')[1]);
         await deleteCar(id);
         await getCars(+pages);
-        garage.innerHTML = drawGarage(Count, data);
+        garage.innerHTML = drawGarage(Count);
     }
     if (target.classList.contains('button__select')) {
         const editName = document.getElementById('edit-name') as HTMLInputElement;
@@ -37,13 +37,13 @@ const buttonReset = <HTMLButtonElement>document.getElementById('reset');
         pages = '' + storage.getPagesNext();
         localStorage.setItem('pages', pages);
         await getCars(+pages);
-        garage.innerHTML = drawGarage(Count, data);
+        garage.innerHTML = drawGarage(Count);
     }
     if (target.classList.contains('button_prev')) {
         pages = '' + storage.getPagesPrev();
         localStorage.setItem('pages', pages);
         await getCars(+pages);
-        garage.innerHTML = drawGarage(Count, data);
+        garage.innerHTML = drawGarage(Count);
     }
     if (target.classList.contains('garage_button')) {
         winners.style.display = 'none';
@@ -59,7 +59,7 @@ const buttonReset = <HTMLButtonElement>document.getElementById('reset');
             await createCar(car);
         });
         await getCars(+pages);
-        garage.innerHTML = drawGarage(Count, data);
+        garage.innerHTML = drawGarage(Count);
     }
     if (target.classList.contains('button__start')) {
         storage.setID(target.id.split('car')[1]);
@@ -82,6 +82,7 @@ const buttonReset = <HTMLButtonElement>document.getElementById('reset');
         cars.map((car) => startDriving(`${car.id}`));
         target.disabled = true;
         buttonReset.disabled = false;
+        getWinners(+pages);
     }
     if (target.classList.contains('button-reset')) {
         const cars = storage.getСars();
@@ -118,7 +119,7 @@ newForm.addEventListener('submit', async () => {
     const newColor = document.getElementById('new-color') as HTMLInputElement;
     await createCar({ name: newName.value, color: newColor.value });
     await getCars(+pages);
-    garage.innerHTML = drawGarage(Count, data);
+    garage.innerHTML = drawGarage(Count);
 });
 
 const editForm = document.getElementById('edit-form') as HTMLInputElement;

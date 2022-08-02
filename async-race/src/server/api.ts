@@ -1,9 +1,10 @@
 import { storage } from './store';
-import { Сars, Car } from '../type';
+import { Сars, Car, Winners } from '../type';
 const url = 'http://127.0.0.1:3000';
 const path = {
     garage: '/garage',
     engine: '/engine',
+    winners: '/winners',
 };
 export async function getCars(page: number, limit = 7) {
     const res = await fetch(`${url}${path.garage}?_page=${page}&_limit=${limit}`);
@@ -56,4 +57,14 @@ export async function switchCar(id: string) {
         return { success: false };
     }
     return await res.json();
+}
+export async function getWinners(page: number, limit = 10) {
+    const res = await fetch(
+        `${url}${path.winners}?_page=${page}&_limit=${limit}&_sort=['id'|'wins'|'time']$_order=['ASC'|'DESC']`,
+        { method: 'GET' }
+    );
+    const data: Winners[] = await res.json();
+    console.log(data);
+    const count = Number(res.headers.get('X-Total-Count'));
+    console.log(count);
 }

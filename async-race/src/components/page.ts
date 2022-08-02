@@ -4,14 +4,14 @@ export type Сars = {
     color: string;
     id: number;
 };
-export function drawPage(Count: number, data: Сars[]) {
+export function drawPage(Count: number) {
     const result = `
     <header class="header container">
           <button type="button" class="button garage_button">to garage</button>
           <button type="button" class="button winners_button">to winners</button>
         </header>
         <main class="main container">
-          <div class="garage" id="garage">${drawGarage(Count, data)}</div>
+          <div class="garage" id="garage">${drawGarage(Count)}</div>
           <div class="winners" id="winners">
           </div>
           <div class="pagination">
