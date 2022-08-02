@@ -7,3 +7,8 @@ export type Сars = {
     color: string;
     id: number;
 };
+export type Winners = {
+    id: number;
+    wins: number;
+    time: number;
+};
