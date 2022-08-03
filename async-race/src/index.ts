@@ -1,7 +1,7 @@
 import './global.css';
 import { drawPage } from './components/page';
 import { drawGarage } from './components/garage';
-import { getCars, createCar, deleteCar, updateCar, stoptCar, getWinners } from './server/api';
+import { getCars, createCar, deleteCar, updateCar, stoptCar, getWinners, deleteWinner } from './server/api';
 import { storage } from './server/store';
 import { generateRandomCars } from './random';
 import { animationID } from './race';
@@ -28,6 +28,7 @@ import { race } from './race';
         await deleteCar(id);
         await getCars(+pages);
         garage.innerHTML = drawGarage();
+        await deleteWinner(id);
     }
     if (target.classList.contains('button__select')) {
         const editName = document.getElementById('edit-name') as HTMLInputElement;

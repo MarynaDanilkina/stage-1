@@ -1,5 +1,3 @@
-import { stat } from 'fs';
-import { connected } from 'process';
 import { Сars, Winners } from '../type';
 import { getWinner, сreateWinners, updateWinner } from './api';
 export default class Storage {

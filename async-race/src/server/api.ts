@@ -1,5 +1,5 @@
 import { storage } from './store';
-import { Сars, Car, Winners, Winner } from '../type';
+import { Сars, Car, Winner } from '../type';
 const url = 'http://127.0.0.1:3000';
 const path = {
     garage: '/garage',
@@ -95,5 +95,10 @@ export async function updateWinner(id: number, body: Winner) {
         },
         body: JSON.stringify(body),
     });
+    return await res.json();
+}
+
+export async function deleteWinner(id: number) {
+    const res = await fetch(`${url}${path.winners}/${id}`, { method: 'DELETE' });
     return await res.json();
 }
