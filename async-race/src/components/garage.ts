@@ -6,7 +6,7 @@ export type Сars = {
     color: string;
     id: number;
 };
-export function drawGarage(Count: number) {
+export function drawGarage() {
     return `
             <div class="garage__form">
               <form class="form new-form" id="new-form">
@@ -26,7 +26,7 @@ export function drawGarage(Count: number) {
               <li class="li"><button class="button-generate" id="generate">Generate</button></li>
             </ul>  
               <div class="garage__block">
-                <h2 class="title">Garage (${Count})</h2>
+                <h2 class="title">Garage (${storage.getCarsCount()})</h2>
                 <p class="page">Page #${pages}</p>
                 <ul class="cars">
                   <li class="li">
@@ -35,5 +35,9 @@ export function drawGarage(Count: number) {
                 </ul>
               </div>
             </ul>
+            <div class="pagination">
+              <button class="button button_prev" id="prev">←</button>
+              <button class="button button_next" id="next">→</button>
+            </div>
 `;
 }
