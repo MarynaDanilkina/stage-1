@@ -1,10 +1,11 @@
 import { storage } from '../server/store';
 import { Winners } from '../type';
+import { pagesWinners } from '../index';
 export function drawWinners() {
     return `
     <div class="winners__block">
         <h2 class="title">Garage (${storage.getWinnersCount()})</h2>
-        <p class="page">Page #1</p>
+        <p class="page">Page #${pagesWinners}</p>
         <div class="winners__container">
             <table>
                 <thead>
@@ -23,6 +24,10 @@ export function drawWinners() {
                 </tbody>
             </table>
         </div>
+    </div>
+    <div class="pagination">
+        <button class="button button_prevWin" id="prevWin">←</button>
+        <button class="button button_nextWin" id="nextWin">→</button>
     </div>
   `;
 }

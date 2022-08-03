@@ -14,10 +14,6 @@ export function drawPage() {
         <main class="main container">
           <div class="garage" id="garage">${drawGarage()}</div>
           <div class="winners" id="winners">${drawWinners()}</div>
-          <div class="pagination">
-            <button class="button button_prev" id="prev">←</button>
-            <button class="button button_next" id="next">→</button>
-          </div>
         </main> 
 `;
     const div = document.createElement('div');

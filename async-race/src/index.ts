@@ -9,10 +9,12 @@ import { startDriving } from './race';
 export let pages = localStorage.getItem('pages') || '1';
 import { drawWinners } from './components/winners';
 storage.setPages(+pages);
+export let pagesWinners = 1;
 await getCars(+pages);
-await getWinners(+pages);
+await getWinners(pagesWinners);
 drawPage();
-getWinners(1);
+
+getWinners(pagesWinners);
 const newForm = document.getElementById('new-form') as HTMLDivElement;
 const garage = document.getElementById('garage') as HTMLDivElement;
 const winners = document.getElementById('winners') as HTMLDivElement;
@@ -50,6 +52,20 @@ import { race } from './race';
         localStorage.setItem('pages', pages);
         await getCars(+pages);
         garage.innerHTML = drawGarage();
+    }
+    if (target.classList.contains('button_nextWin')) {
+        pagesWinners += 1;
+        await getWinners(pagesWinners);
+        winners.innerHTML = drawWinners();
+    }
+    if (target.classList.contains('button_prevWin')) {
+        if (pagesWinners === 1) {
+            pagesWinners = 1;
+        } else {
+            pagesWinners -= 1;
+        }
+        await getWinners(pagesWinners);
+        winners.innerHTML = drawWinners();
     }
     if (target.classList.contains('garage_button')) {
         winners.style.display = 'none';

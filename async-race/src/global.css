@@ -26,12 +26,21 @@ body{
 }
 .button:hover{
   background-color: rgb(117, 131, 239);
+  cursor: pointer;
 }
 .bttn{
   width: 95px;
   height: 30px;
   margin-right: 10px;
   background-color: rgb(182 216 144);
+}
+.bttn:hover{
+  background-color: rgb(137, 185, 81);
+  cursor: pointer;
+}
+.bttn:disabled{
+  background-color: rgb(182 216 144);
+  cursor: default;
 }
 .button-generate{
   width: 150px;
@@ -42,6 +51,16 @@ body{
   width: 90px;
   height: 30px;
   background-color: rgb(187, 239, 248);
+}
+.button__form:hover,
+.button-generate:hover{
+  background-color: rgb(90, 185, 202);
+  cursor: pointer;
+}
+.button__form:disabled,
+.button-generate:disabled{
+  background-color: rgb(187, 239, 248);
+  cursor: default;
 }
 .garage{
   display: block;
@@ -109,13 +128,40 @@ body{
 .btn{
   width: 70px;
   margin-right: 10px;
-  height: 30px;background-color: rgb(187, 239, 248);
+  height: 30px;
+  background-color: rgb(187, 239, 248);
+}
+.btn:hover{
+  background-color: rgb(93, 172, 185);
+  cursor: pointer;
 }
 .button__start{
   border: #72cd22 solid 3px;
+  background-color: #d7eac7;
+}
+.button__start:hover{
+  border: #366f04 solid 3px;
+  cursor: pointer;
+  background-color: #c2e9a0;
+}
+.button__start:disabled{
+  border:  #72cd22 solid 3px;
+  cursor: default;
+  background-color: #c2e9a0;
 }
 .button__stop{
   border: #ec0d0d solid 2px;
+  background-color: #b69490;
+}
+.button__stop:hover{
+  border: #750606 solid 2px;
+  cursor: pointer;
+  background-color: #e8877a;
+}
+.button__stop:disabled{
+  border: #ec0d0d solid 2px;
+  cursor: default;
+  background-color: #b69490;
 }
 .car{
   width: 90px;
