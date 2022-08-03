@@ -1,10 +1,14 @@
-import { Сars } from '../type';
+import { stat } from 'fs';
+import { connected } from 'process';
+import { Сars, Winners } from '../type';
+import { getWinner, сreateWinners, updateWinner } from './api';
 export default class Storage {
     data!: Сars[];
     CarsCount!: number;
     id!: string;
     pages = 1;
-    requestId!: number;
+    Winners!: Winners[];
+    WinnersCount!: number;
     setСars = (data: Сars[]): void => {
         this.data = data;
     };
@@ -34,6 +38,44 @@ export default class Storage {
     };
     setPages = (pages: number) => {
         this.pages = pages;
+    };
+    setWinners = (Winners: Winners[]): void => {
+        this.Winners = Winners;
+    };
+    getWinners = (): Winners[] => {
+        return this.Winners;
+    };
+    setWinnersCount = (WinnersCount: number): void => {
+        this.WinnersCount = WinnersCount;
+    };
+    getWinnersCount = (): number => {
+        return this.WinnersCount;
+    };
+    saveWinners = async ({ id, time }: { id: number; time: number }) => {
+        time = time / 1000;
+        let status = 'false';
+        const winners = await this.getWinners();
+        console.log(winners);
+
+        winners.map(async (winner) => {
+            if (winner.winner.id === id) {
+                status = 'true';
+            }
+        });
+        console.log(status);
+        if (status === 'true') {
+            const winner = await getWinner(id);
+            const wins = winner[0].wins + 1;
+            if (wins.time < time) {
+                time = wins.time;
+            }
+            await updateWinner(id, { id, time, wins });
+        }
+        if (status === 'false') {
+            const wins = 1;
+            await сreateWinners({ id, time, wins });
+        }
+        status = 'false';
     };
 }
 const storage = new Storage();

@@ -132,6 +132,7 @@ body{
 .pagination .button{
   color: aliceblue;
 }
+
 .winners{
   color: #fefffe;
 }
@@ -140,4 +141,19 @@ body{
 }
 .table div{
   margin-right: 20px;
+}
+.winners__block{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.table{
+  color: #fefffe;
+}
+.winners__container{
+  margin-top: 20px;
+}
+td, th{
+  width: 150px;
 }
