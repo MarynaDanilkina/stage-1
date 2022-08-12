@@ -22,8 +22,8 @@
 					<section>
 						<h4>Lodash’s modular methods are great for:</h4>
 						<ul>
-						<li>Iterating arrays, objects, & strings</li>
-						<li>Manipulating & testing values</li>
+						<li>Iterating arrays, objects and strings</li>
+						<li>Manipulating and testing values</li>
 						<li>Creating composite functions</li>
 					</ul>
 					</section>
@@ -85,7 +85,50 @@
 							})
   					</code></pre>
 					</section>
-					
+				</section>
+				<section>
+					<section>
+						<h4>filter method</h4>
+					</section>
+					<section>
+						<h5>filter lodash</h5>
+						<pre><code data-trim data-noescape>
+							_.filter([1,2,3,4,5], function (item) {
+							  return item < 3;
+							})
+  					</code></pre>
+					</section>
+					<section>
+						<h5>object filter</h5>
+						<pre><code data-trim data-noescape>
+							_.filter([
+								{id: 1, name: 'foo'}, {id:2, name: 'bar'}
+								], function (item) {
+							  	return item.name === 'foo';
+							});
+  					</code></pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h4>find method</h4>
+					</section>
+					<section>
+						<h5>find lodash</h5>
+						<pre><code data-trim data-noescape>
+							_.find([
+								{id: 1, name: 'foo'}, {id:2, name: 'bar'}
+								], function (item){
+								  return item.name === 'bar';
+							});
+  					</code></pre>
+					</section>
+					<section>
+						<h5>short entry</h5>
+						<pre><code data-trim data-noescape>
+							_.find([{id: 1, name: 'foo'}, {id:2, name: 'bar'}], {id: 1});
+  					</code></pre>
+					</section>
 				</section>
 				<section>
 					<section>
