@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section><h1>Lodash</h1></section>
+				<section>
+					<section><h2>Why use Lodash?</h2></section>
+					<section>
+						<h4>Lodash’s modular methods are great for:</h4>
+						<ul>
+						<li>Iterating arrays, objects, & strings</li>
+						<li>Manipulating & testing values</li>
+						<li>Creating composite functions</li>
+					</ul>
+					</section>
+				</section>
+				<section>
+					<section><h2>Installation</h2></section>
+					<section>
+						<h4>In a browser:</h4>
+						<pre><code data-trim data-noescape>
+							&lt;script src="lodash.js"&gt;&lt;/script&gt;
+  					</code></pre>
+					</section>
+					<section>
+						<h4>Using npm:</h4>
+						<pre><code data-trim data-noescape>
+							$ npm i -g npm
+							$ npm i --save lodash
+  					</code></pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h4>each method</h4>
+					</section>
+					<section>
+						<h5>Native forEach</h5>
+						<pre><code data-trim data-noescape>
+							[1,2].forEach(function (item) {
+								console.log(item);
+							});
+  					</code></pre>
+					</section>
+					<section>
+						<h5>each lodash</h5>
+						<pre><code data-trim data-noescape>
+							_.each([1,2], function (item) {
+								console.log(item);
+							});
+  					</code></pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h4>map method</h4>
+					</section>
+					<section>
+						<h5>Native Map</h5>
+						<pre><code data-trim data-noescape>
+							let newArr = [1,2,3].map(function (item) {
+							  return item;
+							})
+  					</code></pre>
+					</section>
+					<section>
+						<h5>Map lodash</h5>
+						<pre><code data-trim data-noescape>
+							_.map([{id: 1}, {id: 2}, {id: 3}], function (item) {
+							  return item.id;
+							})
+  					</code></pre>
+					</section>
+					
+				</section>
+				<section>
+					<section>
+						<h4>assign method</h4>
+					</section>
+					<section>
+						<pre><code data-trim data-noescape>
+							let foo = { a: "a property" };
+							let bar = { b: 4, c: "an other property" }
+							let result = _.assign({ a: "an old property" }, foo, bar);
+							// result => { a: 'a property', b: 4, c: 'an other property' }
+  					</code></pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h4>sortedUniq method</h4>
+					</section>
+					<section>
+						<pre><code data-trim data-noescape>
+							let sortedArray = [1, 1, 2, 3, 3, 3, 5, 8, 8];
+							let result = _.sortedUniq(sortedArray);
+							// -> [1, 2, 3, 5, 8]
+  					</code></pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h4>times method</h4>
+					</section>
+					<section>
+						<pre><code data-trim data-noescape>
+							function getRandomInteger() {
+							    return Math.round(Math.random() * 100);
+							}
+
+							let result = _.times(5, getRandomNumber);
+							// result => [64, 70, 29, 10, 23]
+  					</code></pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h4>Conclusion</h4>
+					</section>
+				</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
